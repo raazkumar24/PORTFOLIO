@@ -2,16 +2,18 @@
 
 @theme {
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-heading: 'Helvetica Neue', 'Inter', system-ui, sans-serif;
+  --font-heading: 'Syne', system-ui, sans-serif;
   
   --color-brand: #e5e5e5;
-  --color-bg-dark: #070707;
-  --color-surface: #0c0c0c;
-  --color-surface-hover: #141414;
-  --color-text-primary: #ededed;
-  --color-text-secondary: #8a8a8a;
+  --color-bg-dark: #050608;
+  --color-surface: #0a0c10;
+  --color-surface-hover: #12151c;
+  --color-text-primary: #f0f2f5;
+  --color-text-secondary: #9ba1a6;
+  --color-accent-cyan: #45a29e;
+  --color-accent-purple: #7b2cbf;
   
-  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-subtle: rgba(255, 255, 255, 0.05);
 }
 
 @layer base {
@@ -23,7 +25,6 @@
     @apply bg-bg-dark text-text-primary font-sans antialiased overflow-x-hidden;
     margin: 0;
     padding: 0;
-    /* Hide scrollbar for cleaner look, lenis handles scrolling */
     scrollbar-width: none; 
     -ms-overflow-style: none;
   }
@@ -36,7 +37,35 @@
     @apply font-heading tracking-tight;
   }
 
-  /* Global noise texture - Optimized for performance */
+  /* Text Outline Utility */
+  .text-outline {
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
+  }
+  .text-outline:hover {
+    color: white;
+    -webkit-text-stroke: 1px transparent;
+    transition: color 0.3s ease;
+  }
+
+  /* Aurora Blur Orbs */
+  .aurora-blur {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.15;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* Glassmorphism Card */
+  .glass-card {
+    background: rgba(10, 12, 16, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
   body::before {
     content: "";
     position: fixed;
@@ -46,7 +75,7 @@
     height: 100vh;
     pointer-events: none;
     z-index: 9999;
-    opacity: 0.05;
+    opacity: 0.03;
     background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAGFBMVEUAAAAAAP8AAAAAAAAAAAAAAAAAAAAAAABg4JzSAAAABnRSTlMAAAAAAABupgeRAAAAPElEQVR4AWMYBcMNAQxEGBjExQYmMgwMDGISgxUZGBjERQYnMgwMDGI8gwEZGBjERQYHMQwMDGLcgwHhAADN9A3bE8aJMAAAAABJRU5ErkJggg==");
     background-repeat: repeat;
   }

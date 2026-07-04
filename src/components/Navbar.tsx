@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link, useLocation } from 'react-router-dom';
 
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,12 +17,10 @@ export const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Services', href: '#services' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Experience', href: '#experience' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Home', href: '/' },
+    { name: 'About', href: '/about' },
+    { name: 'Projects', href: '/projects' },
+    { name: 'Experience', href: '/experience' },
   ];
 
   return (
@@ -31,27 +31,32 @@ export const Navbar = () => {
         }`}
       >
         <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
-          <a href="#" className="text-xl font-heading font-bold text-white tracking-tighter">
-            RAAZ<span className="text-text-secondary">.</span>
-          </a>
+          <Link to="/" className="text-xl font-heading font-bold text-white tracking-tighter">
+            Raj Shekhar<span className="text-accent-cyan">.</span>
+          </Link>
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-sm font-medium text-text-secondary hover:text-white transition-colors"
-              >
-                {link.name}
-              </a>
-            ))}
-            <a
-              href="#contact"
+            {navLinks.map((link) => {
+              const isActive = location.pathname === link.href;
+              return (
+                <Link
+                  key={link.name}
+                  to={link.href}
+                  className={`text-sm font-medium transition-colors ${
+                    isActive ? 'text-white' : 'text-text-secondary hover:text-white'
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
+            <Link
+              to="/contact"
               className="ml-4 px-5 py-2.5 bg-white text-black text-xs font-medium uppercase tracking-wide rounded-full hover:bg-white/90 transition-colors"
             >
               Let's Talk
-            </a>
+            </Link>
           </nav>
 
           {/* Mobile Menu Toggle */}
@@ -89,18 +94,34 @@ export const Navbar = () => {
             className="fixed inset-0 z-40 bg-bg-dark/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8 md:hidden"
           >
             {navLinks.map((link, index) => (
-              <motion.a
+              <motion.div
                 key={link.name}
-                href={link.href}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index, duration: 0.3 }}
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-2xl font-heading font-medium text-white hover:text-text-secondary transition-colors"
               >
-                {link.name}
-              </motion.a>
+                <Link
+                  to={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-2xl font-heading font-medium text-white hover:text-text-secondary transition-colors"
+                >
+                  {link.name}
+                </Link>
+              </motion.div>
             ))}
+            <motion.div
+               initial={{ opacity: 0, y: 20 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ delay: 0.1 * navLinks.length, duration: 0.3 }}
+            >
+              <Link
+                to="/contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-2xl font-heading font-medium text-text-secondary hover:text-white transition-colors"
+              >
+                Contact
+              </Link>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

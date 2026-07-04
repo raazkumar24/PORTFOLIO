@@ -1,12 +1,21 @@
 import { useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import Lenis from 'lenis'
 import { Navbar } from './components/Navbar'
-import { Hero } from './components/Hero'
-import { About } from './components/About'
-import { Services } from './components/Services'
-import { Projects } from './components/Projects'
-import { Experience } from './components/Experience'
-import { Contact } from './components/Contact'
+import { Home } from './pages/Home'
+import { About } from './pages/About'
+import { Projects } from './pages/Projects'
+import { Experience } from './pages/Experience'
+import { Contact } from './pages/Contact'
+
+// Scroll to top on route change
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
 
 function App() {
   useEffect(() => {
@@ -30,15 +39,19 @@ function App() {
   }, [])
 
   return (
-    <main className="w-full min-h-screen bg-bg-dark text-text-primary">
-      <Navbar />
-      <Hero />
-      <About />
-      <Services />
-      <Projects />
-      <Experience />
-      <Contact />
-    </main>
+    <Router>
+      <ScrollToTop />
+      <main className="w-full min-h-screen bg-bg-dark text-text-primary">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/experience" element={<Experience />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </main>
+    </Router>
   )
 }
 
