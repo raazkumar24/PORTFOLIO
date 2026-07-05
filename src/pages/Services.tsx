@@ -117,51 +117,56 @@ export const Services = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.7, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                className="group relative glass-card rounded-[1.5rem] p-6 sm:p-7 border border-white/[0.05] hover:border-white/[0.10] transition-all duration-500 hover:-translate-y-1 flex flex-col"
+                className="group relative flex flex-col p-8 sm:p-10 bg-surface/40 hover:bg-surface/80 rounded-[2rem] border border-white/[0.04] hover:border-white/[0.12] transition-all duration-500 overflow-hidden"
               >
-                {/* Glow on hover */}
-                <div
-                  className="absolute inset-0 rounded-[1.5rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                  style={{ background: `radial-gradient(ellipse at top left, ${service.accent}0d 0%, transparent 60%)` }}
+                {/* Minimal corner glow */}
+                <div 
+                  className="absolute -top-24 -right-24 w-48 h-48 rounded-full blur-[70px] opacity-0 group-hover:opacity-40 transition-opacity duration-700 pointer-events-none"
+                  style={{ background: service.accent }}
                 />
 
-                {/* Icon */}
-                <div
-                  className="w-11 h-11 rounded-xl flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110"
-                  style={{ background: `${service.accent}15`, border: `1px solid ${service.accent}30` }}
-                >
-                  <Icon size={20} style={{ color: service.accent }} />
+                <div className="flex justify-between items-start mb-8 relative z-10">
+                  {/* Clean Icon Container */}
+                  <div 
+                    className="w-14 h-14 rounded-full flex items-center justify-center border border-white/[0.08] bg-black/50 group-hover:bg-black transition-all duration-500 group-hover:scale-110"
+                  >
+                    <Icon size={22} style={{ color: service.accent }} className="opacity-80 group-hover:opacity-100 transition-opacity" />
+                  </div>
+                  {/* Subtle Number */}
+                  <span className="text-sm font-mono font-bold text-white/20 group-hover:text-white/60 transition-colors duration-500">
+                    /{service.id}
+                  </span>
                 </div>
 
-                {/* Number */}
-                <span className="text-[10px] font-black tracking-widest uppercase text-text-secondary/40 mb-3">{service.id}</span>
+                {/* Text Content */}
+                <h3 className="text-2xl font-black text-white tracking-tight mb-2 relative z-10">{service.title}</h3>
+                <p className="text-sm font-semibold tracking-wide mb-6 relative z-10" style={{ color: service.accent }}>{service.short}</p>
+                
+                <p className="text-text-secondary text-sm leading-relaxed mb-8 flex-1 relative z-10">{service.description}</p>
 
-                {/* Title & short */}
-                <h2 className="text-xl font-black text-white tracking-tight mb-1 group-hover:text-white transition-colors">{service.title}</h2>
-                <p className="text-sm font-medium mb-4" style={{ color: service.accent }}>{service.short}</p>
-
-                {/* Description */}
-                <p className="text-sm text-text-secondary leading-relaxed mb-6 flex-1">{service.description}</p>
-
-                {/* Features */}
-                <ul className="space-y-2 mb-7">
-                  {service.features.map((f) => (
-                    <li key={f} className="flex items-center gap-2 text-xs text-text-secondary">
-                      <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: service.accent }} />
-                      {f}
-                    </li>
+                {/* Clean Feature List */}
+                <div className="space-y-3 mb-8 relative z-10">
+                  {service.features.map((f, idx) => (
+                    <div key={idx} className="flex items-center gap-3">
+                      <div className="w-1 h-1 rounded-full bg-white/20 group-hover:bg-white/80 transition-colors duration-300" />
+                      <span className="text-sm text-text-secondary/80 group-hover:text-white/90 transition-colors duration-300">{f}</span>
+                    </div>
                   ))}
-                </ul>
+                </div>
 
-                {/* Price + CTA */}
-                <div className="flex items-center justify-between pt-5 border-t border-white/[0.05]">
-                  <span className="text-sm font-black text-white">{service.price}</span>
-                  <Link
+                <div className="w-full h-px bg-white/[0.04] mb-6 relative z-10 group-hover:bg-white/[0.08] transition-colors duration-500" />
+
+                {/* Footer / CTA */}
+                <div className="flex justify-between items-center mt-auto relative z-10">
+                  <div>
+                    <span className="block text-[10px] text-text-secondary/50 uppercase tracking-widest font-bold mb-1">Starting At</span>
+                    <span className="text-sm font-bold text-white">{service.price}</span>
+                  </div>
+                  <Link 
                     to="/contact"
-                    className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider transition-colors duration-300"
-                    style={{ color: service.accent }}
+                    className="w-12 h-12 rounded-full bg-white/[0.03] group-hover:bg-white flex items-center justify-center transition-all duration-500 border border-white/[0.05]"
                   >
-                    Hire Me <ArrowUpRight size={12} />
+                    <ArrowUpRight size={18} className="text-white/50 group-hover:text-black group-hover:rotate-45 transition-all duration-500" />
                   </Link>
                 </div>
               </motion.div>
