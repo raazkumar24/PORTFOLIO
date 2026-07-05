@@ -30,10 +30,10 @@ export const Contact = () => {
     <div className="w-full min-h-screen pt-28 sm:pt-32 pb-24 md:pb-40 relative overflow-hidden flex flex-col bg-bg-dark text-text-primary">
 
       {/* Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+      {/* <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
         <div className="aurora-blur w-[600px] h-[600px] bg-accent-purple top-[-15%] left-[-15%] mix-blend-screen opacity-[0.13]" />
         <div className="aurora-blur w-[700px] h-[700px] bg-accent-cyan bottom-[-20%] right-[-15%] mix-blend-screen opacity-[0.08]" />
-      </div>
+      </div> */}
 
       <div className="max-w-6xl w-full mx-auto px-5 sm:px-8 md:px-16 relative z-10">
 

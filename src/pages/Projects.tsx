@@ -54,10 +54,10 @@ export const Projects = () => {
     <div className="w-full min-h-screen bg-bg-dark pt-28 sm:pt-32 text-text-primary pb-24 md:pb-40">
 
       {/* Background */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+      {/* <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
         <div className="aurora-blur w-[600px] h-[600px] bg-accent-cyan top-[-10%] right-[-15%] mix-blend-screen opacity-[0.08]" />
         <div className="aurora-blur w-[500px] h-[500px] bg-accent-purple bottom-[-10%] left-[-15%] mix-blend-screen opacity-[0.07]" />
-      </div>
+      </div> */}
 
       <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-16 relative z-10">
 

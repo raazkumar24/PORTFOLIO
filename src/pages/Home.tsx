@@ -79,11 +79,11 @@ export const Home = () => {
     <div className="w-full min-h-screen bg-bg-dark text-text-primary" ref={containerRef}>
 
       {/* ── Fixed Aurora Background ── */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+      {/* <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
         <div className="aurora-blur w-[700px] h-[700px] bg-accent-cyan top-[-25%] left-[-15%] mix-blend-screen animate-float" />
         <div className="aurora-blur w-[600px] h-[600px] bg-accent-purple bottom-[-15%] right-[-15%] mix-blend-screen opacity-[0.10]" style={{ animationDelay: '2s' }} />
         <div className="aurora-blur w-[400px] h-[400px] bg-accent-pink bottom-[20%] left-[30%] mix-blend-screen opacity-[0.05]" style={{ animationDelay: '4s' }} />
-      </div>
+      </div> */}
 
       {/* ────────────── HERO ────────────── */}
       <section className="min-h-screen w-full relative flex flex-col justify-center px-5 sm:px-8 md:px-16 pt-28 pb-20 overflow-hidden">
@@ -110,7 +110,7 @@ export const Home = () => {
           {/* Big headline */}
           <div className="overflow-hidden">
             <motion.h1
-              className="text-[clamp(3.5rem,10vw,10rem)] font-black leading-[0.88] tracking-tighter"
+              className="text-[clamp(3rem,10vw,10rem)] font-black leading-[0.88] tracking-tighter"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.4, delay: 0.3 }}
@@ -328,7 +328,7 @@ export const Home = () => {
                   <div className="w-full h-full rounded-[1.2rem] sm:rounded-[1.6rem] overflow-hidden relative">
                     {/* Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-600" />
-                    
+
                     {/* Image */}
                     <img
                       src={project.img}

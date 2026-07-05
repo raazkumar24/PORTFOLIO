@@ -38,10 +38,10 @@ export const Experience = () => {
     <div className="w-full min-h-screen bg-bg-dark pt-28 sm:pt-32 text-text-primary pb-24 md:pb-40">
 
       {/* Background */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+      {/* <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
         <div className="aurora-blur w-[600px] h-[600px] bg-accent-purple top-[-5%] left-[-15%] mix-blend-screen opacity-[0.09]" />
         <div className="aurora-blur w-[500px] h-[500px] bg-accent-cyan bottom-[-15%] right-[-10%] mix-blend-screen opacity-[0.07]" />
-      </div>
+      </div> */}
 
       <div className="max-w-5xl mx-auto px-5 sm:px-8 md:px-16 relative z-10">
 
@@ -83,9 +83,8 @@ export const Experience = () => {
                   <div className="flex items-baseline gap-4 sm:gap-8">
                     <span className="font-black text-xs tabular-nums" style={{ color: item.accent }}>{item.id}</span>
                     <div>
-                      <h2 className={`text-2xl sm:text-4xl md:text-5xl font-black tracking-tight transition-colors duration-400 ${
-                        isExpanded ? 'text-white' : 'text-text-secondary group-hover:text-white'
-                      }`}>
+                      <h2 className={`text-2xl sm:text-4xl md:text-5xl font-black tracking-tight transition-colors duration-400 ${isExpanded ? 'text-white' : 'text-text-secondary group-hover:text-white'
+                        }`}>
                         {item.role}
                       </h2>
                       <p className="text-sm font-bold uppercase tracking-widest text-white/40 mt-1">{item.company}</p>
@@ -101,11 +100,10 @@ export const Experience = () => {
                     <motion.div
                       animate={{ rotate: isExpanded ? 180 : 0 }}
                       transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                      className={`flex-shrink-0 w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-400 ${
-                        isExpanded
+                      className={`flex-shrink-0 w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-400 ${isExpanded
                           ? 'border-transparent text-black'
                           : 'border-white/[0.08] text-text-secondary group-hover:text-white group-hover:border-white/20'
-                      }`}
+                        }`}
                       style={isExpanded ? { background: item.accent } : {}}
                     >
                       <ChevronDown size={18} strokeWidth={2} />
