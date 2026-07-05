@@ -69,7 +69,7 @@ export const Projects = () => {
           className="mb-20 md:mb-32"
         >
           <span className="text-xs font-bold tracking-[0.25em] uppercase text-accent-cyan mb-5 block">( Portfolio )</span>
-          <h1 className="text-[clamp(3rem,8vw,8rem)] font-black tracking-tighter uppercase mb-8 leading-[0.9]">
+          <h1 className="text-[clamp(2.5rem,10vw,10rem)] font-black tracking-tighter uppercase mb-8 leading-[0.9]">
             Selected<br />
             <span className="text-outline">Works.</span>
           </h1>

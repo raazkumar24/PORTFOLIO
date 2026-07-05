@@ -110,7 +110,7 @@ export const Home = () => {
           {/* Big headline */}
           <div className="overflow-hidden">
             <motion.h1
-              className="text-[clamp(2.5rem,12vw,10rem)] font-black leading-[0.88] tracking-tighter"
+              className="text-[clamp(2.5rem,10vw,10rem)] font-black leading-[0.88] tracking-tighter"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.4, delay: 0.3 }}

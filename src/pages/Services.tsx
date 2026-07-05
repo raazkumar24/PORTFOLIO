@@ -98,7 +98,7 @@ export const Services = () => {
           className="mb-16 md:mb-24"
         >
           <span className="text-xs font-bold tracking-[0.25em] uppercase text-accent-cyan mb-5 block">( What I Do )</span>
-          <h1 className="text-[clamp(3rem,8vw,8rem)] font-black tracking-tighter uppercase mb-6 leading-[0.9]">
+          <h1 className="text-[clamp(2.5rem,10vw,10rem)] font-black tracking-tighter uppercase mb-6 leading-[0.9]">
             My <span className="text-outline">Services.</span>
           </h1>
           <p className="text-base sm:text-xl text-text-secondary max-w-2xl font-sans leading-relaxed">

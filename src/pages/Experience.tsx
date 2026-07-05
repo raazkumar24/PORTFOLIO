@@ -53,7 +53,7 @@ export const Experience = () => {
           className="mb-16 md:mb-24"
         >
           <span className="text-xs font-bold tracking-[0.25em] uppercase text-accent-cyan mb-5 block">( Freelance Journey )</span>
-          <h1 className="text-[clamp(3rem,8vw,8rem)] font-black tracking-tighter uppercase mb-6 leading-[0.9]">
+          <h1 className="text-[clamp(2.5rem,10vw,10rem)] font-black tracking-tighter uppercase mb-6 leading-[0.9]">
             The <span className="text-outline">Journey.</span>
           </h1>
           <p className="text-base sm:text-xl text-text-secondary max-w-xl font-sans leading-relaxed">
@@ -101,8 +101,8 @@ export const Experience = () => {
                       animate={{ rotate: isExpanded ? 180 : 0 }}
                       transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                       className={`flex-shrink-0 w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-400 ${isExpanded
-                          ? 'border-transparent text-black'
-                          : 'border-white/[0.08] text-text-secondary group-hover:text-white group-hover:border-white/20'
+                        ? 'border-transparent text-black'
+                        : 'border-white/[0.08] text-text-secondary group-hover:text-white group-hover:border-white/20'
                         }`}
                       style={isExpanded ? { background: item.accent } : {}}
                     >
