@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
+import { AnimatePresence, motion } from 'framer-motion'
 import Lenis from 'lenis'
 import { Navbar } from './components/Navbar'
 import { Home } from './pages/Home'
@@ -7,21 +8,52 @@ import { About } from './pages/About'
 import { Projects } from './pages/Projects'
 import { Experience } from './pages/Experience'
 import { Contact } from './pages/Contact'
+import { Services } from './pages/Services'
 
-// Scroll to top on route change
+/* ── Page wrapper with fade transition ── */
+const PageWrapper = ({ children }: { children: React.ReactNode }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 16 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: -16 }}
+    transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+  >
+    {children}
+  </motion.div>
+)
+
+/* ── Scroll to top on route change ── */
 const ScrollToTop = () => {
-  const { pathname } = useLocation();
+  const { pathname } = useLocation()
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-  return null;
+    window.scrollTo(0, 0)
+  }, [pathname])
+  return null
+}
+
+/* ── Animated routes ── */
+const AnimatedRoutes = () => {
+  const location = useLocation()
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
+        <Route path="/about" element={<PageWrapper><About /></PageWrapper>} />
+        <Route path="/projects" element={<PageWrapper><Projects /></PageWrapper>} />
+        <Route path="/experience" element={<PageWrapper><Experience /></PageWrapper>} />
+        <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
+        <Route path="/services" element={<PageWrapper><Services /></PageWrapper>} />
+      </Routes>
+    </AnimatePresence>
+  )
 }
 
 function App() {
+  /* ── Smooth scroll ── */
   useEffect(() => {
     const lenis = new Lenis({
-      lerp: 0.05,
-      wheelMultiplier: 1,
+      lerp: 0.07,
+      wheelMultiplier: 0.9,
       touchMultiplier: 2,
       syncTouch: true,
     })
@@ -30,12 +62,9 @@ function App() {
       lenis.raf(time)
       requestAnimationFrame(raf)
     }
-
     requestAnimationFrame(raf)
 
-    return () => {
-      lenis.destroy()
-    }
+    return () => lenis.destroy()
   }, [])
 
   return (
@@ -43,13 +72,7 @@ function App() {
       <ScrollToTop />
       <main className="w-full min-h-screen bg-bg-dark text-text-primary">
         <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/experience" element={<Experience />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
+        <AnimatedRoutes />
       </main>
     </Router>
   )

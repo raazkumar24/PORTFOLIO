@@ -1,31 +1,33 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Plus } from 'lucide-react'
+import { ArrowUpRight, ChevronDown } from 'lucide-react'
 
 const experienceData = [
   {
     id: '01',
-    role: 'Senior Full Stack Engineer',
-    company: 'TechFront Agency',
-    period: 'Jan 2023 - Present',
-    metrics: ['40% increase in conversion', 'Sub 1s page loads', 'Mentored 5 developers'],
-    description: 'Spearheaded the technical direction for all major client projects. Transitioned the agency from legacy React SPA builds to heavily optimized Next.js frameworks. Designed and implemented complex GraphQL APIs to serve data to bespoke WebGL frontends. Instituted rigorous CI/CD pipelines that reduced deployment times by 60%.',
+    role: 'Freelance Full Stack Developer',
+    company: 'Self-Employed',
+    period: '2024 – Present',
+    type: 'Freelance',
+    location: 'Remote',
+    accent: '#3dd8d0',
+    metrics: ['20+ projects delivered', 'Multiple happy clients', 'End-to-end ownership'],
+    description:
+      'Working independently with clients across various industries to build modern, performant web applications. From ideation to deployment — I handle the full stack: UI design, frontend development, backend APIs, database design, and hosting. Focused on delivering real business value, not just writing code.',
+    tech: ['React', 'Next.js', 'TypeScript', 'Node.js', 'TailwindCSS', 'MongoDB', 'PostgreSQL'],
   },
   {
     id: '02',
-    role: 'Frontend Architect',
-    company: 'Innovate Labs',
-    period: 'Mar 2021 - Dec 2022',
-    metrics: ['Created internal UI library', 'Zero-downtime migrations', '99.9% uptime'],
-    description: 'Responsible for the core frontend architecture of an enterprise-level SaaS product used by 10,000+ daily active users. Built a comprehensive component library from scratch using React, TypeScript, and Tailwind, drastically reducing development time for new features. Refactored critical state management to Zustand, resolving long-standing memory leaks.',
-  },
-  {
-    id: '03',
-    role: 'Creative Developer',
-    company: 'Studio Nu',
-    period: 'Jun 2019 - Feb 2021',
-    metrics: ['2 Awwwards wins', 'FWA of the day', '10+ launched sites'],
-    description: 'Acted as the bridge between the design and engineering teams. Transformed static Figma files into fluid, interactive, and highly animated web experiences. Mastered GSAP, Framer Motion, and basic Three.js to add the "wow" factor to marketing sites for Fortune 500 brands.',
+    role: 'Frontend Developer',
+    company: 'Freelance Projects',
+    period: '2023 – 2024',
+    type: 'Freelance',
+    location: 'Remote',
+    accent: '#8b5cf6',
+    metrics: ['Landing pages', 'React web apps', 'Responsive design'],
+    description:
+      'Started freelancing by building landing pages, portfolio websites, and small web apps for local businesses and startups. Focused heavily on learning and applying modern frontend practices — clean code, smooth animations, and mobile-first design. This is where the passion for premium web experiences began.',
+    tech: ['React', 'JavaScript', 'CSS', 'HTML', 'Figma'],
   },
 ]
 
@@ -33,90 +35,165 @@ export const Experience = () => {
   const [expandedId, setExpandedId] = useState<string | null>(experienceData[0].id)
 
   return (
-    <div className="w-full min-h-screen bg-bg-dark pt-32 text-text-primary pb-32">
-      <div className="max-w-5xl mx-auto px-8 md:px-16">
-        
-        {/* PAGE HEADER */}
-        <div className="mb-24">
-          <h1 className="text-6xl md:text-[8rem] font-black tracking-tighter uppercase mb-6">
+    <div className="w-full min-h-screen bg-bg-dark pt-28 sm:pt-32 text-text-primary pb-24 md:pb-40">
+
+      {/* Background */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="aurora-blur w-[600px] h-[600px] bg-accent-purple top-[-5%] left-[-15%] mix-blend-screen opacity-[0.09]" />
+        <div className="aurora-blur w-[500px] h-[500px] bg-accent-cyan bottom-[-15%] right-[-10%] mix-blend-screen opacity-[0.07]" />
+      </div>
+
+      <div className="max-w-5xl mx-auto px-5 sm:px-8 md:px-16 relative z-10">
+
+        {/* ── HEADER ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-16 md:mb-24"
+        >
+          <span className="text-xs font-bold tracking-[0.25em] uppercase text-accent-cyan mb-5 block">( Freelance Journey )</span>
+          <h1 className="text-[clamp(3rem,8vw,8rem)] font-black tracking-tighter uppercase mb-6 leading-[0.9]">
             The <span className="text-outline">Journey.</span>
           </h1>
-          <p className="text-xl text-text-secondary max-w-2xl font-sans leading-relaxed">
-            Five years of building, breaking, and optimizing. A track record of turning complex problems into elegant, scalable solutions.
+          <p className="text-base sm:text-xl text-text-secondary max-w-xl font-sans leading-relaxed">
+            2 years of freelancing — learning by doing, building real products for real clients, and growing with every project.
           </p>
-        </div>
+        </motion.div>
 
-        {/* ACCORDION */}
-        <div className="flex flex-col">
-          {experienceData.map((item) => {
+        {/* ── ACCORDION ── */}
+        <div className="flex flex-col border-t border-white/[0.05]">
+          {experienceData.map((item, index) => {
             const isExpanded = expandedId === item.id
 
             return (
-              <div key={item.id} className="border-b border-white/[0.05] group/item">
+              <motion.div
+                key={item.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="border-b border-white/[0.05]"
+              >
+                {/* Trigger */}
                 <button
                   onClick={() => setExpandedId(isExpanded ? null : item.id)}
-                  className="w-full py-12 flex flex-col md:flex-row md:items-center justify-between text-left focus:outline-none"
+                  className="w-full py-8 sm:py-10 flex flex-col sm:flex-row sm:items-center justify-between text-left gap-4 group focus:outline-none"
+                  aria-expanded={isExpanded}
                 >
-                  <div className="flex items-baseline gap-6 md:gap-16 w-full md:w-auto">
-                    <span className="text-accent-cyan font-bold text-xs">{item.id}</span>
-                    <h3 className={`text-3xl md:text-5xl font-bold tracking-tight transition-colors duration-500 ${isExpanded ? 'text-white' : 'text-text-secondary group-hover/item:text-white'}`}>
-                      {item.role}
-                    </h3>
+                  <div className="flex items-baseline gap-4 sm:gap-8">
+                    <span className="font-black text-xs tabular-nums" style={{ color: item.accent }}>{item.id}</span>
+                    <div>
+                      <h2 className={`text-2xl sm:text-4xl md:text-5xl font-black tracking-tight transition-colors duration-400 ${
+                        isExpanded ? 'text-white' : 'text-text-secondary group-hover:text-white'
+                      }`}>
+                        {item.role}
+                      </h2>
+                      <p className="text-sm font-bold uppercase tracking-widest text-white/40 mt-1">{item.company}</p>
+                    </div>
                   </div>
-                  <div className="flex items-center justify-between w-full md:w-auto mt-6 md:mt-0 gap-8">
-                    <span className="text-white font-medium text-sm uppercase tracking-widest">{item.company}</span>
+
+                  <div className="flex items-center gap-4 ml-6 sm:ml-0">
+                    <div className="text-right hidden sm:block">
+                      <p className="text-xs font-medium text-text-secondary">{item.period}</p>
+                      <p className="text-xs text-text-secondary/60 mt-0.5">{item.type} · {item.location}</p>
+                    </div>
+
                     <motion.div
-                      animate={{ rotate: isExpanded ? 45 : 0 }}
-                      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                      className={`hidden md:flex items-center justify-center w-12 h-12 rounded-full border border-white/[0.1] transition-colors duration-500 ${isExpanded ? 'bg-white text-black' : 'text-text-secondary group-hover/item:text-white'}`}
+                      animate={{ rotate: isExpanded ? 180 : 0 }}
+                      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                      className={`flex-shrink-0 w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-400 ${
+                        isExpanded
+                          ? 'border-transparent text-black'
+                          : 'border-white/[0.08] text-text-secondary group-hover:text-white group-hover:border-white/20'
+                      }`}
+                      style={isExpanded ? { background: item.accent } : {}}
                     >
-                      <Plus size={20} strokeWidth={2} />
+                      <ChevronDown size={18} strokeWidth={2} />
                     </motion.div>
                   </div>
                 </button>
-                
-                <AnimatePresence>
+
+                {/* Expanded content */}
+                <AnimatePresence initial={false}>
                   {isExpanded && (
                     <motion.div
+                      key="content"
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                      transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
                       className="overflow-hidden"
                     >
-                      <div className="pb-12 pl-10 md:pl-24 pr-4 max-w-4xl flex flex-col gap-8">
-                        <p className="text-accent-cyan font-bold text-xs uppercase tracking-widest">{item.period}</p>
-                        
-                        <div className="flex flex-wrap gap-4">
-                          {item.metrics.map(metric => (
-                            <div key={metric} className="px-4 py-2 glass-card rounded-lg border border-accent-cyan/20 text-accent-cyan text-sm font-medium">
+                      <div className="pb-10 sm:pb-12 pl-6 sm:pl-14 md:pl-20 pr-2 sm:pr-4 flex flex-col gap-8">
+
+                        {/* Mobile period */}
+                        <div className="sm:hidden">
+                          <p className="text-xs font-medium text-text-secondary">{item.period}</p>
+                          <p className="text-xs text-text-secondary/60">{item.type} · {item.location}</p>
+                        </div>
+
+                        {/* Metrics */}
+                        <div className="flex flex-wrap gap-2.5">
+                          {item.metrics.map((metric) => (
+                            <span
+                              key={metric}
+                              className="px-3.5 py-1.5 rounded-full text-xs font-semibold border"
+                              style={{
+                                borderColor: `${item.accent}33`,
+                                background: `${item.accent}0d`,
+                                color: item.accent,
+                              }}
+                            >
                               {metric}
-                            </div>
+                            </span>
                           ))}
                         </div>
 
-                        <p className="text-lg md:text-xl text-text-primary font-sans leading-relaxed opacity-90">
+                        {/* Description */}
+                        <p className="text-base sm:text-lg text-text-secondary font-sans leading-relaxed max-w-2xl">
                           {item.description}
                         </p>
+
+                        {/* Tech */}
+                        <div>
+                          <p className="text-[10px] font-bold tracking-widest uppercase text-text-secondary/60 mb-3">Technologies Used</p>
+                          <div className="flex flex-wrap gap-2">
+                            {item.tech.map((t) => (
+                              <span key={t} className="px-3 py-1.5 rounded-lg glass-card text-xs font-medium text-text-primary">
+                                {t}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
                       </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </div>
+              </motion.div>
             )
           })}
         </div>
 
-        {/* BOTTOM STATS / CTA */}
-        <div className="mt-32 pt-16 border-t border-white/[0.05] flex flex-col md:flex-row justify-between items-center gap-8">
+        {/* ── BOTTOM CTA ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-20 md:mt-28 pt-12 border-t border-white/[0.05] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-8"
+        >
           <div>
-            <h3 className="text-3xl font-bold mb-2">Ready to see my full resume?</h3>
-            <p className="text-text-secondary font-sans">Available upon request for serious inquiries.</p>
+            <h3 className="text-2xl sm:text-3xl font-black tracking-tight text-white mb-2">Open to new projects!</h3>
+            <p className="text-text-secondary font-sans text-sm sm:text-base">Available for freelance work. Let's build something great.</p>
           </div>
-          <a href="mailto:raj@example.com" className="px-8 py-4 rounded-full bg-accent-cyan text-bg-dark font-bold text-sm tracking-wide hover:bg-white transition-colors uppercase">
-            Request PDF
+          <a
+            href="mailto:hello@rajshekhar.dev"
+            className="group inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-accent-cyan text-bg-dark font-black text-xs tracking-widest uppercase hover:shadow-[0_0_40px_rgba(61,216,208,0.4)] hover:scale-105 transition-all duration-300"
+          >
+            Let's Talk
+            <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </a>
-        </div>
+        </motion.div>
 
       </div>
     </div>
