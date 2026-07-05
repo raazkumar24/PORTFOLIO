@@ -41,7 +41,7 @@ export const Hero = () => {
       </div>
       
       <div className="z-10 flex flex-col items-center pointer-events-none w-full px-8">
-        <h1 className="text-5xl md:text-8xl lg:text-9xl font-black text-white mix-blend-difference pointer-events-auto uppercase tracking-tighter w-full max-w-7xl flex flex-col items-start">
+        <h1 className="text-[clamp(2.25rem,12vw,4rem)] md:text-8xl lg:text-9xl font-black text-white mix-blend-difference pointer-events-auto uppercase tracking-tighter w-full max-w-7xl flex flex-col items-start">
           <MagneticText>SOFTWARE</MagneticText>
           <div className="self-end mt-[-2%]"><MagneticText>ENGINEER</MagneticText></div>
         </h1>

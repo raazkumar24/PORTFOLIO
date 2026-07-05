@@ -110,7 +110,7 @@ export const Home = () => {
           {/* Big headline */}
           <div className="overflow-hidden">
             <motion.h1
-              className="text-[clamp(3rem,10vw,10rem)] font-black leading-[0.88] tracking-tighter"
+              className="text-[clamp(2.5rem,12vw,10rem)] font-black leading-[0.88] tracking-tighter"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.4, delay: 0.3 }}
@@ -386,7 +386,7 @@ export const Home = () => {
             <p className="text-xs font-bold tracking-[0.3em] uppercase text-accent-cyan mb-6">Got a project in mind?</p>
             <Link
               to="/contact"
-              className="group block text-[clamp(3rem,10vw,10rem)] font-black tracking-tighter leading-none hover:text-outline transition-all duration-700 pb-2"
+              className="group block text-[clamp(2.5rem,12vw,10rem)] font-black tracking-tighter leading-none hover:text-outline transition-all duration-700 pb-2"
             >
               LET'S<br className="sm:hidden" /> TALK.
             </Link>
