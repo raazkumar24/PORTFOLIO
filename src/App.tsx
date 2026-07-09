@@ -9,6 +9,7 @@ import { Projects } from './pages/Projects'
 import { Experience } from './pages/Experience'
 import { Contact } from './pages/Contact'
 import { Services } from './pages/Services'
+import { PeekCreature } from './components/PeekCreature'
 
 /* ── Page wrapper with fade transition ── */
 const PageWrapper = ({ children }: { children: React.ReactNode }) => (
@@ -61,9 +62,10 @@ function App() {
 
   return (
     <Router>
-      <main className="w-full min-h-screen bg-bg-dark text-text-primary">
+      <main className="w-full min-h-screen bg-bg-dark text-text-primary overflow-hidden">
         <Navbar />
         <AnimatedRoutes />
+        <PeekCreature />
       </main>
     </Router>
   )

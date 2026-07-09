@@ -97,12 +97,12 @@ export const Home = () => {
           {/* Big headline matched to the brutalist site style */}
           <div className="flex flex-col mb-8 relative">
             <motion.h1
-              className="text-[clamp(3.5rem,12vw,9rem)] font-black leading-[0.85] tracking-tighter text-white uppercase break-words mix-blend-difference z-10 relative"
+              className="text-[clamp(2.2rem,11vw,9rem)] font-black leading-[0.85] tracking-tighter text-white uppercase break-words mix-blend-difference z-10 relative"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             >
-              Building <br className="hidden md:block"/>Digital
+              Building <br className="sm:hidden block md:block"/>Digital
             </motion.h1>
             <motion.div
               className="flex items-center gap-4 mt-2 md:mt-0"
@@ -110,7 +110,7 @@ export const Home = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             >
-              <h1 className="text-[clamp(3.5rem,12vw,9rem)] font-black leading-[0.85] tracking-tighter text-text-secondary uppercase break-words z-10 relative">
+              <h1 className="text-[clamp(2.2rem,11vw,9rem)] font-black leading-[0.85] tracking-tighter text-text-secondary uppercase break-words z-10 relative">
                 Futures.
               </h1>
             </motion.div>
@@ -128,12 +128,14 @@ export const Home = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col sm:flex-row items-start sm:items-center gap-4 text-xl sm:text-2xl font-bold tracking-tight text-white mb-16"
+            className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 text-xl sm:text-2xl font-bold tracking-tight text-white mb-16"
           >
             <span>I'm {personalInfo.firstName}.</span>
             <span className="hidden sm:block text-white/30">—</span>
-            <span className="text-accent-cyan">{typeText}</span>
-            <span className="animate-pulse -ml-2 text-accent-cyan">|</span>
+            <div className="flex items-center">
+              <span className="text-accent-cyan">{typeText}</span>
+              <span className="animate-pulse text-accent-cyan">|</span>
+            </div>
           </motion.div>
 
           {/* Intro + CTA row */}

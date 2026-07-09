@@ -132,7 +132,7 @@ export const Navbar = () => {
                   >
                     <Link
                       to={link.href}
-                      className={`block text-5xl font-heading font-bold tracking-tighter transition-colors duration-300 hover-underline ${isActive ? 'text-accent-cyan' : 'text-white hover:text-accent-cyan'
+                      className={`block text-3xl font-heading font-bold tracking-tighter transition-colors duration-300 hover-underline ${isActive ? 'text-accent-cyan' : 'text-white hover:text-accent-cyan'
                         }`}
                     >
                       {link.name}
