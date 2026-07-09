@@ -10,11 +10,10 @@ export const Projects = () => {
   return (
     <div className="w-full min-h-screen bg-bg-dark pt-28 sm:pt-32 text-text-primary pb-24 md:pb-40">
 
-      {/* Background */}
-      {/* <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="aurora-blur w-[600px] h-[600px] bg-accent-cyan top-[-10%] right-[-15%] mix-blend-screen opacity-[0.08]" />
-        <div className="aurora-blur w-[500px] h-[500px] bg-accent-purple bottom-[-10%] left-[-15%] mix-blend-screen opacity-[0.07]" />
-      </div> */}
+      {/* Brutalist Grid Background */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+      </div>
 
       <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-16 relative z-10">
 
@@ -26,7 +25,7 @@ export const Projects = () => {
           className="mb-20 md:mb-32"
         >
           <span className="text-xs font-bold tracking-[0.25em] uppercase text-accent-cyan mb-5 block">( Archive )</span>
-          <h1 className="text-[clamp(2.2rem,8vw,8rem)] font-black tracking-tighter uppercase mb-8 leading-[0.9] text-white break-words">
+          <h1 className="text-[clamp(1.5rem,8vw,8rem)] font-black tracking-tighter uppercase mb-8 leading-[0.9] text-white break-words">
             Selected <span className="text-white/40">Works.</span>
           </h1>
           <p className="text-base sm:text-xl text-text-secondary max-w-xl font-sans leading-relaxed">

@@ -29,23 +29,27 @@ export const PeekCreature = () => {
     
     isAnimating.current = true
 
-    if (msgToSay) setCustomMsg(msgToSay)
-    else setCustomMsg("WATCHING_YOU")
+    if (msgToSay) {
+      setCustomMsg(msgToSay)
+    } else {
+      const cuteMessages = ["PEEK_A_BOO! 🥷", "JUST_CHECKING_IN ✨", "NINJA_HUGS 💜", "HI_THERE! 👀"]
+      setCustomMsg(cuteMessages[Math.floor(Math.random() * cuteMessages.length)])
+    }
 
-    // 1. Ninja pops in with a playful wobble
+    // 1. Ninja pops in with a playful wobble (faster)
     await containerControls.start({ 
       x: -15, 
       rotate: [-10, 3, 0],
-      transition: { type: 'spring', stiffness: 150, damping: 12 } 
+      transition: { type: 'spring', stiffness: 280, damping: 16 } 
     })
     
-    // 2. Ninja Hand signs (dynamic peace sign wave)
+    // 2. Ninja Hand signs (faster wave)
     await handControls.start({ 
       rotate: [0, -35, 20, -15, 0], 
       y: [40, -5, 0, 0, 40],
       x: [0, -8, 4, 0, 0],
       opacity: [0, 1, 1, 1, 0],
-      transition: { duration: 2, ease: "easeInOut", times: [0, 0.2, 0.4, 0.8, 1] } 
+      transition: { duration: 1.3, ease: "easeInOut", times: [0, 0.2, 0.4, 0.8, 1] } 
     })
     
     // 3. Show greeting
@@ -58,9 +62,9 @@ export const PeekCreature = () => {
       setShowMessage(false)
       // Swift, clean retreat
       await containerControls.start({ 
-        x: 90, 
+        x: 120, 
         rotate: 0,
-        transition: { type: 'spring', stiffness: 90, damping: 20 } 
+        transition: { type: 'spring', stiffness: 120, damping: 20 } 
       })
     }
     
@@ -114,8 +118,8 @@ export const PeekCreature = () => {
     setShowMessage(true)
     setCustomMsg("INTERACTIVE_MODE")
     
-    // Pop out fully and tilt excitedly
-    containerControls.start({ x: -25, rotate: -8, y: -5, transition: { type: 'spring', stiffness: 300, damping: 15 } })
+    // Pop out fully and tilt excitedly (faster)
+    containerControls.start({ x: -25, rotate: -8, y: -5, transition: { type: 'spring', stiffness: 450, damping: 12 } })
     
     // Eyes become happy (purple and squinty)
     visorControls.start({ 
@@ -139,8 +143,8 @@ export const PeekCreature = () => {
     setIsHovered(false)
     setShowMessage(false)
     
-    // Hide
-    containerControls.start({ x: 90, rotate: 0, y: 0, transition: { type: 'spring', stiffness: 100, damping: 20 } })
+    // Hide fully
+    containerControls.start({ x: 120, rotate: 0, y: 0, transition: { type: 'spring', stiffness: 120, damping: 20 } })
     
     // Reset eyes
     visorControls.start({ 
@@ -162,7 +166,7 @@ export const PeekCreature = () => {
 
   return (
     <motion.div
-      initial={{ x: 150 }}
+      initial={{ x: 120 }}
       animate={containerControls}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -170,12 +174,15 @@ export const PeekCreature = () => {
       className="fixed bottom-0 right-0 z-[100] cursor-pointer flex items-end transition-transform duration-1000 ease-in-out"
       style={{ originX: 0.5, originY: 1 }}
     >
+      {/* Invisible Hover Hitbox (Allows hovering even when creature is fully off-screen) */}
+      <div className="absolute left-[-60px] bottom-0 w-[60px] h-[120px] bg-transparent" />
+
       {/* Dialogue Box (Premium Cyberpunk Style) */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.3, y: 20, rotate: -10 }}
-        animate={{ opacity: showMessage ? 1 : 0, scale: showMessage ? 1 : 0.3, y: showMessage ? -30 : 20, rotate: showMessage ? 0 : -10 }}
+        initial={{ opacity: 0, scale: 0.3, y: 15, rotate: -10 }}
+        animate={{ opacity: showMessage ? 1 : 0, scale: showMessage ? 1 : 0.3, y: showMessage ? -10 : 15, rotate: showMessage ? 0 : -10 }}
         transition={{ type: "spring", stiffness: 250, damping: 14 }}
-        className="absolute bottom-full right-24 mb-4 whitespace-nowrap bg-bg-dark/90 backdrop-blur-md border-l-[3px] border-accent-purple text-white px-5 py-3 rounded-r-lg font-mono text-xs shadow-[0_10px_30px_rgba(139,92,246,0.3)] pointer-events-none origin-bottom-right"
+        className="absolute bottom-[75%] right-20 mb-0 whitespace-nowrap bg-bg-dark/90 backdrop-blur-md border-l-[3px] border-accent-purple text-white px-5 py-3 rounded-r-lg font-mono text-xs shadow-[0_10px_30px_rgba(139,92,246,0.3)] pointer-events-none origin-bottom-right"
       >
         <span className="text-accent-purple font-black mr-2 tracking-widest">&gt;&gt;</span> 
         <span className="tracking-wide">{customMsg}</span>
