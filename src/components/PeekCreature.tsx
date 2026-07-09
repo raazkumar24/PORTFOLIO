@@ -177,6 +177,13 @@ export const PeekCreature = () => {
       {/* Invisible Hover Hitbox (Allows hovering even when creature is fully off-screen) */}
       <div className="absolute left-[-60px] bottom-0 w-[60px] h-[120px] bg-transparent" />
 
+      {/* Mobile Pull Tab (Visible hint on mobile so users know where to tap) */}
+      <div className="sm:hidden absolute left-[-20px] bottom-12 w-5 h-16 bg-[#11131a] border-y border-l border-white/10 rounded-l-md flex flex-col items-center justify-center gap-1 shadow-[-5px_0_15px_rgba(0,0,0,0.8)] z-50">
+        <div className="w-1 h-1 rounded-full bg-accent-cyan shadow-[0_0_5px_#3dd8d0]" />
+        <div className="w-1 h-1 rounded-full bg-accent-cyan shadow-[0_0_5px_#3dd8d0]" />
+        <div className="w-1 h-1 rounded-full bg-accent-cyan shadow-[0_0_5px_#3dd8d0]" />
+      </div>
+
       {/* Dialogue Box (Premium Cyberpunk Style) */}
       <motion.div
         initial={{ opacity: 0, scale: 0.3, y: 15, rotate: -10 }}
