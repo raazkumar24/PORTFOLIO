@@ -1,7 +1,8 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { useRef, useEffect, useState, Fragment } from 'react'
-import { ArrowUpRight, ChevronDown } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
+import { personalInfo, stats, projects } from '../data/portfolio'
 
 /* ── Typewriter hook ── */
 const useTypewriter = (words: string[], speed = 80, pause = 1800) => {
@@ -31,11 +32,6 @@ const useTypewriter = (words: string[], speed = 80, pause = 1800) => {
 
   return text
 }
-
-/* ── Marquee items ── */
-import { personalInfo, stats, techItems as baseTechItems, projects } from '../data/portfolio'
-
-const marqueeItems = [...baseTechItems, ...baseTechItems, ...baseTechItems, ...baseTechItems]
 
 /* ── Number counter ── */
 const Counter = ({ target, suffix = '' }: { target: number; suffix?: string }) => {
@@ -75,65 +71,82 @@ export const Home = () => {
   return (
     <div className="w-full min-h-screen bg-bg-dark text-text-primary" ref={containerRef}>
 
-      {/* ── Fixed Aurora Background ── */}
-      {/* <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="aurora-blur w-[700px] h-[700px] bg-accent-cyan top-[-25%] left-[-15%] mix-blend-screen animate-float" />
-        <div className="aurora-blur w-[600px] h-[600px] bg-accent-purple bottom-[-15%] right-[-15%] mix-blend-screen opacity-[0.10]" style={{ animationDelay: '2s' }} />
-        <div className="aurora-blur w-[400px] h-[400px] bg-accent-pink bottom-[20%] left-[30%] mix-blend-screen opacity-[0.05]" style={{ animationDelay: '4s' }} />
-      </div> */}
-
       {/* ────────────── HERO ────────────── */}
-      <section className="min-h-screen w-full relative flex flex-col justify-center px-5 sm:px-8 md:px-16 pt-28 pb-20">
+      <section className="min-h-screen w-full relative flex flex-col justify-center px-5 sm:px-8 md:px-16 pt-28 pb-20 overflow-hidden">
+        
+        {/* Subtle grid background pattern */}
+        <div className="absolute inset-0 z-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-30 pointer-events-none" />
+
         <motion.div
           style={{ y: heroY, opacity: heroOpacity }}
           className="w-full max-w-7xl mx-auto z-10 flex flex-col items-start"
         >
-          {/* Status badge - Minimal raw text */}
+          {/* Status badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="mb-8 md:mb-12"
+            className="mb-8 md:mb-12 flex items-center gap-3"
           >
-            <div className="flex items-center gap-3">
-              <span className="relative flex h-2 w-2">
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-white" />
-              </span>
-              <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-text-secondary">Available for work</span>
-            </div>
+            <span className="relative flex h-2 w-2">
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-accent-cyan" />
+            </span>
+            <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-text-secondary">Available for work</span>
           </motion.div>
 
-          {/* Big headline */}
-          <div className="flex flex-col">
+          {/* Big headline matched to the brutalist site style */}
+          <div className="flex flex-col mb-8 relative">
             <motion.h1
-              className="text-[clamp(2.2rem,11vw,7rem)] font-black leading-[0.9] tracking-tighter text-white uppercase break-words"
+              className="text-[clamp(3.5rem,12vw,9rem)] font-black leading-[0.85] tracking-tighter text-white uppercase break-words mix-blend-difference z-10 relative"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             >
-              {personalInfo.firstName}
+              Building <br className="hidden md:block"/>Digital
             </motion.h1>
-            <motion.h1
-              className="text-[clamp(2.2rem,11vw,7rem)] font-black leading-[0.9] tracking-tighter text-text-secondary uppercase break-words"
+            <motion.div
+              className="flex items-center gap-4 mt-2 md:mt-0"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             >
-              {personalInfo.lastName}.
-            </motion.h1>
+              <h1 className="text-[clamp(3.5rem,12vw,9rem)] font-black leading-[0.85] tracking-tighter text-text-secondary uppercase break-words z-10 relative">
+                Futures.
+              </h1>
+            </motion.div>
+            
+            {/* Abstract geometric shape replacing the aurora */}
+            <motion.div 
+              initial={{ scale: 0.8, opacity: 0, rotate: -15 }}
+              animate={{ scale: 1, opacity: 1, rotate: 0 }}
+              transition={{ duration: 1.5, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute right-0 top-1/2 -translate-y-1/2 w-32 h-32 md:w-64 md:h-64 bg-accent-cyan/20 blur-[60px] rounded-full z-0 pointer-events-none"
+            />
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col sm:flex-row items-start sm:items-center gap-4 text-xl sm:text-2xl font-bold tracking-tight text-white mb-16"
+          >
+            <span>I'm {personalInfo.firstName}.</span>
+            <span className="hidden sm:block text-white/30">—</span>
+            <span className="text-accent-cyan">{typeText}</span>
+            <span className="animate-pulse -ml-2 text-accent-cyan">|</span>
+          </motion.div>
 
           {/* Intro + CTA row */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-16 md:mt-24 w-full flex flex-col md:flex-row justify-between items-start md:items-end gap-10 border-t border-white/[0.08] pt-8"
+            className="w-full flex flex-col md:flex-row justify-between items-start md:items-end gap-10 border-t border-white/[0.08] pt-8"
           >
             <div className="max-w-md">
-              <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-white mb-4">Web Developer</p>
+              <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-white mb-4">Engineering & Design</p>
               <p className="text-base sm:text-lg text-text-secondary font-sans leading-relaxed">
-                {personalInfo.introText.split('—').map((part, i, arr) => i === 0 ? <Fragment key={i}>{part}—<br/><em className="text-white not-italic">{arr[1].split('.')[0]}</em>.</Fragment> : null)} Bridging hardcore engineering with premium design.
+                {personalInfo.introText} I engineer robust architectures while obsessed with pixel-perfect interfaces. No generic templates, just uncompromising quality.
               </p>
             </div>
 
@@ -163,50 +176,30 @@ export const Home = () => {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
             {stats.map((stat) => (
               <div key={stat.label} className="flex flex-col items-center sm:items-start text-center sm:text-left">
-                <p className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+                <p className="text-3xl sm:text-4xl font-black text-white tracking-tighter">
                   <Counter target={stat.value} suffix={stat.suffix} />
                 </p>
-                <p className="text-xs text-text-secondary mt-1 font-medium uppercase tracking-widest">{stat.label}</p>
+                <p className="text-[10px] text-text-secondary mt-1 font-bold uppercase tracking-widest">{stat.label}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ────────────── INFINITE MARQUEE ────────────── */}
-      <section className="py-14 overflow-hidden relative z-10 flex whitespace-nowrap group">
-        <motion.div
-          animate={{ x: ['0%', '-50%'] }}
-          transition={{ repeat: Infinity, ease: 'linear', duration: 35 }}
-          className="group-hover:[animation-play-state:paused] flex gap-12 items-center px-6 w-max"
-        >
-          {marqueeItems.map((item, i) => (
-            <span
-              key={i}
-              className="flex items-center gap-3 text-2xl sm:text-4xl md:text-5xl font-black text-outline hover:text-white transition-all duration-300 cursor-default select-none"
-            >
-              {item.label}
-              <span className="text-accent-cyan text-lg sm:text-2xl opacity-30">✦</span>
-            </span>
-          ))}
-        </motion.div>
-      </section>
-
-      {/* ────────────── PHILOSOPHY ────────────── */}
-      <section className="py-20 md:py-32 px-5 sm:px-8 md:px-16 relative z-10">
+      {/* ────────────── APPROACH (Replaced generic philosophy) ────────────── */}
+      <section className="py-24 md:py-36 px-5 sm:px-8 md:px-16 relative z-10">
         <div className="max-w-7xl mx-auto w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 md:gap-20 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-12 md:gap-20 items-start">
             <motion.div
               initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: '-80px' }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             >
-              <span className="text-xs font-bold tracking-[0.25em] uppercase text-accent-cyan mb-6 block">( Philosophy )</span>
-              <h2 className="text-4xl sm:text-5xl md:text-6xl font-black leading-[1.05] tracking-tighter text-white">
-                I believe <br />
-                <span className="gradient-text">great engineering</span><br />
-                should be invisible.
+              <span className="text-xs font-bold tracking-[0.25em] uppercase text-accent-cyan mb-6 block">( Method )</span>
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-black leading-[1] tracking-tighter text-white uppercase">
+                Zero Compromise. <br />
+                <span className="text-text-secondary">Pure Performance.</span>
               </h2>
             </motion.div>
 
@@ -215,19 +208,37 @@ export const Home = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: '-80px' }}
               transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col justify-center space-y-6 lg:pt-8"
+              className="flex flex-col justify-center space-y-6 lg:pt-2"
             >
-              <p className="text-lg md:text-xl text-text-secondary leading-relaxed">
-                Users shouldn't think about the tech stack, database queries, or state management. They should simply feel the application is <span className="text-white font-medium">remarkably fast, fluid, and intuitive.</span>
-              </p>
-              <p className="text-lg md:text-xl text-text-secondary leading-relaxed">
-                My approach combines rigorous architectural planning with an obsessive attention to frontend detail. I write clean, highly optimized code tailored specifically to the problem at hand.
-              </p>
+              <div className="flex gap-4 items-start">
+                <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center flex-shrink-0 mt-1">
+                  <span className="text-xs font-bold text-white">01</span>
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-white mb-2 uppercase tracking-tight">Rigorous Architecture</h3>
+                  <p className="text-text-secondary font-sans leading-relaxed">
+                    Building scalable, maintainable systems from day one. I don't just patch together libraries; I engineer solutions designed for the long haul.
+                  </p>
+                </div>
+              </div>
+              
+              <div className="flex gap-4 items-start">
+                <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center flex-shrink-0 mt-1">
+                  <span className="text-xs font-bold text-white">02</span>
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-white mb-2 uppercase tracking-tight">Obsessive Detail</h3>
+                  <p className="text-text-secondary font-sans leading-relaxed">
+                    Micro-interactions, flawless responsive states, and millisecond-level performance optimizations. The difference between good and great is in the details.
+                  </p>
+                </div>
+              </div>
+              
               <Link
                 to="/about"
-                className="group inline-flex items-center gap-2 text-white font-bold text-sm uppercase tracking-widest hover:text-accent-cyan transition-colors self-start mt-2"
+                className="group inline-flex items-center gap-2 text-white font-bold text-xs uppercase tracking-[0.15em] hover:text-accent-cyan transition-colors self-start mt-6"
               >
-                <span className="border-b-2 border-white group-hover:border-accent-cyan pb-0.5 transition-colors duration-300">My full story</span>
+                <span className="border-b-2 border-white group-hover:border-accent-cyan pb-0.5 transition-colors duration-300">Discover my background</span>
                 <ArrowUpRight size={16} strokeWidth={2.5} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
               </Link>
             </motion.div>
@@ -235,7 +246,7 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* ────────────── FEATURED WORK ────────────── */}
+      {/* ────────────── FEATURED WORK (Cleaner layout) ────────────── */}
       <section className="py-24 md:py-36 px-5 sm:px-8 md:px-16 bg-surface relative z-10 rounded-t-[2.5rem] md:rounded-t-[4rem] border-t border-white/[0.04]">
         <div className="max-w-7xl mx-auto w-full">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-14 md:mb-20 gap-6">
@@ -246,86 +257,71 @@ export const Home = () => {
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             >
               <span className="text-xs font-bold tracking-[0.25em] uppercase text-accent-cyan mb-4 block">( Selected Work )</span>
-              <h2 className="text-5xl md:text-7xl font-black tracking-tighter">Featured<br />Works.</h2>
+              <h2 className="text-[clamp(3rem,8vw,6rem)] leading-[0.9] font-black tracking-tighter uppercase text-white">Featured<br />Cases.</h2>
             </motion.div>
             <Link
               to="/projects"
-              className="hidden sm:inline-flex items-center gap-2 text-sm font-medium text-text-secondary border border-white/[0.08] px-5 py-2.5 rounded-full hover:bg-white hover:text-black hover:border-transparent transition-all duration-300"
+              className="hidden sm:inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-text-secondary border border-white/[0.08] px-6 py-3 rounded-full hover:bg-white hover:text-black hover:border-transparent transition-all duration-300"
             >
-              View All <ArrowUpRight size={14} />
+              View Archive <ArrowUpRight size={14} />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16">
             {projects.filter(p => p.isFeatured).slice(0, 2).map((project, i) => (
               <motion.div
                 key={project.num}
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -10 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.8, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] }}
-                className="group relative"
+                className="group relative flex flex-col"
               >
-                <div
-                  className="aspect-[4/5] sm:aspect-[5/6] md:aspect-[4/5] relative rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden mb-5 glass-card p-2"
-                  style={{ '--proj-accent': project.accent } as React.CSSProperties}
-                >
-                  <div className="w-full h-full rounded-[1.2rem] sm:rounded-[1.6rem] overflow-hidden relative">
-                    {/* Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-600" />
-
-                    {/* Image */}
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover transition-all duration-[1.2s] ease-out group-hover:scale-[1.08] filter grayscale group-hover:grayscale-0"
-                    />
-
-                    {/* Number badge */}
-                    <div className="absolute top-5 left-5 z-20 w-9 h-9 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center text-xs font-black text-white border border-white/10">
+                <div className="aspect-[4/3] w-full relative rounded-2xl overflow-hidden mb-6 bg-bg-dark border border-white/[0.05]">
+                  <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-500 z-10" />
+                  
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
+                  />
+                  
+                  <div className="absolute top-5 left-5 z-20">
+                    <div className="bg-bg-dark/80 backdrop-blur-md px-4 py-2 rounded-lg border border-white/10 text-xs font-bold tracking-widest text-white uppercase">
                       {project.num}
                     </div>
-
-                    {/* CTA on hover */}
-                    <div className="absolute bottom-7 left-7 right-7 z-20 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-out">
-                      <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                        <Link
-                          to="/projects"
-                          className="inline-flex items-center gap-2 bg-white text-black font-bold px-5 py-2.5 rounded-full text-sm hover:bg-accent-cyan transition-colors duration-300"
-                        >
-                          View Case Study <ArrowUpRight size={14} />
-                        </Link>
-                      </motion.div>
-                    </div>
                   </div>
+
+                  <Link
+                    to="/projects"
+                    className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  >
+                    <div className="w-16 h-16 rounded-full bg-white text-black flex items-center justify-center shadow-2xl transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                      <ArrowUpRight size={24} />
+                    </div>
+                  </Link>
                 </div>
 
-                <div className="flex justify-between items-start px-1">
+                <div className="flex justify-between items-start">
                   <div>
-                    <h3 className="text-lg sm:text-xl font-bold text-white mb-1 group-hover:text-accent-cyan transition-colors duration-300">{project.title}</h3>
-                    <p className="text-sm text-text-secondary">{project.featuredCategory}</p>
+                    <h3 className="text-2xl font-black text-white uppercase tracking-tight mb-2">{project.title}</h3>
+                    <p className="text-sm font-bold text-text-secondary uppercase tracking-widest">{project.featuredCategory}</p>
                   </div>
-                  <Link to="/projects" className="w-10 h-10 rounded-full border border-white/[0.08] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white hover:text-black">
-                    <ArrowUpRight size={14} />
-                  </Link>
                 </div>
               </motion.div>
             ))}
           </div>
 
-          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="sm:hidden mt-10">
-            <Link to="/projects" className="flex w-full justify-center items-center gap-2 text-sm font-medium border border-white/[0.08] px-5 py-4 rounded-full hover:bg-white hover:text-black transition-all duration-300">
-              View All Projects <ArrowUpRight size={14} />
+          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="sm:hidden mt-12">
+            <Link to="/projects" className="flex w-full justify-center items-center gap-2 text-xs font-bold uppercase tracking-widest border border-white/[0.08] px-6 py-4 rounded-full hover:bg-white hover:text-black transition-all duration-300">
+              View Archive <ArrowUpRight size={14} />
             </Link>
           </motion.div>
         </div>
       </section>
 
       {/* ────────────── FOOTER / CTA ────────────── */}
-      <footer className="py-24 md:py-36 px-5 sm:px-8 md:px-16 relative z-10 border-t border-white/[0.04] overflow-hidden">
-        <div className="aurora-blur w-[700px] h-[700px] bg-accent-cyan top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mix-blend-screen opacity-[0.07]" />
-
+      <footer className="py-24 md:py-36 px-5 sm:px-8 md:px-16 relative z-10 border-t border-white/[0.04]">
         <div className="max-w-7xl mx-auto w-full text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -333,22 +329,22 @@ export const Home = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           >
-            <p className="text-xs font-bold tracking-[0.3em] uppercase text-white/50 mb-6">Got a project in mind?</p>
+            <p className="text-xs font-bold tracking-[0.25em] uppercase text-text-secondary mb-6">( Next Steps )</p>
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               <Link
                 to="/contact"
-                className="group inline-block text-[clamp(3rem,8vw,8rem)] font-black tracking-tighter uppercase leading-[0.9] text-white hover:opacity-80 transition-opacity duration-300 pb-2"
+                className="inline-block text-[clamp(2.5rem,7vw,7rem)] font-black tracking-tighter uppercase leading-[0.9] text-white hover:text-accent-cyan transition-colors duration-300"
               >
-                Let's <span className="text-white/40">Talk.</span>
+                Start a <br/>Project.
               </Link>
             </motion.div>
           </motion.div>
 
-          <div className="flex flex-col sm:flex-row justify-between items-center mt-20 pt-8 border-t border-white/[0.06] text-text-secondary text-xs gap-4">
-            <p>© {new Date().getFullYear()} {personalInfo.firstName} {personalInfo.lastName.charAt(0) + personalInfo.lastName.slice(1).toLowerCase()}. All rights reserved.</p>
+          <div className="flex flex-col sm:flex-row justify-between items-center mt-24 pt-8 border-t border-white/[0.06] text-text-secondary text-xs font-bold uppercase tracking-widest gap-6">
+            <p>© {new Date().getFullYear()} {personalInfo.firstName} {personalInfo.lastName}.</p>
             <div className="flex gap-6">
               {personalInfo.socialLinks.map((s) => (
-                <a key={s.label} href={s.href} className="hover:text-white transition-colors hover-underline">{s.label}</a>
+                <a key={s.label} href={s.href} className="hover:text-white transition-colors">{s.label}</a>
               ))}
             </div>
           </div>
