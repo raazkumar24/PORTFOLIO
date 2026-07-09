@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect, useState, Fragment } from 'react'
 import { ArrowUpRight, ChevronDown } from 'lucide-react'
 
 /* ── Typewriter hook ── */
@@ -33,12 +33,9 @@ const useTypewriter = (words: string[], speed = 80, pause = 1800) => {
 }
 
 /* ── Marquee items ── */
-const techItems = [
-  { label: "React" }, { label: "Next.js" }, { label: "TypeScript" }, { label: "Node.js" },
-  { label: "WebGL" }, { label: "Three.js" }, { label: "Framer Motion" }, { label: "TailwindCSS" },
-  { label: "GraphQL" }, { label: "PostgreSQL" }, { label: "AWS" }, { label: "Docker" },
-]
-const marqueeItems = [...techItems, ...techItems, ...techItems, ...techItems]
+import { personalInfo, stats, techItems as baseTechItems, projects } from '../data/portfolio'
+
+const marqueeItems = [...baseTechItems, ...baseTechItems, ...baseTechItems, ...baseTechItems]
 
 /* ── Number counter ── */
 const Counter = ({ target, suffix = '' }: { target: number; suffix?: string }) => {
@@ -73,7 +70,7 @@ export const Home = () => {
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start start', 'end end'] })
   const heroY = useTransform(scrollYProgress, [0, 0.3], [0, 120])
   const heroOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0])
-  const typeText = useTypewriter(['FULL STACK', 'CREATIVE', 'FRONTEND', 'BACKEND'])
+  const typeText = useTypewriter(personalInfo.roles)
 
   return (
     <div className="w-full min-h-screen bg-bg-dark text-text-primary" ref={containerRef}>
@@ -86,108 +83,76 @@ export const Home = () => {
       </div> */}
 
       {/* ────────────── HERO ────────────── */}
-      <section className="min-h-screen w-full relative flex flex-col justify-center px-5 sm:px-8 md:px-16 pt-28 pb-20 overflow-hidden">
+      <section className="min-h-screen w-full relative flex flex-col justify-center px-5 sm:px-8 md:px-16 pt-28 pb-20">
         <motion.div
           style={{ y: heroY, opacity: heroOpacity }}
-          className="w-full max-w-7xl mx-auto z-10"
+          className="w-full max-w-7xl mx-auto z-10 flex flex-col items-start"
         >
-          {/* Status badge */}
+          {/* Status badge - Minimal raw text */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mb-8 flex items-center gap-3 w-fit"
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="mb-8 md:mb-12"
           >
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-accent-cyan/20 bg-accent-cyan/5 backdrop-blur-sm">
+            <div className="flex items-center gap-3">
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-cyan opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-accent-cyan" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-white" />
               </span>
-              <span className="text-xs font-semibold tracking-widest uppercase text-accent-cyan">Available for work</span>
+              <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-text-secondary">Available for work</span>
             </div>
           </motion.div>
 
           {/* Big headline */}
-          <div className="overflow-hidden">
+          <div className="flex flex-col">
             <motion.h1
-              className="text-[clamp(2.5rem,10vw,10rem)] font-black leading-[0.88] tracking-tighter"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.4, delay: 0.3 }}
+              className="text-[clamp(2.2rem,11vw,7rem)] font-black leading-[0.9] tracking-tighter text-white uppercase break-words"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             >
-              {['RAJ', 'SHEKHAR'].map((word, i) => (
-                <motion.span
-                  key={word}
-                  className="block overflow-hidden"
-                  initial={{ y: '110%' }}
-                  animate={{ y: '0%' }}
-                  transition={{ duration: 0.9, delay: 0.3 + i * 0.12, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  <span className={i === 1 ? 'text-outline' : 'text-white'}>{word}</span>
-                </motion.span>
-              ))}
+              {personalInfo.firstName}
+            </motion.h1>
+            <motion.h1
+              className="text-[clamp(2.2rem,11vw,7rem)] font-black leading-[0.9] tracking-tighter text-text-secondary uppercase break-words"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            >
+              {personalInfo.lastName}.
             </motion.h1>
           </div>
-
-          {/* Typewriter role */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.7 }}
-            className="mt-6 flex items-center gap-4"
-          >
-            <div className="h-px flex-1 max-w-[60px] bg-gradient-to-r from-accent-cyan to-transparent" />
-            <span className="text-sm sm:text-base font-mono font-medium text-accent-cyan tracking-wider">
-              {typeText}
-              <span className="inline-block w-[2px] h-[1em] bg-accent-cyan ml-[2px] align-middle animate-pulse" />
-              &nbsp;DEVELOPER
-            </span>
-          </motion.div>
 
           {/* Intro + CTA row */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-12 sm:mt-16 flex flex-col md:flex-row justify-between items-start md:items-end gap-10 border-t border-white/[0.06] pt-8"
+            transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-16 md:mt-24 w-full flex flex-col md:flex-row justify-between items-start md:items-end gap-10 border-t border-white/[0.08] pt-8"
           >
-            <p className="text-base sm:text-lg text-text-secondary font-sans leading-relaxed max-w-sm">
-              Building robust, scalable web applications that don't just work—they <em className="text-white not-italic">feel incredible</em> to use. Bridging hardcore engineering with premium design.
-            </p>
+            <div className="max-w-md">
+              <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-white mb-4">Web Developer</p>
+              <p className="text-base sm:text-lg text-text-secondary font-sans leading-relaxed">
+                {personalInfo.introText.split('—').map((part, i, arr) => i === 0 ? <Fragment key={i}>{part}—<br/><em className="text-white not-italic">{arr[1].split('.')[0]}</em>.</Fragment> : null)} Bridging hardcore engineering with premium design.
+              </p>
+            </div>
 
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-6">
               {[
-                { label: 'GitHub', href: 'https://github.com' },
-                { label: 'LinkedIn', href: 'https://linkedin.com' },
-                { label: 'Resume ↓', href: '#' },
+                ...personalInfo.socialLinks,
+                { label: 'Resume', href: personalInfo.resumeUrl },
               ].map((item) => (
                 <a
                   key={item.label}
                   href={item.href}
                   target={item.href.startsWith('http') ? '_blank' : undefined}
                   rel="noreferrer"
-                  className="group px-5 py-2.5 rounded-full border border-white/[0.08] text-sm font-medium text-text-secondary hover:text-black hover:bg-white hover:border-transparent transition-all duration-300"
+                  className="text-xs font-bold tracking-[0.15em] uppercase text-text-secondary hover:text-white transition-colors duration-300 pb-1 border-b border-transparent hover:border-white"
                 >
                   {item.label}
                 </a>
               ))}
             </div>
-          </motion.div>
-        </motion.div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.4, duration: 0.8 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
-        >
-          <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-text-secondary">Scroll</span>
-          <motion.div
-            animate={{ y: [0, 6, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-          >
-            <ChevronDown size={16} className="text-text-secondary" />
           </motion.div>
         </motion.div>
       </section>
@@ -196,12 +161,7 @@ export const Home = () => {
       <section className="py-10 border-y border-white/[0.04] bg-surface relative z-10">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-16">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
-            {[
-              { value: 5, suffix: '+', label: 'Years Experience' },
-              { value: 50, suffix: '+', label: 'Projects Shipped' },
-              { value: 40, suffix: '%', label: 'Avg. Perf. Gain' },
-              { value: 99, suffix: '.9%', label: 'Uptime Delivered' },
-            ].map((stat) => (
+            {stats.map((stat) => (
               <div key={stat.label} className="flex flex-col items-center sm:items-start text-center sm:text-left">
                 <p className="text-3xl sm:text-4xl font-black text-white tracking-tight">
                   <Counter target={stat.value} suffix={stat.suffix} />
@@ -297,26 +257,12 @@ export const Home = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-            {[
-              {
-                title: 'NEXUS Dashboard',
-                category: 'Fintech · WebGL',
-                num: '01',
-                img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop',
-                accent: '#3dd8d0'
-              },
-              {
-                title: 'AURA E-Commerce',
-                category: 'Luxury · Editorial',
-                num: '02',
-                img: 'https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=1200&auto=format&fit=crop',
-                accent: '#8b5cf6'
-              },
-            ].map((project, i) => (
+            {projects.filter(p => p.isFeatured).slice(0, 2).map((project, i) => (
               <motion.div
                 key={project.num}
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -10 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.8, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] }}
                 className="group relative"
@@ -331,7 +277,7 @@ export const Home = () => {
 
                     {/* Image */}
                     <img
-                      src={project.img}
+                      src={project.image}
                       alt={project.title}
                       className="w-full h-full object-cover transition-all duration-[1.2s] ease-out group-hover:scale-[1.08] filter grayscale group-hover:grayscale-0"
                     />
@@ -343,12 +289,14 @@ export const Home = () => {
 
                     {/* CTA on hover */}
                     <div className="absolute bottom-7 left-7 right-7 z-20 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-out">
-                      <Link
-                        to="/projects"
-                        className="inline-flex items-center gap-2 bg-white text-black font-bold px-5 py-2.5 rounded-full text-sm hover:bg-accent-cyan transition-colors duration-300"
-                      >
-                        View Case Study <ArrowUpRight size={14} />
-                      </Link>
+                      <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                        <Link
+                          to="/projects"
+                          className="inline-flex items-center gap-2 bg-white text-black font-bold px-5 py-2.5 rounded-full text-sm hover:bg-accent-cyan transition-colors duration-300"
+                        >
+                          View Case Study <ArrowUpRight size={14} />
+                        </Link>
+                      </motion.div>
                     </div>
                   </div>
                 </div>
@@ -356,7 +304,7 @@ export const Home = () => {
                 <div className="flex justify-between items-start px-1">
                   <div>
                     <h3 className="text-lg sm:text-xl font-bold text-white mb-1 group-hover:text-accent-cyan transition-colors duration-300">{project.title}</h3>
-                    <p className="text-sm text-text-secondary">{project.category}</p>
+                    <p className="text-sm text-text-secondary">{project.featuredCategory}</p>
                   </div>
                   <Link to="/projects" className="w-10 h-10 rounded-full border border-white/[0.08] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white hover:text-black">
                     <ArrowUpRight size={14} />
@@ -366,9 +314,11 @@ export const Home = () => {
             ))}
           </div>
 
-          <Link to="/projects" className="sm:hidden mt-10 flex w-full justify-center items-center gap-2 text-sm font-medium border border-white/[0.08] px-5 py-4 rounded-full hover:bg-white hover:text-black transition-all duration-300">
-            View All Projects <ArrowUpRight size={14} />
-          </Link>
+          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="sm:hidden mt-10">
+            <Link to="/projects" className="flex w-full justify-center items-center gap-2 text-sm font-medium border border-white/[0.08] px-5 py-4 rounded-full hover:bg-white hover:text-black transition-all duration-300">
+              View All Projects <ArrowUpRight size={14} />
+            </Link>
+          </motion.div>
         </div>
       </section>
 
@@ -383,20 +333,22 @@ export const Home = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           >
-            <p className="text-xs font-bold tracking-[0.3em] uppercase text-accent-cyan mb-6">Got a project in mind?</p>
-            <Link
-              to="/contact"
-              className="group block text-[clamp(2.5rem,12vw,10rem)] font-black tracking-tighter leading-none hover:text-outline transition-all duration-700 pb-2"
-            >
-              LET'S<br className="sm:hidden" /> TALK.
-            </Link>
+            <p className="text-xs font-bold tracking-[0.3em] uppercase text-white/50 mb-6">Got a project in mind?</p>
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+              <Link
+                to="/contact"
+                className="group inline-block text-[clamp(3rem,8vw,8rem)] font-black tracking-tighter uppercase leading-[0.9] text-white hover:opacity-80 transition-opacity duration-300 pb-2"
+              >
+                Let's <span className="text-white/40">Talk.</span>
+              </Link>
+            </motion.div>
           </motion.div>
 
           <div className="flex flex-col sm:flex-row justify-between items-center mt-20 pt-8 border-t border-white/[0.06] text-text-secondary text-xs gap-4">
-            <p>© {new Date().getFullYear()} Raj Shekhar. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} {personalInfo.firstName} {personalInfo.lastName.charAt(0) + personalInfo.lastName.slice(1).toLowerCase()}. All rights reserved.</p>
             <div className="flex gap-6">
-              {['LinkedIn', 'GitHub', 'Twitter'].map((s) => (
-                <a key={s} href="#" className="hover:text-white transition-colors hover-underline">{s}</a>
+              {personalInfo.socialLinks.map((s) => (
+                <a key={s.label} href={s.href} className="hover:text-white transition-colors hover-underline">{s.label}</a>
               ))}
             </div>
           </div>

@@ -4,46 +4,7 @@ import profileImg from '../assets/profile.jpeg';
 import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const skills = [
-  { name: 'React & React Native', level: 95 },
-  { name: 'Next.js 14', level: 92 },
-  { name: 'TypeScript', level: 90 },
-  { name: 'Node.js & Express', level: 88 },
-  { name: 'WebGL & Three.js', level: 75 },
-  { name: 'Framer Motion', level: 85 },
-  { name: 'GSAP', level: 80 },
-  { name: 'PostgreSQL', level: 82 },
-  { name: 'GraphQL', level: 78 },
-  { name: 'AWS', level: 72 },
-  { name: 'Docker', level: 70 },
-  { name: 'TailwindCSS', level: 96 },
-];
-
-/* TODO: Add real timeline later
-const timeline = [
-  {
-    year: '2023 – Present',
-    title: 'Senior Full Stack Engineer',
-    company: 'TechFront Agency',
-    desc: 'Leading transition from legacy monoliths to Next.js micro-frontends. Orchestrated a team of 5 to deliver a bespoke e-commerce platform that increased conversion rates by 40%.',
-    highlights: ['40% conversion boost', 'Sub-1s loads', '5-person team'],
-  },
-  {
-    year: '2021 – 2023',
-    title: 'Frontend Architect',
-    company: 'Innovate Labs',
-    desc: 'Responsible for the core frontend architecture of an enterprise SaaS product with 10,000+ daily active users. Built a comprehensive component library from scratch.',
-    highlights: ['10k+ daily users', 'Zero-downtime migrations', '99.9% uptime'],
-  },
-  {
-    year: '2019 – 2021',
-    title: 'Creative Developer',
-    company: 'Studio Nu',
-    desc: 'Bridged design and engineering. Created award-winning promotional sites using WebGL and advanced CSS animations for Fortune 500 brands.',
-    highlights: ['2× Awwwards wins', 'FWA of the day', '10+ launches'],
-  },
-];
-*/
+import { personalInfo, skills } from '../data/portfolio';
 
 export const About = () => {
   const containerRef = useRef<HTMLElement>(null);
@@ -70,8 +31,8 @@ export const About = () => {
           className="mb-16 md:mb-24"
         >
           <span className="text-xs font-bold tracking-[0.25em] uppercase text-accent-cyan mb-5 block">( About Me )</span>
-          <h1 className="text-[clamp(2.5rem,10vw,10rem)] font-black tracking-tighter uppercase mb-6 leading-[0.9]">
-            About <span className="text-outline">Raj.</span>
+          <h1 className="text-[clamp(3rem,8vw,8rem)] font-black tracking-tighter uppercase mb-6 leading-[0.9] text-white">
+            About <span className="text-white/40">{personalInfo.firstName}.</span>
           </h1>
           <div className="h-px w-full bg-gradient-to-r from-white/[0.1] to-transparent" />
         </motion.div>
@@ -90,7 +51,7 @@ export const About = () => {
                   className="w-full h-full object-cover transition-transform duration-[2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 contrast-[1.1]"
                 />
                 <div className="absolute bottom-6 left-6 z-20">
-                  <p className="text-white font-black text-3xl sm:text-4xl tracking-tighter mix-blend-difference">RAJ SHEKHAR</p>
+                  <p className="text-white font-black text-3xl sm:text-4xl tracking-tighter mix-blend-difference">{personalInfo.firstName} {personalInfo.lastName}</p>
                   <p className="gradient-text text-xs font-bold tracking-widest uppercase mt-1">Full Stack Developer</p>
                 </div>
 
@@ -103,9 +64,9 @@ export const About = () => {
 
             {/* Social links below image */}
             <div className="mt-5 flex gap-3">
-              {['GitHub', 'LinkedIn', 'Twitter'].map((s) => (
-                <a key={s} href="#" className="flex-1 py-2.5 rounded-xl border border-white/[0.06] text-xs font-medium text-text-secondary text-center hover:text-white hover:border-white/20 hover:bg-white/[0.04] transition-all duration-300">
-                  {s}
+              {personalInfo.socialLinks.map((s) => (
+                <a key={s.label} href={s.href} className="flex-1 py-2.5 rounded-xl border border-white/[0.06] text-xs font-medium text-text-secondary text-center hover:text-white hover:border-white/20 hover:bg-white/[0.04] transition-all duration-300">
+                  {s.label}
                 </a>
               ))}
             </div>
@@ -172,15 +133,17 @@ export const About = () => {
               </div>
             </div>
 
-            <Link
-              to="/contact"
-              className="group mt-12 inline-flex items-center gap-3 self-start"
-            >
-              <span className="w-10 h-10 rounded-full border border-white/[0.08] flex items-center justify-center group-hover:bg-accent-cyan group-hover:border-accent-cyan transition-all duration-300">
-                <ArrowUpRight size={16} className="group-hover:text-black transition-colors" />
-              </span>
-              <span className="text-sm font-bold uppercase tracking-widest text-text-secondary group-hover:text-white transition-colors duration-300">Work with me</span>
-            </Link>
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="self-start mt-12">
+              <Link
+                to="/contact"
+                className="group inline-flex items-center gap-3"
+              >
+                <span className="w-10 h-10 rounded-full border border-white/[0.08] flex items-center justify-center group-hover:bg-accent-cyan group-hover:border-accent-cyan transition-all duration-300">
+                  <ArrowUpRight size={16} className="group-hover:text-black transition-colors" />
+                </span>
+                <span className="text-sm font-bold uppercase tracking-widest text-text-secondary group-hover:text-white transition-colors duration-300">Work with me</span>
+              </Link>
+            </motion.div>
           </motion.div>
         </section>
 

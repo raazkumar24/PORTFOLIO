@@ -2,50 +2,7 @@ import { motion } from 'framer-motion'
 import { ArrowUpRight, ExternalLink, GitBranch } from 'lucide-react'
 import { useState } from 'react'
 
-const projects = [
-  {
-    id: 1,
-    num: '01',
-    title: 'NEXUS',
-    client: 'Fintech Startup',
-    role: 'Lead Architect',
-    year: '2025',
-    accent: '#3dd8d0',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1600&auto=format&fit=crop',
-    description:
-      'A complete overhaul of a legacy financial dashboard. We implemented a custom WebGL renderer paired with a Next.js frontend, resulting in a 300% performance increase and real-time data at scale.',
-    stack: ['Next.js', 'WebGL', 'TypeScript', 'Tailwind', 'Zustand'],
-    metrics: ['300% faster', '50k+ data pts/s', 'Sub 200ms load'],
-  },
-  {
-    id: 2,
-    num: '02',
-    title: 'AURA',
-    client: 'Luxury Brand',
-    role: 'Creative Developer',
-    year: '2024',
-    accent: '#8b5cf6',
-    image: 'https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=1600&auto=format&fit=crop',
-    description:
-      'An award-winning e-commerce experience that feels more like an editorial magazine than a store. Features smooth page transitions, complex scroll-linked animations, and a bespoke headless Shopify integration.',
-    stack: ['React', 'Framer Motion', 'Shopify API', 'GSAP', 'Sanity'],
-    metrics: ['Awwwards SOTD', '180% AOV increase', 'FWA nominated'],
-  },
-  {
-    id: 3,
-    num: '03',
-    title: 'SYNAPSE',
-    client: 'AI Research Lab',
-    role: 'Full Stack Engineer',
-    year: '2024',
-    accent: '#ec4899',
-    image: 'https://images.unsplash.com/photo-1620121692029-d088224ddc74?q=80&w=1600&auto=format&fit=crop',
-    description:
-      'User interface and API middleware for a complex ML visualization tool. Users can upload datasets and watch neural networks train in real-time via WebSockets with interactive D3.js charts.',
-    stack: ['Vue.js', 'Node.js', 'WebSockets', 'Python', 'D3.js'],
-    metrics: ['Real-time viz', '10k dataset pts', '99.9% uptime'],
-  },
-]
+import { projects } from '../data/portfolio'
 
 export const Projects = () => {
   const [hovered, setHovered] = useState<number | null>(null)
@@ -69,9 +26,8 @@ export const Projects = () => {
           className="mb-20 md:mb-32"
         >
           <span className="text-xs font-bold tracking-[0.25em] uppercase text-accent-cyan mb-5 block">( Portfolio )</span>
-          <h1 className="text-[clamp(2.5rem,10vw,10rem)] font-black tracking-tighter uppercase mb-8 leading-[0.9]">
-            Selected<br />
-            <span className="text-outline">Works.</span>
+          <h1 className="text-[clamp(3rem,8vw,8rem)] font-black tracking-tighter uppercase mb-8 leading-[0.9] text-white">
+            Selected <span className="text-white/40">Works.</span>
           </h1>
           <p className="text-base sm:text-xl text-text-secondary max-w-xl font-sans leading-relaxed">
             A curated collection demonstrating my approach to engineering and design. No fluff—just results.
@@ -85,6 +41,7 @@ export const Projects = () => {
               key={project.id}
               initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
+              whileHover={{ y: -15 }}
               viewport={{ once: true, margin: '-80px' }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
               className="group"
@@ -177,7 +134,9 @@ export const Projects = () => {
                     </div>
                   </div>
 
-                  <a
+                  <motion.a
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     href="#"
                     className="mt-2 inline-flex items-center gap-2 self-start px-6 py-3 rounded-full font-bold text-xs tracking-widest uppercase transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,0,0,0.3)]"
                     style={{
@@ -186,7 +145,7 @@ export const Projects = () => {
                     }}
                   >
                     View Live <ArrowUpRight size={14} />
-                  </a>
+                  </motion.a>
                 </div>
               </div>
 

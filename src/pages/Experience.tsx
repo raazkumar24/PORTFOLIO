@@ -2,34 +2,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowUpRight, ChevronDown } from 'lucide-react'
 
-const experienceData = [
-  {
-    id: '01',
-    role: 'Freelance Full Stack Developer',
-    company: 'Self-Employed',
-    period: '2024 – Present',
-    type: 'Freelance',
-    location: 'Remote',
-    accent: '#3dd8d0',
-    metrics: ['20+ projects delivered', 'Multiple happy clients', 'End-to-end ownership'],
-    description:
-      'Working independently with clients across various industries to build modern, performant web applications. From ideation to deployment — I handle the full stack: UI design, frontend development, backend APIs, database design, and hosting. Focused on delivering real business value, not just writing code.',
-    tech: ['React', 'Next.js', 'TypeScript', 'Node.js', 'TailwindCSS', 'MongoDB', 'PostgreSQL'],
-  },
-  {
-    id: '02',
-    role: 'Frontend Developer',
-    company: 'Freelance Projects',
-    period: '2023 – 2024',
-    type: 'Freelance',
-    location: 'Remote',
-    accent: '#8b5cf6',
-    metrics: ['Landing pages', 'React web apps', 'Responsive design'],
-    description:
-      'Started freelancing by building landing pages, portfolio websites, and small web apps for local businesses and startups. Focused heavily on learning and applying modern frontend practices — clean code, smooth animations, and mobile-first design. This is where the passion for premium web experiences began.',
-    tech: ['React', 'JavaScript', 'CSS', 'HTML', 'Figma'],
-  },
-]
+import { experienceData } from '../data/portfolio'
 
 export const Experience = () => {
   const [expandedId, setExpandedId] = useState<string | null>(experienceData[0].id)
@@ -53,8 +26,8 @@ export const Experience = () => {
           className="mb-16 md:mb-24"
         >
           <span className="text-xs font-bold tracking-[0.25em] uppercase text-accent-cyan mb-5 block">( Freelance Journey )</span>
-          <h1 className="text-[clamp(2.5rem,10vw,10rem)] font-black tracking-tighter uppercase mb-6 leading-[0.9]">
-            The <span className="text-outline">Journey.</span>
+          <h1 className="text-[clamp(3rem,8vw,8rem)] font-black tracking-tighter uppercase mb-6 leading-[0.9] text-white">
+            The <span className="text-white/40">Journey.</span>
           </h1>
           <p className="text-base sm:text-xl text-text-secondary max-w-xl font-sans leading-relaxed">
             2 years of freelancing — learning by doing, building real products for real clients, and growing with every project.
@@ -75,7 +48,8 @@ export const Experience = () => {
                 className="border-b border-white/[0.05]"
               >
                 {/* Trigger */}
-                <button
+                <motion.button
+                  whileHover={{ x: 8 }}
                   onClick={() => setExpandedId(isExpanded ? null : item.id)}
                   className="w-full py-8 sm:py-10 flex flex-col sm:flex-row sm:items-center justify-between text-left gap-4 group focus:outline-none"
                   aria-expanded={isExpanded}
@@ -109,7 +83,7 @@ export const Experience = () => {
                       <ChevronDown size={18} strokeWidth={2} />
                     </motion.div>
                   </div>
-                </button>
+                </motion.button>
 
                 {/* Expanded content */}
                 <AnimatePresence initial={false}>
@@ -184,13 +158,15 @@ export const Experience = () => {
             <h3 className="text-2xl sm:text-3xl font-black tracking-tight text-white mb-2">Open to new projects!</h3>
             <p className="text-text-secondary font-sans text-sm sm:text-base">Available for freelance work. Let's build something great.</p>
           </div>
-          <a
+          <motion.a
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             href="mailto:hello@rajshekhar.dev"
-            className="group inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-accent-cyan text-bg-dark font-black text-xs tracking-widest uppercase hover:shadow-[0_0_40px_rgba(61,216,208,0.4)] hover:scale-105 transition-all duration-300"
+            className="group inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-accent-cyan text-bg-dark font-black text-xs tracking-widest uppercase hover:shadow-[0_0_40px_rgba(61,216,208,0.4)] transition-all duration-300"
           >
             Let's Talk
             <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </a>
+          </motion.a>
         </motion.div>
 
       </div>

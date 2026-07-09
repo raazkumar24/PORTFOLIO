@@ -22,20 +22,12 @@ const PageWrapper = ({ children }: { children: React.ReactNode }) => (
   </motion.div>
 )
 
-/* ── Scroll to top on route change ── */
-const ScrollToTop = () => {
-  const { pathname } = useLocation()
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [pathname])
-  return null
-}
-
+/* ── Scroll to top on route change handled by AnimatePresence ── */
 /* ── Animated routes ── */
 const AnimatedRoutes = () => {
   const location = useLocation()
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)}>
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
         <Route path="/about" element={<PageWrapper><About /></PageWrapper>} />
@@ -69,7 +61,6 @@ function App() {
 
   return (
     <Router>
-      <ScrollToTop />
       <main className="w-full min-h-screen bg-bg-dark text-text-primary">
         <Navbar />
         <AnimatedRoutes />
