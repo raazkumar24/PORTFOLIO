@@ -25,9 +25,10 @@ export const Experience = () => {
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           className="mb-16 md:mb-24"
         >
-          <span className="text-xs font-bold tracking-[0.25em] uppercase text-accent-cyan mb-5 block">( Freelance Journey )</span>
-          <h1 className="text-[clamp(3rem,8vw,8rem)] font-black tracking-tighter uppercase mb-6 leading-[0.9] text-white">
-            The <span className="text-white/40">Journey.</span>
+          <span className="text-xs font-bold tracking-[0.25em] uppercase text-accent-cyan mb-5 block">( Career )</span>
+          <h1 className="text-[clamp(2.2rem,8vw,8rem)] font-black tracking-tighter uppercase mb-6 leading-[0.9] text-white break-words">
+            Professional <br className="sm:hidden block"/>
+            <span className="text-white/40">Journey.</span>
           </h1>
           <p className="text-base sm:text-xl text-text-secondary max-w-xl font-sans leading-relaxed">
             2 years of freelancing — learning by doing, building real products for real clients, and growing with every project.

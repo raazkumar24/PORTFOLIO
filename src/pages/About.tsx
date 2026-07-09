@@ -30,9 +30,9 @@ export const About = () => {
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           className="mb-16 md:mb-24"
         >
-          <span className="text-xs font-bold tracking-[0.25em] uppercase text-accent-cyan mb-5 block">( About Me )</span>
-          <h1 className="text-[clamp(3rem,8vw,8rem)] font-black tracking-tighter uppercase mb-6 leading-[0.9] text-white">
-            About <span className="text-white/40">{personalInfo.firstName}.</span>
+          <span className="text-xs font-bold tracking-[0.25em] uppercase text-accent-cyan mb-5 block">( Who I Am )</span>
+          <h1 className="text-[clamp(2.2rem,8vw,8rem)] font-black tracking-tighter uppercase mb-6 leading-[0.9] text-white break-words">
+            About <span className="text-white/40">Me.</span>
           </h1>
           <div className="h-px w-full bg-gradient-to-r from-white/[0.1] to-transparent" />
         </motion.div>

@@ -199,7 +199,7 @@ export const Home = () => {
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             >
               <span className="text-xs font-bold tracking-[0.25em] uppercase text-accent-cyan mb-6 block">( Method )</span>
-              <h2 className="text-4xl sm:text-5xl md:text-6xl font-black leading-[1] tracking-tighter text-white uppercase">
+              <h2 className="text-[clamp(2.2rem,8vw,4rem)] sm:text-5xl md:text-6xl font-black leading-[1] tracking-tighter text-white uppercase break-words">
                 Zero Compromise. <br />
                 <span className="text-text-secondary">Pure Performance.</span>
               </h2>
@@ -259,7 +259,7 @@ export const Home = () => {
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             >
               <span className="text-xs font-bold tracking-[0.25em] uppercase text-accent-cyan mb-4 block">( Selected Work )</span>
-              <h2 className="text-[clamp(3rem,8vw,6rem)] leading-[0.9] font-black tracking-tighter uppercase text-white">Featured<br />Cases.</h2>
+              <h2 className="text-[clamp(2.2rem,11vw,6rem)] leading-[0.9] font-black tracking-tighter uppercase text-white break-words">Featured<br />Cases.</h2>
             </motion.div>
             <Link
               to="/projects"
@@ -335,7 +335,7 @@ export const Home = () => {
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               <Link
                 to="/contact"
-                className="inline-block text-[clamp(2.5rem,7vw,7rem)] font-black tracking-tighter uppercase leading-[0.9] text-white hover:text-accent-cyan transition-colors duration-300"
+                className="inline-block text-[clamp(2.2rem,10vw,7rem)] font-black tracking-tighter uppercase leading-[0.9] text-white hover:text-accent-cyan transition-colors duration-300 break-words"
               >
                 Start a <br/>Project.
               </Link>

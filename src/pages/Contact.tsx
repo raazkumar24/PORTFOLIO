@@ -45,7 +45,7 @@ export const Contact = () => {
           className="mb-16 md:mb-20"
         >
           <span className="text-xs font-bold tracking-[0.25em] uppercase text-accent-cyan mb-5 block">( Get In Touch )</span>
-          <h1 className="text-[clamp(3rem,8vw,8rem)] font-black tracking-tighter uppercase mb-6 leading-[0.9] text-white">
+          <h1 className="text-[clamp(2.2rem,8vw,8rem)] font-black tracking-tighter uppercase mb-6 leading-[0.9] text-white break-words">
             Let's <span className="text-white/40">Talk.</span>
           </h1>
         </motion.div>

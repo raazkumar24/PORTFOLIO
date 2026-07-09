@@ -152,25 +152,40 @@ export const PeekCreature = () => {
     })
   }
 
+  const toggleMobileInteraction = () => {
+    if (isHovered) {
+      handleMouseLeave()
+    } else {
+      handleMouseEnter()
+    }
+  }
+
   return (
     <motion.div
       initial={{ x: 150 }}
       animate={containerControls}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onClick={toggleMobileInteraction}
       className="fixed bottom-0 right-0 z-[100] cursor-pointer flex items-end transition-transform duration-1000 ease-in-out"
       style={{ originX: 0.5, originY: 1 }}
     >
-      {/* Dialogue Box (Cyberpunk Style) */}
+      {/* Dialogue Box (Premium Cyberpunk Style) */}
       <motion.div
         initial={{ opacity: 0, scale: 0.3, y: 20, rotate: -10 }}
         animate={{ opacity: showMessage ? 1 : 0, scale: showMessage ? 1 : 0.3, y: showMessage ? -30 : 20, rotate: showMessage ? 0 : -10 }}
         transition={{ type: "spring", stiffness: 250, damping: 14 }}
-        className="absolute bottom-full right-20 mb-4 whitespace-nowrap bg-black border border-accent-cyan/40 text-white px-4 py-2 rounded-sm font-mono text-xs shadow-[0_0_15px_rgba(61,216,208,0.2)] pointer-events-none origin-bottom-right"
+        className="absolute bottom-full right-24 mb-4 whitespace-nowrap bg-bg-dark/90 backdrop-blur-md border-l-[3px] border-accent-purple text-white px-5 py-3 rounded-r-lg font-mono text-xs shadow-[0_10px_30px_rgba(139,92,246,0.3)] pointer-events-none origin-bottom-right"
       >
-        <span className="text-accent-cyan mr-2">&gt;_</span> 
-        {customMsg}
-        <div className="absolute -bottom-1.5 right-6 w-3 h-3 bg-black border-r border-b border-accent-cyan/40 transform rotate-45" />
+        <span className="text-accent-purple font-black mr-2 tracking-widest">&gt;&gt;</span> 
+        <span className="tracking-wide">{customMsg}</span>
+        
+        {/* Decorative corner */}
+        <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-white/20" />
+        <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white/20" />
+        
+        {/* Speech triangle */}
+        <div className="absolute -bottom-2 right-6 w-4 h-4 bg-bg-dark/90 border-r border-b border-white/10 transform rotate-45" />
       </motion.div>
 
       {/* Ninja Cyber-Hood Body */}

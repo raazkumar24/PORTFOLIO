@@ -25,8 +25,8 @@ export const Projects = () => {
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           className="mb-20 md:mb-32"
         >
-          <span className="text-xs font-bold tracking-[0.25em] uppercase text-accent-cyan mb-5 block">( Portfolio )</span>
-          <h1 className="text-[clamp(3rem,8vw,8rem)] font-black tracking-tighter uppercase mb-8 leading-[0.9] text-white">
+          <span className="text-xs font-bold tracking-[0.25em] uppercase text-accent-cyan mb-5 block">( Archive )</span>
+          <h1 className="text-[clamp(2.2rem,8vw,8rem)] font-black tracking-tighter uppercase mb-8 leading-[0.9] text-white break-words">
             Selected <span className="text-white/40">Works.</span>
           </h1>
           <p className="text-base sm:text-xl text-text-secondary max-w-xl font-sans leading-relaxed">
