@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
+import { MagneticButton } from './MagneticButton';
 
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -80,13 +81,15 @@ export const Navbar = () => {
           </nav>
 
           {/* CTA */}
-          <Link
-            to="/contact"
-            className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent-cyan/10 border border-accent-cyan/30 text-accent-cyan text-xs font-semibold uppercase tracking-wider hover:bg-accent-cyan hover:text-black transition-all duration-300 hover:shadow-[0_0_30px_rgba(61,216,208,0.3)]"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-accent-cyan inline-block animate-pulse" />
-            Hire Me
-          </Link>
+          <MagneticButton className="hidden md:block">
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent-cyan/10 border border-accent-cyan/30 text-accent-cyan text-xs font-semibold uppercase tracking-wider hover:bg-accent-cyan hover:text-black transition-all duration-300 hover:shadow-[0_0_30px_rgba(61,216,208,0.3)]"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-accent-cyan inline-block animate-pulse" />
+              Hire Me
+            </Link>
+          </MagneticButton>
 
           {/* Hamburger */}
           <button

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowUpRight, Mail, MapPin, Clock } from 'lucide-react'
+import { MagneticButton } from '../components/MagneticButton'
 
 export const Contact = () => {
   const [formData, setFormData] = useState({
@@ -87,14 +88,15 @@ export const Contact = () => {
               <p className="text-[10px] font-bold tracking-widest uppercase text-text-secondary/60 mb-4">Socials</p>
               <div className="flex flex-col gap-3">
                 {['LinkedIn', 'GitHub', 'Twitter / X'].map((s) => (
-                  <a
-                    key={s}
-                    href="#"
-                    className="group/link flex items-center justify-between text-sm font-medium text-text-secondary hover:text-white transition-colors"
-                  >
-                    {s}
-                    <ArrowUpRight size={14} className="opacity-0 group-hover/link:opacity-100 transition-opacity group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
-                  </a>
+                  <MagneticButton key={s}>
+                    <a
+                      href="#"
+                      className="group/link flex items-center justify-between text-sm font-medium text-text-secondary hover:text-white transition-colors"
+                    >
+                      {s}
+                      <ArrowUpRight size={14} className="opacity-0 group-hover/link:opacity-100 transition-opacity group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+                    </a>
+                  </MagneticButton>
                 ))}
               </div>
             </div>
@@ -184,15 +186,17 @@ export const Contact = () => {
                     <span className="text-text-secondary">to discuss further.</span>
                   </div>
 
-                  <motion.button
-                    type="submit"
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.97 }}
-                    className="mt-12 self-start group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white text-black font-black text-xs tracking-widest uppercase hover:bg-accent-cyan transition-all duration-300 hover:shadow-[0_0_40px_rgba(61,216,208,0.4)]"
-                  >
-                    Send Message
-                    <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                  </motion.button>
+                  <MagneticButton className="mt-12 self-start">
+                    <motion.button
+                      type="submit"
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                      className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white text-black font-black text-xs tracking-widest uppercase hover:bg-accent-cyan transition-all duration-300 hover:shadow-[0_0_40px_rgba(61,216,208,0.4)]"
+                    >
+                      Send Message
+                      <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    </motion.button>
+                  </MagneticButton>
                 </form>
               )}
             </div>

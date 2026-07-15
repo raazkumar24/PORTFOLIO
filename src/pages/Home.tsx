@@ -1,8 +1,10 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { useRef, useEffect, useState, Fragment } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { ArrowUpRight } from 'lucide-react'
 import { personalInfo, stats, projects } from '../data/portfolio'
+import { MagneticButton } from '../components/MagneticButton'
+import { AbstractCubes } from '../components/AbstractCubes'
 
 /* ── Typewriter hook ── */
 const useTypewriter = (words: string[], speed = 80, pause = 1800) => {
@@ -73,7 +75,7 @@ export const Home = () => {
 
       {/* ────────────── HERO ────────────── */}
       <section className="min-h-screen w-full relative flex flex-col justify-center px-5 sm:px-8 md:px-16 pt-28 pb-20 overflow-hidden">
-        
+
         {/* Subtle grid background pattern */}
         <div className="absolute inset-0 z-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-30 pointer-events-none" />
 
@@ -102,7 +104,7 @@ export const Home = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             >
-              Building <br className="sm:hidden block md:block"/>Digital
+              Building <br className="sm:hidden block md:block" />Digital
             </motion.h1>
             <motion.div
               className="flex items-center gap-4 mt-2 md:mt-0"
@@ -114,14 +116,16 @@ export const Home = () => {
                 Futures.
               </h1>
             </motion.div>
-            
-            {/* Abstract geometric shape replacing the aurora */}
-            <motion.div 
-              initial={{ scale: 0.8, opacity: 0, rotate: -15 }}
-              animate={{ scale: 1, opacity: 1, rotate: 0 }}
+
+            {/* Interactive 3D element replacing simple blur */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               transition={{ duration: 1.5, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute right-0 top-1/2 -translate-y-1/2 w-32 h-32 md:w-64 md:h-64 bg-accent-cyan/20 blur-[60px] rounded-full z-0 pointer-events-none"
-            />
+              className="absolute right-0 top-1/2 -translate-y-1/2 w-full h-full pointer-events-none z-0"
+            >
+              {/* <AbstractCubes /> */}
+            </motion.div>
           </div>
 
           <motion.div
@@ -157,15 +161,16 @@ export const Home = () => {
                 ...personalInfo.socialLinks,
                 { label: 'Resume', href: personalInfo.resumeUrl },
               ].map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  target={item.href.startsWith('http') ? '_blank' : undefined}
-                  rel="noreferrer"
-                  className="text-xs font-bold tracking-[0.15em] uppercase text-text-secondary hover:text-white transition-colors duration-300 pb-1 border-b border-transparent hover:border-white"
-                >
-                  {item.label}
-                </a>
+                <MagneticButton key={item.label}>
+                  <a
+                    href={item.href}
+                    target={item.href.startsWith('http') ? '_blank' : undefined}
+                    rel="noreferrer"
+                    className="text-xs font-bold tracking-[0.15em] uppercase text-text-secondary hover:text-white transition-colors duration-300 pb-1 border-b border-transparent hover:border-white"
+                  >
+                    {item.label}
+                  </a>
+                </MagneticButton>
               ))}
             </div>
           </motion.div>
@@ -223,7 +228,7 @@ export const Home = () => {
                   </p>
                 </div>
               </div>
-              
+
               <div className="flex gap-4 items-start">
                 <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center flex-shrink-0 mt-1">
                   <span className="text-xs font-bold text-white">02</span>
@@ -235,14 +240,16 @@ export const Home = () => {
                   </p>
                 </div>
               </div>
-              
-              <Link
-                to="/about"
-                className="group inline-flex items-center gap-2 text-white font-bold text-xs uppercase tracking-[0.15em] hover:text-accent-cyan transition-colors self-start mt-6"
-              >
-                <span className="border-b-2 border-white group-hover:border-accent-cyan pb-0.5 transition-colors duration-300">Discover my background</span>
-                <ArrowUpRight size={16} strokeWidth={2.5} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
-              </Link>
+
+              <MagneticButton>
+                <Link
+                  to="/about"
+                  className="group inline-flex items-center gap-2 text-white font-bold text-xs uppercase tracking-[0.15em] hover:text-accent-cyan transition-colors self-start mt-6"
+                >
+                  <span className="border-b-2 border-white group-hover:border-accent-cyan pb-0.5 transition-colors duration-300">Discover my background</span>
+                  <ArrowUpRight size={16} strokeWidth={2.5} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+                </Link>
+              </MagneticButton>
             </motion.div>
           </div>
         </div>
@@ -261,12 +268,14 @@ export const Home = () => {
               <span className="text-xs font-bold tracking-[0.25em] uppercase text-accent-cyan mb-4 block">( Selected Work )</span>
               <h2 className="text-[clamp(1.5rem,11vw,6rem)] leading-[0.9] font-black tracking-tighter uppercase text-white break-words">Featured<br />Cases.</h2>
             </motion.div>
-            <Link
-              to="/projects"
-              className="hidden sm:inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-text-secondary border border-white/[0.08] px-6 py-3 rounded-full hover:bg-white hover:text-black hover:border-transparent transition-all duration-300"
-            >
-              View Archive <ArrowUpRight size={14} />
-            </Link>
+            <MagneticButton className="hidden sm:block">
+              <Link
+                to="/projects"
+                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-text-secondary border border-white/[0.08] px-6 py-3 rounded-full hover:bg-white hover:text-black hover:border-transparent transition-all duration-300"
+              >
+                View Archive <ArrowUpRight size={14} />
+              </Link>
+            </MagneticButton>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16">
@@ -279,17 +288,17 @@ export const Home = () => {
                 transition={{ duration: 0.8, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] }}
                 className="group relative flex flex-col"
               >
-                <div className="aspect-[4/3] w-full relative rounded-2xl overflow-hidden mb-6 bg-bg-dark border border-white/[0.05]">
-                  <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-500 z-10" />
-                  
+                <div className="aspect-[4/3] w-full relative rounded-2xl overflow-hidden mb-6 bg-bg-dark border border-white/[0.05] group-hover:border-white/20 transition-all duration-500">
+                  <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none" />
+
                   <img
                     src={project.image}
                     alt={project.title}
                     className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
                   />
-                  
-                  <div className="absolute top-5 left-5 z-20">
-                    <div className="bg-bg-dark/80 backdrop-blur-md px-4 py-2 rounded-lg border border-white/10 text-xs font-bold tracking-widest text-white uppercase">
+
+                  <div className="absolute top-5 left-5 z-20 pointer-events-none">
+                    <div className="bg-bg-dark/80 backdrop-blur-md px-4 py-2 rounded-lg border border-white/10 text-xs font-bold tracking-widest text-white uppercase glass-card">
                       {project.num}
                     </div>
                   </div>
@@ -298,8 +307,8 @@ export const Home = () => {
                     to="/projects"
                     className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   >
-                    <div className="w-16 h-16 rounded-full bg-white text-black flex items-center justify-center shadow-2xl transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-                      <ArrowUpRight size={24} />
+                    <div className="w-20 h-20 rounded-full bg-white text-black flex items-center justify-center shadow-2xl transform translate-y-8 group-hover:translate-y-0 transition-all duration-500 ease-[0.16,1,0.3,1]">
+                      <ArrowUpRight size={28} />
                     </div>
                   </Link>
                 </div>
@@ -332,12 +341,12 @@ export const Home = () => {
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           >
             <p className="text-xs font-bold tracking-[0.25em] uppercase text-text-secondary mb-6">( Next Steps )</p>
-            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="inline-block">
               <Link
                 to="/contact"
-                className="inline-block text-[clamp(1.5rem,10vw,7rem)] font-black tracking-tighter uppercase leading-[0.9] text-white hover:text-accent-cyan transition-colors duration-300 break-words"
+                className="inline-block text-[clamp(1.5rem,10vw,7rem)] font-black tracking-tighter uppercase leading-[0.9] text-white hover:text-outline transition-all duration-300 break-words"
               >
-                Start a <br/>Project.
+                Start a <br />Project.
               </Link>
             </motion.div>
           </motion.div>

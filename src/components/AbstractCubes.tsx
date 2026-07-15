@@ -17,14 +17,14 @@ const CubeCluster = () => {
       const theta = u * 2.0 * Math.PI
       const phi = Math.acos(2.0 * v - 1.0)
       const r = Math.cbrt(Math.random()) * radius
-      
+
       const x = r * Math.sin(phi) * Math.cos(theta)
       const y = r * Math.sin(phi) * Math.sin(theta)
       const z = r * Math.cos(phi)
 
       // Random scale to make it look organic
       const scale = 0.5 + Math.random() * 0.8
-      
+
       // Random rotation
       const rotX = Math.random() * Math.PI
       const rotY = Math.random() * Math.PI
@@ -40,7 +40,7 @@ const CubeCluster = () => {
       // Rotate the entire cluster slowly
       groupRef.current.rotation.x += delta * 0.1
       groupRef.current.rotation.y += delta * 0.15
-      
+
       // Slight floating effect (bobbing)
       groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.2
     }
@@ -49,17 +49,17 @@ const CubeCluster = () => {
   return (
     <group ref={groupRef}>
       {cubes.map((cube, i) => (
-        <RoundedBox 
+        <RoundedBox
           key={i}
-          args={[1, 1, 1]} 
-          radius={0.1} 
+          args={[1, 1, 1]}
+          radius={0.1}
           smoothness={4}
-          position={cube.position as [number, number, number]} 
+          position={cube.position as [number, number, number]}
           rotation={cube.rotation as [number, number, number]}
           scale={cube.scale}
         >
-          <meshPhysicalMaterial 
-            color="#3dd8d0" 
+          <meshPhysicalMaterial
+            color="#3dd8d0"
             emissive="#004455"
             emissiveIntensity={0.2}
             roughness={0.1}
@@ -83,9 +83,9 @@ export const AbstractCubes = () => {
         <ambientLight intensity={0.5} />
         <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={2} color="#8b5cf6" />
         <pointLight position={[-10, -10, -10]} intensity={1} color="#3dd8d0" />
-        
+
         <CubeCluster />
-        
+
         {/* Environment map for realistic glass reflections */}
         <Environment preset="city" />
       </Canvas>
