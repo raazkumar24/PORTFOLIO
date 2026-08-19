@@ -55,10 +55,12 @@ export function GlassSurface({
     }
     update()
 
-    // Exclude only Safari from using SVG filters inside backdrop-filter
+    // Exclude Safari, mobile devices, and touch devices from SVG filters for 60fps scrolling performance
     const ua = navigator.userAgent
     const isSafari = /Safari/.test(ua) && !/Chrome|Edg|Opr/.test(ua)
-    setUseSvgFilter(!isSafari)
+    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua) || window.innerWidth < 768
+    setUseSvgFilter(!isSafari && !isMobile && !isTouch)
 
     const ro = new ResizeObserver(update)
     ro.observe(el)
@@ -71,6 +73,8 @@ export function GlassSurface({
   // 3D Parallax Tilt Mouse Handlers
   const handleMouseMove = (e: MouseEvent<HTMLElement>) => {
     if (!tilt || !ref.current) return
+    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0
+    if (isTouch) return
     const el = ref.current
     const rect = el.getBoundingClientRect()
     const x = e.clientX - rect.left

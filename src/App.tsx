@@ -44,11 +44,13 @@ const AnimatedRoutes = () => {
 function App() {
   /* ── Smooth scroll ── */
   useEffect(() => {
+    // Disable smooth scrolling on touch devices to ensure 60fps native momentum scrolling
+    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0
+    if (isTouch) return
+
     const lenis = new Lenis({
       lerp: 0.07,
       wheelMultiplier: 0.9,
-      touchMultiplier: 2,
-      syncTouch: true,
     })
 
     function raf(time: number) {
