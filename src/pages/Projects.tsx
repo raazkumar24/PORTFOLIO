@@ -1,19 +1,17 @@
 import { motion } from 'framer-motion'
 import { ArrowUpRight, ExternalLink, GitBranch } from 'lucide-react'
 import { useState } from 'react'
-
 import { projects } from '../data/portfolio'
+import { GlassSurface } from '../components/GlassSurface'
 
 export const Projects = () => {
   const [hovered, setHovered] = useState<number | null>(null)
 
   return (
-    <div className="w-full min-h-screen bg-bg-dark pt-28 sm:pt-32 text-text-primary pb-24 md:pb-40">
-
-      {/* Brutalist Grid Background */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-      </div>
+    <div
+      className="w-full min-h-screen pt-28 sm:pt-32 pb-24 md:pb-40"
+      style={{ background: 'var(--theme-bg)', color: 'var(--theme-text)' }}
+    >
 
       <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-16 relative z-10">
 
@@ -47,8 +45,8 @@ export const Projects = () => {
               onMouseEnter={() => setHovered(project.id)}
               onMouseLeave={() => setHovered(null)}
             >
-              {/* Meta row */}
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-6 gap-4">
+              {/* Header */}
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 mb-8 border-b border-white/[0.04] pb-6">
                 <div className="flex items-baseline gap-5">
                   <span className="text-xs font-black text-text-secondary">{project.num}</span>
                   <div>
@@ -70,7 +68,14 @@ export const Projects = () => {
               </div>
 
               {/* Image */}
-              <div className="w-full aspect-video sm:aspect-[21/9] relative rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden glass-card p-2 mb-10 group/img">
+              <GlassSurface
+                radius={28}
+                edgeWidth={24}
+                strength={38}
+                tilt={true}
+                className="w-full aspect-video sm:aspect-[21/9] mb-10 group/img"
+                style={{ padding: 8 }}
+              >
                 <div className="w-full h-full rounded-[1.2rem] sm:rounded-[1.6rem] overflow-hidden relative">
                   {/* Color tint overlay */}
                   <div
@@ -88,16 +93,42 @@ export const Projects = () => {
                   {/* Corner badge */}
                   <div className="absolute top-5 right-5 z-20 opacity-0 group-hover/img:opacity-100 transition-opacity duration-500">
                     <div className="flex gap-2">
-                      <a href="#" className="w-9 h-9 rounded-full bg-black/60 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-black transition-all duration-300">
+                      <GlassSurface
+                        as="a"
+                        href="#"
+                        radius={999}
+                        edgeWidth={14}
+                        strength={18}
+                        style={{
+                          width: 36, height: 36,
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          color: 'white',
+                        }}
+                      >
                         <GitBranch size={14} />
-                      </a>
-                      <a href="#" className="w-9 h-9 rounded-full bg-black/60 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-black transition-all duration-300">
+                      </GlassSurface>
+                      <GlassSurface
+                        as="a"
+                        href="#"
+                        radius={999}
+                        edgeWidth={14}
+                        strength={18}
+                        style={{
+                          width: 36, height: 36,
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          color: 'white',
+                        }}
+                      >
                         <ExternalLink size={14} />
-                      </a>
+                      </GlassSurface>
                     </div>
                   </div>
                 </div>
-              </div>
+              </GlassSurface>
 
               {/* Details */}
               <div className="grid grid-cols-1 md:grid-cols-[1.5fr_1fr] gap-10 md:gap-16">
@@ -111,12 +142,23 @@ export const Projects = () => {
                     <h3 className="text-xs font-bold tracking-widest uppercase text-text-secondary mb-4">Tech Stack</h3>
                     <div className="flex flex-wrap gap-2">
                       {project.stack.map((tech) => (
-                        <span
+                        <GlassSurface
                           key={tech}
-                          className="px-3 py-1.5 rounded-lg text-xs font-semibold glass-card border-white/[0.05] text-text-primary"
+                          as="span"
+                          radius={10}
+                          edgeWidth={10}
+                          strength={16}
+                          tint="rgba(139,92,246,0.08)"
+                          style={{
+                            display: 'inline-block',
+                            padding: '5px 12px',
+                            fontSize: 12,
+                            fontWeight: 600,
+                            color: 'var(--theme-text)',
+                          }}
                         >
                           {tech}
-                        </span>
+                        </GlassSurface>
                       ))}
                     </div>
                   </div>

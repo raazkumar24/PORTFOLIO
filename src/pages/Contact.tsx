@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowUpRight, Mail, MapPin, Clock } from 'lucide-react'
 import { MagneticButton } from '../components/MagneticButton'
+import { GlassSurface } from '../components/GlassSurface'
 
 export const Contact = () => {
   const [formData, setFormData] = useState({
@@ -28,12 +29,10 @@ export const Contact = () => {
   ]
 
   return (
-    <div className="w-full min-h-screen pt-28 sm:pt-32 pb-24 md:pb-40 relative overflow-hidden flex flex-col bg-bg-dark text-text-primary">
-
-      {/* Brutalist Grid Background */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-      </div>
+    <div
+      className="w-full min-h-screen pt-28 sm:pt-32 pb-24 md:pb-40 relative overflow-hidden flex flex-col"
+      style={{ background: 'var(--theme-bg)', color: 'var(--theme-text)' }}
+    >
 
       <div className="max-w-6xl w-full mx-auto px-5 sm:px-8 md:px-16 relative z-10">
 
@@ -68,9 +67,21 @@ export const Contact = () => {
             <div className="flex flex-col gap-6">
               {contactInfo.map(({ icon: Icon, label, value, href }) => (
                 <div key={label} className="flex items-start gap-4 group">
-                  <div className="w-9 h-9 rounded-xl glass-card flex items-center justify-center flex-shrink-0 border border-white/[0.06] group-hover:border-accent-cyan/30 group-hover:bg-accent-cyan/5 transition-all duration-300">
+                  <GlassSurface
+                    as="div"
+                    radius={999}
+                    edgeWidth={14}
+                    strength={18}
+                    style={{
+                      width: 36, height: 36,
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexShrink: 0,
+                    }}
+                  >
                     <Icon size={14} className="text-accent-cyan" />
-                  </div>
+                  </GlassSurface>
                   <div>
                     <p className="text-[10px] font-bold tracking-widest uppercase text-text-secondary/60 mb-0.5">{label}</p>
                     {href ? (
@@ -102,7 +113,13 @@ export const Contact = () => {
             </div>
 
             {/* Availability badge */}
-            <div className="p-4 rounded-2xl glass-card border border-accent-cyan/15 bg-accent-cyan/5">
+            <GlassSurface
+              radius={20}
+              edgeWidth={16}
+              strength={22}
+              tint="rgba(61,216,208,0.09)"
+              style={{ padding: 16 }}
+            >
               <div className="flex items-center gap-2 mb-2">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-cyan opacity-75" />
@@ -111,7 +128,7 @@ export const Contact = () => {
                 <p className="text-xs font-bold text-accent-cyan uppercase tracking-widest">Available Now</p>
               </div>
               <p className="text-xs text-text-secondary leading-relaxed">Open for new projects. Typical response within 24 hours.</p>
-            </div>
+            </GlassSurface>
           </motion.div>
 
           {/* Right - Form */}
@@ -120,7 +137,13 @@ export const Contact = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="glass-card rounded-[2rem] p-7 sm:p-10 md:p-12 border border-white/[0.06]">
+            <GlassSurface
+              radius={32}
+              edgeWidth={28}
+              strength={40}
+              tilt={true}
+              style={{ padding: '28px 32px' }}
+            >
               {submitted ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
@@ -187,19 +210,34 @@ export const Contact = () => {
                   </div>
 
                   <MagneticButton className="mt-12 self-start">
-                    <motion.button
+                    <GlassSurface
+                      as="button"
                       type="submit"
-                      whileHover={{ scale: 1.03 }}
-                      whileTap={{ scale: 0.97 }}
-                      className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white text-black font-black text-xs tracking-widest uppercase hover:bg-accent-cyan transition-all duration-300 hover:shadow-[0_0_40px_rgba(61,216,208,0.4)]"
+                      radius={999}
+                      edgeWidth={16}
+                      strength={24}
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: 10,
+                        padding: '14px 28px',
+                        fontWeight: 900,
+                        fontSize: 12,
+                        letterSpacing: '0.15em',
+                        textTransform: 'uppercase',
+                        color: '#060709',
+                        background: 'rgba(61,216,208,0.9)',
+                        borderColor: 'rgba(61,216,208,0.6)',
+                        cursor: 'pointer',
+                      }}
                     >
                       Send Message
-                      <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                    </motion.button>
+                      <ArrowUpRight size={14} />
+                    </GlassSurface>
                   </MagneticButton>
                 </form>
               )}
-            </div>
+            </GlassSurface>
           </motion.div>
         </div>
 

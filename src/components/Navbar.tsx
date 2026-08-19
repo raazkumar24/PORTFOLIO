@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import { MagneticButton } from './MagneticButton';
+import { GlassSurface } from './GlassSurface';
 
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -19,10 +20,10 @@ export const Navbar = () => {
   }, [location.pathname]);
 
   const navLinks = [
-    { name: 'Home', href: '/' },
-    { name: 'About', href: '/about' },
-    { name: 'Services', href: '/services' },
-    { name: 'Projects', href: '/projects' },
+    { name: 'Home',       href: '/' },
+    { name: 'About',      href: '/about' },
+    { name: 'Services',   href: '/services' },
+    { name: 'Projects',   href: '/projects' },
     { name: 'Experience', href: '/experience' },
   ];
 
@@ -32,40 +33,51 @@ export const Navbar = () => {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
-          ? 'py-3'
-          : 'py-5'
-          }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          scrolled ? 'py-3' : 'py-5'
+        }`}
       >
-        {/* Blur bg pill */}
-        <div className={`absolute inset-0 transition-all duration-500 ${scrolled ? 'opacity-100' : 'opacity-0'
-          }`}>
-          <div className="absolute inset-0 bg-bg-dark/70 backdrop-blur-2xl border-b border-white/[0.04]" />
-        </div>
+        {/* Scrolled backdrop */}
+        {/* <div className={`absolute inset-0 transition-all duration-500 ${scrolled ? 'opacity-100' : 'opacity-0'}`}>
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              background: 'rgba(6,7,9,0.75)',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)',
+              borderBottom: '1px solid var(--theme-border)',
+            }}
+          />
+        </div> */}
 
         <div className="container mx-auto px-5 sm:px-8 md:px-12 flex justify-between items-center relative z-10">
+
           {/* Logo */}
           <Link to="/" className="group flex items-center gap-2">
-            <div className="text-2xl md:text-3xl font-bold text-white">
+            <div className="text-2xl md:text-3xl font-bold" style={{ color: 'var(--theme-text)' }}>
               RS
             </div>
-            {/* <span className="text-base font-heading font-bold text-white tracking-tight hidden sm:block">
-              Raj Shekhar<span className="text-accent-cyan">.</span>
-            </span> */}
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-1 bg-white/[0.04] backdrop-blur-sm rounded-full px-2 py-2 border border-white/[0.06]">
+          {/* Desktop Nav — single glass pill (original style) */}
+          <GlassSurface
+            as="nav"
+            radius={25}
+            edgeWidth={16}
+            strength={22}
+            className="hidden md:flex items-center gap-1 px-2 py-2"
+            style={{ background: 'rgba(255,255,255,0.04)' }}
+          >
             {navLinks.map((link) => {
               const isActive = location.pathname === link.href;
               return (
                 <Link
                   key={link.name}
                   to={link.href}
-                  className={`relative px-5 py-2 text-sm font-medium rounded-full transition-all duration-300 ${isActive
-                    ? 'text-black'
-                    : 'text-text-secondary hover:text-white'
-                    }`}
+                  className={`relative px-5 py-2 text-sm font-medium rounded-full transition-all duration-300 ${
+                    isActive ? 'text-black' : 'text-text-secondary hover:text-white'
+                  }`}
                 >
                   {isActive && (
                     <motion.span
@@ -78,30 +90,60 @@ export const Navbar = () => {
                 </Link>
               );
             })}
-          </nav>
+          </GlassSurface>
 
-          {/* CTA */}
-          <MagneticButton className="hidden md:block">
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent-cyan/10 border border-accent-cyan/30 text-accent-cyan text-xs font-semibold uppercase tracking-wider hover:bg-accent-cyan hover:text-black transition-all duration-300 hover:shadow-[0_0_30px_rgba(61,216,208,0.3)]"
+          {/* Right side: Hire Me */}
+          <div className="hidden md:flex items-center gap-3">
+            <MagneticButton>
+              <GlassSurface
+                as={Link}
+                to="/contact"
+                radius={999}
+                edgeWidth={14}
+                strength={22}
+                tint="rgba(61,216,208,0.1)"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 8,
+                  padding: '9px 20px',
+                  fontSize: 12,
+                  fontWeight: 600,
+                  letterSpacing: '0.1em',
+                  textTransform: 'uppercase',
+                  color: '#3dd8d0',
+                  borderColor: 'rgba(61,216,208,0.3)',
+                  textDecoration: 'none',
+                }}
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-accent-cyan inline-block animate-pulse" />
+                Hire Me
+              </GlassSurface>
+            </MagneticButton>
+          </div>
+
+          {/* Mobile: Hamburger only */}
+          <div className="md:hidden flex items-center gap-2">
+            <button
+              id="mobile-menu-toggle"
+              className="relative w-10 h-10 flex flex-col justify-center items-center gap-1.5"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle menu"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-accent-cyan inline-block animate-pulse" />
-              Hire Me
-            </Link>
-          </MagneticButton>
-
-          {/* Hamburger */}
-          <button
-            id="mobile-menu-toggle"
-            className="md:hidden relative w-10 h-10 flex flex-col justify-center items-center gap-1.5"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            <span className={`block w-6 h-[1.5px] bg-white origin-center transition-all duration-300 ${mobileMenuOpen ? 'rotate-45 translate-y-[6px]' : ''}`} />
-            <span className={`block w-4 h-[1.5px] bg-white transition-all duration-300 ${mobileMenuOpen ? 'opacity-0 w-0' : 'opacity-100'}`} />
-            <span className={`block w-6 h-[1.5px] bg-white origin-center transition-all duration-300 ${mobileMenuOpen ? '-rotate-45 -translate-y-[6px]' : ''}`} />
-          </button>
+              <span
+                className={`block w-6 h-[1.5px] origin-center transition-all duration-300 ${mobileMenuOpen ? 'rotate-45 translate-y-[6px]' : ''}`}
+                style={{ background: 'var(--theme-text)' }}
+              />
+              <span
+                className={`block w-4 h-[1.5px] transition-all duration-300 ${mobileMenuOpen ? 'opacity-0 w-0' : 'opacity-100'}`}
+                style={{ background: 'var(--theme-text)' }}
+              />
+              <span
+                className={`block w-6 h-[1.5px] origin-center transition-all duration-300 ${mobileMenuOpen ? '-rotate-45 -translate-y-[6px]' : ''}`}
+                style={{ background: 'var(--theme-text)' }}
+              />
+            </button>
+          </div>
         </div>
       </motion.header>
 
@@ -114,7 +156,8 @@ export const Navbar = () => {
             animate={{ clipPath: 'circle(150% at calc(100% - 2.5rem) 2.5rem)' }}
             exit={{ clipPath: 'circle(0% at calc(100% - 2.5rem) 2.5rem)' }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-40 bg-bg-dark/98 backdrop-blur-2xl flex flex-col items-start justify-center px-10 md:hidden"
+            style={{ background: 'rgba(6,7,9,0.98)' }}
+            className="fixed inset-0 z-40 backdrop-blur-2xl flex flex-col items-start justify-center px-10 md:hidden"
           >
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
               <div className="aurora-blur w-96 h-96 bg-accent-cyan top-[-10%] left-[-10%]" />
@@ -122,7 +165,9 @@ export const Navbar = () => {
             </div>
 
             <div className="relative z-10 flex flex-col gap-6 w-full">
-              <p className="text-xs font-bold tracking-widest uppercase text-text-secondary mb-4">Navigation</p>
+              <p className="text-xs font-bold tracking-widest uppercase mb-4" style={{ color: 'var(--theme-text-muted)' }}>
+                Navigation
+              </p>
               {[...navLinks, { name: 'Contact', href: '/contact' }].map((link, index) => {
                 const isActive = location.pathname === link.href;
                 return (
@@ -135,8 +180,8 @@ export const Navbar = () => {
                   >
                     <Link
                       to={link.href}
-                      className={`block text-3xl font-heading font-bold tracking-tighter transition-colors duration-300 hover-underline ${isActive ? 'text-accent-cyan' : 'text-white hover:text-accent-cyan'
-                        }`}
+                      className="block text-3xl font-heading font-bold tracking-tighter transition-colors duration-300 hover-underline"
+                      style={{ color: isActive ? '#3dd8d0' : 'var(--theme-text)' }}
                     >
                       {link.name}
                     </Link>
@@ -150,7 +195,8 @@ export const Navbar = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
               transition={{ delay: 0.4, duration: 0.4 }}
-              className="relative z-10 mt-16 text-text-secondary text-sm"
+              className="relative z-10 mt-16 text-sm"
+              style={{ color: 'var(--theme-text-muted)' }}
             >
               hello@rajshekhar.dev
             </motion.div>

@@ -1,19 +1,17 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowUpRight, ChevronDown } from 'lucide-react'
-
 import { experienceData } from '../data/portfolio'
+import { GlassSurface } from '../components/GlassSurface'
 
 export const Experience = () => {
   const [expandedId, setExpandedId] = useState<string | null>(experienceData[0].id)
 
   return (
-    <div className="w-full min-h-screen bg-bg-dark pt-28 sm:pt-32 text-text-primary pb-24 md:pb-40">
-
-      {/* Brutalist Grid Background */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-      </div>
+    <div
+      className="w-full min-h-screen pt-28 sm:pt-32 pb-24 md:pb-40"
+      style={{ background: 'var(--theme-bg)', color: 'var(--theme-text)' }}
+    >
 
       <div className="max-w-5xl mx-auto px-5 sm:px-8 md:px-16 relative z-10">
 
@@ -131,9 +129,23 @@ export const Experience = () => {
                           <p className="text-[10px] font-bold tracking-widest uppercase text-text-secondary/60 mb-3">Technologies Used</p>
                           <div className="flex flex-wrap gap-2">
                             {item.tech.map((t) => (
-                              <span key={t} className="px-3 py-1.5 rounded-lg glass-card text-xs font-medium text-text-primary">
+                              <GlassSurface
+                                key={t}
+                                as="span"
+                                radius={10}
+                                edgeWidth={10}
+                                strength={16}
+                                tint="rgba(139,92,246,0.07)"
+                                style={{
+                                  display: 'inline-block',
+                                  padding: '5px 12px',
+                                  fontSize: 12,
+                                  fontWeight: 500,
+                                  color: 'var(--theme-text)',
+                                }}
+                              >
                                 {t}
-                              </span>
+                              </GlassSurface>
                             ))}
                           </div>
                         </div>
@@ -155,18 +167,33 @@ export const Experience = () => {
           className="mt-20 md:mt-28 pt-12 border-t border-white/[0.05] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-8"
         >
           <div>
-            <h3 className="text-2xl sm:text-3xl font-black tracking-tight text-white mb-2">Open to new projects!</h3>
-            <p className="text-text-secondary font-sans text-sm sm:text-base">Available for freelance work. Let's build something great.</p>
+            <h3 className="text-2xl sm:text-3xl font-black tracking-tight mb-2" style={{ color: 'var(--theme-text)' }}>Open to new projects!</h3>
+            <p className="font-sans text-sm sm:text-base" style={{ color: 'var(--theme-text-muted)' }}>Available for freelance work. Let's build something great.</p>
           </div>
-          <motion.a
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <GlassSurface
+            as="a"
             href="mailto:hello@rajshekhar.dev"
-            className="group inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-accent-cyan text-bg-dark font-black text-xs tracking-widest uppercase hover:shadow-[0_0_40px_rgba(61,216,208,0.4)] transition-all duration-300"
+            radius={999}
+            edgeWidth={16}
+            strength={24}
+            tint="rgba(61,216,208,0.1)"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 10,
+              padding: '12px 28px',
+              fontSize: 12,
+              fontWeight: 900,
+              letterSpacing: '0.15em',
+              textTransform: 'uppercase',
+              color: '#3dd8d0',
+              borderColor: 'rgba(61,216,208,0.3)',
+              textDecoration: 'none',
+            }}
           >
             Let's Talk
-            <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </motion.a>
+            <ArrowUpRight size={14} />
+          </GlassSurface>
         </motion.div>
 
       </div>

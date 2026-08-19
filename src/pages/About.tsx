@@ -4,7 +4,67 @@ import profileImg from '../assets/profile.jpeg';
 import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+const getSocialIcon = (label: string, size = 12) => {
+  switch (label.toLowerCase()) {
+    case 'github':
+      return (
+        <svg
+          width={size}
+          height={size}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="inline mr-1.5 align-middle"
+        >
+          <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+          <path d="M9 18c-4.51 2-5-2-7-2" />
+        </svg>
+      );
+    case 'linkedin':
+      return (
+        <svg
+          width={size}
+          height={size}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="inline mr-1.5 align-middle"
+        >
+          <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+          <rect width="4" height="12" x="2" y="9" />
+          <circle cx="4" cy="4" r="2" />
+        </svg>
+      );
+    case 'twitter':
+    case 'x':
+      return (
+        <svg
+          width={size}
+          height={size}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="inline mr-1.5 align-middle"
+        >
+          <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
+        </svg>
+      );
+    default:
+      return null;
+  }
+};
 import { personalInfo, skills } from '../data/portfolio';
+import { GlassSurface } from '../components/GlassSurface';
+
 
 export const About = () => {
   const containerRef = useRef<HTMLElement>(null);
@@ -13,12 +73,10 @@ export const About = () => {
   const textY = useTransform(scrollYProgress, [0, 1], [-30, 30]);
 
   return (
-    <div className="w-full min-h-screen bg-bg-dark pt-28 sm:pt-32 text-text-primary pb-24 md:pb-40">
-
-      {/* Brutalist Grid Background */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-      </div>
+    <div
+      className="w-full min-h-screen pt-28 sm:pt-32 pb-24 md:pb-40"
+      style={{ background: 'var(--theme-bg)', color: 'var(--theme-text)' }}
+    >
 
       <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-16 relative z-10">
 
@@ -41,7 +99,14 @@ export const About = () => {
 
           {/* Image column */}
           <motion.div style={{ y: imgY }} className="w-full lg:w-5/12 lg:sticky lg:top-28 flex-shrink-0">
-            <div className="relative rounded-[2rem] overflow-hidden glass-card p-2.5 group">
+            <GlassSurface
+              radius={32}
+              edgeWidth={28}
+              strength={40}
+              tilt={true}
+              style={{ padding: 10 }}
+              className="group"
+            >
               <div className="rounded-[1.6rem] overflow-hidden relative aspect-[4/5]">
                 <div className="absolute inset-0 bg-gradient-to-t from-bg-dark/90 via-bg-dark/20 to-transparent z-10 opacity-70 group-hover:opacity-50 transition-opacity duration-700" />
                 <img
@@ -54,17 +119,25 @@ export const About = () => {
                   <p className="gradient-text text-xs font-bold tracking-widest uppercase mt-1">Full Stack Developer</p>
                 </div>
 
-                {/* Floating badge */}
-                <div className="absolute top-5 right-5 z-20 bg-black/50 backdrop-blur-md border border-white/10 rounded-xl px-3 py-2 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500">
-                  <p className="text-[10px] font-bold text-accent-cyan tracking-widest uppercase">Open to Work</p>
+                {/* Floating badge — liquid glass pill */}
+                <div className="absolute top-5 right-5 z-20 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500">
+                  <GlassSurface
+                    as="div"
+                    radius={12}
+                    edgeWidth={10}
+                    strength={16}
+                    style={{ display: 'inline-block', padding: '6px 12px' }}
+                  >
+                    <p className="text-[10px] font-bold text-accent-cyan tracking-widest uppercase">Open to Work</p>
+                  </GlassSurface>
                 </div>
               </div>
-            </div>
+            </GlassSurface>
 
-            {/* Social links below image */}
             <div className="mt-5 flex gap-3">
               {personalInfo.socialLinks.map((s) => (
-                <a key={s.label} href={s.href} className="flex-1 py-2.5 rounded-xl border border-white/[0.06] text-xs font-medium text-text-secondary text-center hover:text-white hover:border-white/20 hover:bg-white/[0.04] transition-all duration-300">
+                <a key={s.label} href={s.href} className="flex-1 py-2.5 rounded-xl border border-white/[0.06] text-xs font-medium text-text-secondary text-center hover:text-white hover:border-white/20 hover:bg-white/[0.04] transition-all duration-300 flex items-center justify-center gap-1.5">
+                  {getSocialIcon(s.label)}
                   {s.label}
                 </a>
               ))}
@@ -117,17 +190,31 @@ export const About = () => {
               <h3 className="text-sm font-bold tracking-widest uppercase text-accent-cyan mb-8">Technical Arsenal</h3>
               <div className="flex flex-wrap gap-2.5">
                 {skills.map((skill, i) => (
-                  <motion.span
+                  <motion.div
                     key={skill.name}
                     initial={{ opacity: 0, scale: 0.85 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.04, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                    whileHover={{ scale: 1.05 }}
-                    className="px-4 py-2 rounded-xl glass-card text-text-primary text-sm font-medium hover:bg-accent-cyan/10 hover:text-accent-cyan hover:border-accent-cyan/30 transition-all duration-300 cursor-default"
                   >
-                    {skill.name}
-                  </motion.span>
+                    <GlassSurface
+                      as="span"
+                      radius={12}
+                      edgeWidth={10}
+                      strength={16}
+                      tint="rgba(61,216,208,0.07)"
+                      style={{
+                        display: 'inline-block',
+                        padding: '6px 14px',
+                        fontSize: 13,
+                        fontWeight: 500,
+                        color: 'var(--theme-text)',
+                        cursor: 'default',
+                      }}
+                    >
+                      {skill.name}
+                    </GlassSurface>
+                  </motion.div>
                 ))}
               </div>
             </div>
