@@ -45,19 +45,16 @@ const getSocialIcon = (label: string, size = 12) => {
       );
     case 'twitter':
     case 'x':
+    case 'twitter / x':
       return (
         <svg
           width={size}
           height={size}
           viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+          fill="currentColor"
           className="inline mr-1.5 align-middle"
         >
-          <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
         </svg>
       );
     case 'resume':
@@ -275,7 +272,7 @@ export const Home = () => {
       {/* ────────────── STATS STRIP ────────────── */}
       <section className="py-10 border-y border-white/[0.04] bg-surface relative z-10">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-16">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
             {stats.map((stat) => (
               <GlassSurface
                 key={stat.label}
@@ -284,9 +281,9 @@ export const Home = () => {
                 strength={28}
                 tilt={true}
                 tint="rgba(139,92,246,0.07)"
-                style={{ padding: '20px 24px', textAlign: 'center' }}
+                style={{ padding: '20px 12px', textAlign: 'center' }}
               >
-                <p className="text-3xl sm:text-4xl font-black tracking-tighter" style={{ color: 'var(--theme-text)' }}>
+                <p className="text-2xl xs:text-3xl sm:text-4xl font-black tracking-tighter" style={{ color: 'var(--theme-text)' }}>
                   <Counter target={stat.value} suffix={stat.suffix} />
                 </p>
                 <p style={{ color: 'var(--theme-text-muted)' }} className="text-[10px] mt-1 font-bold uppercase tracking-widest">{stat.label}</p>

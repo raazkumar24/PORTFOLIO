@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import profileImg from '../assets/profile.jpeg';
 import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -43,19 +43,16 @@ const getSocialIcon = (label: string, size = 12) => {
       );
     case 'twitter':
     case 'x':
+    case 'twitter / x':
       return (
         <svg
           width={size}
           height={size}
           viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+          fill="currentColor"
           className="inline mr-1.5 align-middle"
         >
-          <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
         </svg>
       );
     default:
@@ -68,6 +65,17 @@ import { GlassSurface } from '../components/GlassSurface';
 
 export const About = () => {
   const containerRef = useRef<HTMLElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start end', 'end start'] });
   const imgY = useTransform(scrollYProgress, [0, 1], [40, -40]);
   const textY = useTransform(scrollYProgress, [0, 1], [-30, 30]);
@@ -98,7 +106,7 @@ export const About = () => {
         <section ref={containerRef} className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start mb-24 md:mb-40">
 
           {/* Image column */}
-          <motion.div style={{ y: imgY }} className="w-full lg:w-5/12 lg:sticky lg:top-28 flex-shrink-0">
+          <motion.div style={{ y: isMobile ? 0 : imgY }} className="w-full lg:w-5/12 lg:sticky lg:top-28 flex-shrink-0">
             <GlassSurface
               radius={32}
               edgeWidth={28}
@@ -145,7 +153,7 @@ export const About = () => {
           </motion.div>
 
           {/* Story column */}
-          <motion.div style={{ y: textY }} className="w-full lg:w-7/12 flex flex-col pt-0 lg:pt-8">
+          <motion.div style={{ y: isMobile ? 0 : textY }} className="w-full lg:w-7/12 flex flex-col pt-0 lg:pt-8">
             <span className="text-xs font-bold tracking-[0.25em] uppercase text-accent-cyan mb-6 block">Backstory</span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight leading-tight mb-10">
               I don't just write code.<br />

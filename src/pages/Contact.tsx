@@ -165,7 +165,8 @@ export const Contact = () => {
                 >
                   <p className="text-xs font-bold tracking-widest uppercase text-text-secondary/60 mb-8">Tell me about your project</p>
 
-                  <div className="text-xl sm:text-2xl md:text-3xl font-black leading-snug tracking-tight flex flex-wrap items-end gap-x-3 gap-y-7">
+                  {/* Desktop sentence layout */}
+                  <div className="hidden sm:flex flex-wrap items-end gap-x-3 gap-y-7 text-xl sm:text-2xl md:text-3xl font-black leading-snug tracking-tight">
                     <span className="text-text-secondary">Hi Raj, my name is</span>
                     <div className="relative group/input">
                       <input
@@ -207,6 +208,53 @@ export const Contact = () => {
                       required
                     />
                     <span className="text-text-secondary">to discuss further.</span>
+                  </div>
+
+                  {/* Mobile stacked layout */}
+                  <div className="flex sm:hidden flex-col gap-6 w-full text-left">
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-[10px] font-bold tracking-[0.15em] uppercase text-text-secondary">My Name Is</label>
+                      <input
+                        type="text"
+                        placeholder="Your Name"
+                        className={`${inputBase} text-lg font-bold`}
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        required
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-[10px] font-bold tracking-[0.15em] uppercase text-text-secondary">I Need Help With</label>
+                      <input
+                        type="text"
+                        placeholder="web app, e-commerce, etc."
+                        className={`${inputBase} text-lg font-bold`}
+                        value={formData.project}
+                        onChange={(e) => setFormData({ ...formData, project: e.target.value })}
+                        required
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-[10px] font-bold tracking-[0.15em] uppercase text-text-secondary">My Budget Is</label>
+                      <input
+                        type="text"
+                        placeholder="$5k – $20k"
+                        className={`${inputBase} text-lg font-bold`}
+                        value={formData.budget}
+                        onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-[10px] font-bold tracking-[0.15em] uppercase text-text-secondary">Reach Me At</label>
+                      <input
+                        type="email"
+                        placeholder="email@example.com"
+                        className={`${inputBase} text-lg font-bold`}
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        required
+                      />
+                    </div>
                   </div>
 
                   <MagneticButton className="mt-12 self-start">

@@ -19,6 +19,17 @@ export const Navbar = () => {
     setMobileMenuOpen(false);
   }, [location.pathname]);
 
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
   const navLinks = [
     { name: 'Home',       href: '/' },
     { name: 'About',      href: '/about' },
@@ -152,12 +163,27 @@ export const Navbar = () => {
         {mobileMenuOpen && (
           <motion.div
             key="mobile-menu"
-            initial={{ clipPath: 'circle(0% at calc(100% - 2.5rem) 2.5rem)' }}
-            animate={{ clipPath: 'circle(150% at calc(100% - 2.5rem) 2.5rem)' }}
-            exit={{ clipPath: 'circle(0% at calc(100% - 2.5rem) 2.5rem)' }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            style={{ background: 'rgba(6,7,9,0.98)' }}
-            className="fixed inset-0 z-40 backdrop-blur-2xl flex flex-col items-start justify-center px-10 md:hidden"
+            initial={{ 
+              clipPath: 'circle(0% at 90% 40px)',
+              WebkitClipPath: 'circle(0% at 90% 40px)'
+            }}
+            animate={{ 
+              clipPath: 'circle(150% at 90% 40px)',
+              WebkitClipPath: 'circle(150% at 90% 40px)'
+            }}
+            exit={{ 
+              clipPath: 'circle(0% at 90% 40px)',
+              WebkitClipPath: 'circle(0% at 90% 40px)'
+            }}
+            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+            style={{ 
+              background: 'rgba(6,7,9,0.98)',
+              willChange: 'transform, clip-path',
+              transform: 'translateZ(0)',
+              backfaceVisibility: 'hidden',
+              WebkitBackfaceVisibility: 'hidden',
+            }}
+            className="fixed inset-0 z-40 flex flex-col items-start justify-center px-10 md:hidden"
           >
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
               <div className="aurora-blur w-96 h-96 bg-accent-cyan top-[-10%] left-[-10%]" />
@@ -198,7 +224,8 @@ export const Navbar = () => {
               className="relative z-10 mt-16 text-sm"
               style={{ color: 'var(--theme-text-muted)' }}
             >
-              hello@rajshekhar.dev
+
+              raazverma625@gmail.com
             </motion.div>
           </motion.div>
         )}

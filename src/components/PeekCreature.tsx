@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom'
 /* ──────────────────────────────────────────────────────────────
  *  PeekCreature — Cyberpunk Ninja (improved, glass-matched)
  *  Matches the portfolio's dark + cyan/purple glass aesthetic.
+ *  NOTE: Hidden on mobile — only renders on sm (≥640px) and up.
  * ────────────────────────────────────────────────────────────── */
 
 const PAGE_MESSAGES: Record<string, string> = {
@@ -166,21 +167,12 @@ export const PeekCreature = () => {
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
       onClick={handleClick}
-      className="fixed bottom-0 right-0 z-[100] cursor-pointer flex items-end"
+      className="fixed bottom-0 right-0 z-[100] cursor-pointer hidden sm:flex items-end"
       style={{ originX: 0.5, originY: 1 }}
     >
       {/* Hover hitbox extensions */}
       <div className="absolute left-[-64px] bottom-0 w-[64px] h-[140px] bg-transparent" />
       <div className="absolute right-[-36px] bottom-0 w-[36px] h-[140px] bg-transparent" />
-
-      {/* Mobile pull tab */}
-      <div className="sm:hidden absolute left-[-20px] bottom-14 w-5 h-16 rounded-l-lg flex flex-col items-center justify-center gap-1.5 shadow-[-4px_0_14px_rgba(0,0,0,0.7)]"
-        style={{ background: '#0d0f18', border: '1px solid rgba(61,216,208,0.2)', borderRight: 'none' }}
-      >
-        <div className="w-1 h-1 rounded-full bg-accent-cyan" style={{ boxShadow: '0 0 5px #3dd8d0' }} />
-        <div className="w-1 h-1 rounded-full bg-accent-cyan" style={{ boxShadow: '0 0 5px #3dd8d0' }} />
-        <div className="w-1 h-1 rounded-full bg-accent-cyan" style={{ boxShadow: '0 0 5px #3dd8d0' }} />
-      </div>
 
       {/* ── Speech bubble ── */}
       <motion.div
