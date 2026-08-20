@@ -355,51 +355,77 @@ export const Home = () => {
       </section>
 
       {/* ────────────── STATS STRIP ────────────── */}
-      <section className="py-14 relative z-10 overflow-hidden">
+      <section className="py-14 md:py-18 relative z-10 overflow-hidden">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-16">
           <GlassSurface
-            radius={28}
-            edgeWidth={12}
-            strength={20}
+            radius={30}
+            edgeWidth={18}
+            strength={28}
             tint="rgba(255,255,255,0.02)"
-            className="w-full py-10 px-6 sm:px-12 relative overflow-hidden"
+            className="w-full relative overflow-hidden"
             style={{
-              borderColor: 'rgba(255, 255, 255, 0.08)',
-              boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.15), 0 8px 32px rgba(0,0,0,0.4)',
+              borderColor: 'rgba(255, 255, 255, 0.1)',
+              boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.16), 0 18px 60px rgba(0,0,0,0.38)',
             }}
           >
-            {/* Subtle grid background overlay inside the glass surface */}
-            <div className="absolute inset-0 opacity-[0.02] bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:34px_34px] opacity-[0.025] pointer-events-none" />
+            <div className="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-transparent via-accent-cyan/50 to-transparent" />
+            <div className="absolute right-0 top-0 h-full w-px bg-gradient-to-b from-transparent via-accent-purple/40 to-transparent" />
 
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 relative z-10">
-              {stats.map((stat, idx) => {
-                const config = STATS_CONFIG[idx] || STATS_CONFIG[0];
-                const Icon = config.icon;
-                return (
-                  <div
-                    key={stat.label}
-                    className="group relative flex flex-col items-center sm:items-start text-center sm:text-left transition-all duration-300"
-                  >
-                    {/* Icon with minimal styling */}
-                    <div className="p-2 rounded-xl border border-white/[0.04] bg-black/25 mb-4 group-hover:bg-black/55 group-hover:border-white/[0.1] transition-all duration-300">
-                      <Icon size={15} className="text-text-secondary group-hover:text-white transition-colors" />
-                    </div>
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[0.9fr_3fr]">
+              <div className="border-b lg:border-b-0 lg:border-r border-white/[0.07] p-6 sm:p-8 md:p-10 flex flex-col justify-between gap-8">
+                <div>
+                  <span className="text-[10px] font-black tracking-[0.25em] uppercase text-accent-cyan block mb-4">( Impact )</span>
+                  <h2 className="text-2xl sm:text-3xl font-black uppercase leading-none text-white">
+                    Proof in <span className="text-text-secondary">numbers.</span>
+                  </h2>
+                </div>
+                <p className="text-xs sm:text-sm leading-relaxed text-text-secondary max-w-xs">
+                  A quick read on delivery, momentum, and the kind of product quality I optimize for.
+                </p>
+              </div>
 
-                    {/* Counter with glassy drop-shadow glow (single brand color) */}
-                    <p 
-                      className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter leading-none mb-2 text-accent-cyan transition-all duration-300 group-hover:scale-105 origin-left"
-                      style={{ 
-                        textShadow: '0 2px 10px rgba(61,216,208,0.2)'
-                      }}
+              <div className="grid grid-cols-2 xl:grid-cols-4">
+                {stats.map((stat, idx) => {
+                  const config = STATS_CONFIG[idx] || STATS_CONFIG[0];
+                  const Icon = config.icon;
+                  return (
+                    <div
+                      key={stat.label}
+                      className="group relative min-h-[190px] p-5 sm:p-7 md:p-8 border-white/[0.07] odd:border-r xl:border-r xl:last:border-r-0 border-b xl:border-b-0 last:border-b-0 [&:nth-last-child(2)]:border-b-0"
                     >
-                      <Counter target={stat.value} suffix={stat.suffix} />
-                    </p>
+                      <div
+                        className="absolute inset-x-6 top-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                        style={{ background: config.gradient }}
+                      />
+                      <div className="flex items-start justify-between gap-4 mb-8">
+                        <span className="text-[10px] font-black font-mono text-white/25">
+                          /0{idx + 1}
+                        </span>
+                        <span
+                          className="w-10 h-10 rounded-full border flex items-center justify-center bg-black/30 transition-all duration-300 group-hover:bg-black/60"
+                          style={{ borderColor: config.border, boxShadow: `0 0 28px ${config.glow}` }}
+                        >
+                          <Icon size={16} style={{ color: idx === 0 ? '#3dd8d0' : idx === 1 ? '#8b5cf6' : idx === 2 ? '#ec4899' : '#f59e0b' }} />
+                        </span>
+                      </div>
 
-                    <p className="text-white text-xs font-bold uppercase tracking-wider mb-1 leading-tight">{stat.label}</p>
-                    <p className="text-text-secondary text-[10px] leading-tight font-medium opacity-80 group-hover:opacity-100 transition-opacity">{config.desc}</p>
-                  </div>
-                );
-              })}
+                      <p
+                        className="text-4xl sm:text-5xl font-black leading-none text-white mb-4 transition-colors duration-300"
+                        style={{ textShadow: `0 0 24px ${config.glow}` }}
+                      >
+                        <Counter target={stat.value} suffix={stat.suffix} />
+                      </p>
+                      <p className="text-xs font-black uppercase tracking-[0.18em] text-white mb-2 leading-tight">
+                        {stat.label}
+                      </p>
+                      <p className="text-xs leading-relaxed text-text-secondary">
+                        {config.desc}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </GlassSurface>
         </div>

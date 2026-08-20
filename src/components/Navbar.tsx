@@ -164,16 +164,13 @@ export const Navbar = () => {
           <motion.div
             key="mobile-menu"
             initial={{ 
-              clipPath: 'circle(0% at 90% 40px)',
-              WebkitClipPath: 'circle(0% at 90% 40px)'
+              clipPath: 'circle(0% at 90% 40px)'
             }}
             animate={{ 
-              clipPath: 'circle(150% at 90% 40px)',
-              WebkitClipPath: 'circle(150% at 90% 40px)'
+              clipPath: 'circle(150% at 90% 40px)'
             }}
             exit={{ 
-              clipPath: 'circle(0% at 90% 40px)',
-              WebkitClipPath: 'circle(0% at 90% 40px)'
+              clipPath: 'circle(0% at 90% 40px)'
             }}
             transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
             style={{ 

@@ -33,7 +33,7 @@ export const Services = () => {
         </motion.div>
 
         {/* ── SERVICES GRID ── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 mb-24 md:mb-36">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-10 mb-24 md:mb-36">
           {services.map((service, i) => {
             const Icon = service.icon
             return (
@@ -43,13 +43,23 @@ export const Services = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.7, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                className="service-card-wrap group h-full"
               >
+                <GlassSurface
+                  radius={999}
+                  edgeWidth={14}
+                  strength={22}
+                  tilt={false}
+                  className="service-floating-icon flex items-center justify-center bg-black/70"
+                >
+                  <Icon size={22} style={{ color: service.accent }} className="opacity-80 group-hover:opacity-100 transition-opacity" />
+                </GlassSurface>
                 <GlassSurface
                   radius={28}
                   edgeWidth={24}
                   strength={36}
                   tilt={true}
-                  className="group relative flex flex-col h-full px-6 py-8 sm:px-8 sm:py-10"
+                  className="relative flex flex-col h-full px-6 pt-14 pb-8 sm:px-8 sm:pt-16 sm:pb-10"
                 >
                   {/* Corner glow */}
                   <div
@@ -57,13 +67,7 @@ export const Services = () => {
                     style={{ background: service.accent }}
                   />
 
-                  <div className="flex justify-between items-start mb-8 relative z-10">
-                    {/* Icon */}
-                    <div
-                      className="w-14 h-14 rounded-full flex items-center justify-center border border-white/[0.08] bg-black/50 group-hover:bg-black transition-all duration-500 group-hover:scale-110"
-                    >
-                      <Icon size={22} style={{ color: service.accent }} className="opacity-80 group-hover:opacity-100 transition-opacity" />
-                    </div>
+                  <div className="flex justify-end items-start mb-8 relative z-10">
                     <span className="text-sm font-mono font-bold text-white/20 group-hover:text-white/60 transition-colors duration-500">
                       /{service.id}
                     </span>
