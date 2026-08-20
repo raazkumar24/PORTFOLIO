@@ -201,7 +201,7 @@
 
   .service-floating-icon {
     position: absolute;
-    top: 0;
+    top: 28px;
     left: 50%;
     transform: translateX(-50%);
     width: var(--service-icon-size);
