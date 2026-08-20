@@ -194,7 +194,7 @@
   .lg-surface:hover .lg-shimmer { transform: translateX(25%); }
 
   .service-card-wrap {
-    --service-icon-size: 72px;
+    --service-icon-size: 64px;
     position: relative;
     padding-top: calc(var(--service-icon-size) / 2);
   }
@@ -207,15 +207,20 @@
     width: var(--service-icon-size);
     height: var(--service-icon-size);
     border-radius: 999px !important;
-    z-index: 5;
+    z-index: 20;
     box-shadow:
-      0 0 0 9px var(--theme-bg),
-      0 16px 34px rgba(0, 0, 0, 0.48),
-      inset 0 1px 1px rgba(255,255,255,0.16) !important;
+      0 0 0 7px var(--theme-bg),
+      0 14px 32px rgba(0, 0, 0, 0.6),
+      inset 0 1px 1px rgba(255,255,255,0.2) !important;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
   }
 
-  .service-floating-icon.lg-surface:hover {
-    transform: translateX(-50%) !important;
+  .service-card-wrap:hover .service-floating-icon {
+    transform: translateX(-50%) translateY(-3px) scale(1.05);
+    box-shadow:
+      0 0 0 7px var(--theme-bg),
+      0 18px 40px rgba(0, 0, 0, 0.7),
+      0 0 25px rgba(61,216,208,0.3) !important;
   }
 
   button.lg-surface:hover,
@@ -278,5 +283,40 @@
 
   .bg-vignette-radial {
     background: radial-gradient(circle at 50% 30%, transparent 10%, var(--theme-bg) 85%);
+  }
+
+  /* ── Marquee / Kinetic Ticker ──────────────────────── */
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+  }
+
+  @keyframes marquee-reverse {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0%); }
+  }
+
+  .animate-marquee {
+    display: flex;
+    width: max-content;
+    animation: marquee 30s linear infinite;
+    will-change: transform;
+  }
+
+  .animate-marquee-reverse {
+    display: flex;
+    width: max-content;
+    animation: marquee-reverse 30s linear infinite;
+    will-change: transform;
+  }
+
+  .animate-marquee:hover,
+  .animate-marquee-reverse:hover {
+    animation-play-state: paused;
+  }
+
+  .mask-marquee-edges {
+    mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
   }
 }
