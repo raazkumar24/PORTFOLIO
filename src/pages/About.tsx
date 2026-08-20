@@ -82,9 +82,12 @@ export const About = () => {
 
   return (
     <div
-      className="w-full min-h-screen pt-28 sm:pt-32 pb-24 md:pb-40"
+      className="w-full min-h-screen pt-28 sm:pt-32 pb-24 md:pb-40 relative overflow-hidden"
       style={{ background: 'var(--theme-bg)', color: 'var(--theme-text)' }}
     >
+      {/* Background patterns */}
+      <div className="absolute inset-0 bg-blueprint-tech pointer-events-none z-0 opacity-40" />
+      <div className="absolute inset-0 bg-vignette-radial pointer-events-none z-0" />
 
       <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-16 relative z-10">
 
@@ -96,7 +99,7 @@ export const About = () => {
           className="mb-16 md:mb-24"
         >
           <span className="text-xs font-bold tracking-[0.25em] uppercase text-accent-cyan mb-5 block">( Who I Am )</span>
-          <h1 className="text-[clamp(1.5rem,8vw,8rem)] font-black tracking-tighter uppercase mb-6 leading-[0.9] text-white break-words">
+          <h1 className="text-[clamp(1.5rem,8vw,8rem)] font-black tracking-tighter uppercase mb-6 leading-[0.9] text-white break-normal">
             About <span className="text-white/40">Me.</span>
           </h1>
           <div className="h-px w-full bg-gradient-to-r from-white/[0.1] to-transparent" />
@@ -180,15 +183,15 @@ export const About = () => {
             </div>
 
             {/* Stats */}
-            <div className="mt-14 pt-10 border-t border-white/[0.05] grid grid-cols-3 gap-4 sm:gap-8">
+            <div className="mt-14 pt-10 border-t border-white/[0.05] grid grid-cols-3 gap-3 sm:gap-8">
               {[
                 { num: '2+', label: 'Years Freelancing' },
                 { num: '20+', label: 'Projects' },
                 { num: '15+', label: 'Happy Clients' },
               ].map((s) => (
                 <div key={s.label}>
-                  <p className="text-4xl sm:text-5xl font-black text-white tracking-tighter">{s.num}</p>
-                  <p className="text-[10px] sm:text-xs text-text-secondary mt-2 font-bold uppercase tracking-widest">{s.label}</p>
+                  <p className="text-2xl sm:text-4xl md:text-5xl font-black text-white tracking-tighter">{s.num}</p>
+                  <p className="text-[9px] sm:text-[10px] md:text-xs text-text-secondary mt-2 font-bold uppercase tracking-wider sm:tracking-widest leading-tight">{s.label}</p>
                 </div>
               ))}
             </div>

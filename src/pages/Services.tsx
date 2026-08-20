@@ -7,9 +7,12 @@ import { GlassSurface } from '../components/GlassSurface'
 export const Services = () => {
   return (
     <div
-      className="w-full min-h-screen pt-28 sm:pt-32 pb-24 md:pb-40"
+      className="w-full min-h-screen pt-28 sm:pt-32 pb-24 md:pb-40 relative overflow-hidden"
       style={{ background: 'var(--theme-bg)', color: 'var(--theme-text)' }}
     >
+      {/* Background patterns */}
+      <div className="absolute inset-0 bg-diagonal-cyber pointer-events-none z-0 opacity-40" />
+      <div className="absolute inset-0 bg-vignette-radial pointer-events-none z-0" />
 
       <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-16 relative z-10">
 
@@ -21,7 +24,7 @@ export const Services = () => {
           className="mb-16 md:mb-24"
         >
           <span className="text-xs font-bold tracking-[0.25em] uppercase text-accent-cyan mb-5 block">( What I Do )</span>
-          <h1 className="text-[clamp(1.5rem,8vw,8rem)] font-black tracking-tighter uppercase mb-6 leading-[0.9] text-white break-words">
+          <h1 className="text-[clamp(1.5rem,8vw,8rem)] font-black tracking-tighter uppercase mb-6 leading-[0.9] text-white break-normal">
             My <span className="text-white/40">Services.</span>
           </h1>
           <p className="text-base sm:text-xl text-text-secondary max-w-2xl font-sans leading-relaxed">
@@ -46,8 +49,7 @@ export const Services = () => {
                   edgeWidth={24}
                   strength={36}
                   tilt={true}
-                  className="group relative flex flex-col h-full"
-                  style={{ padding: '32px 36px' }}
+                  className="group relative flex flex-col h-full px-6 py-8 sm:px-8 sm:py-10"
                 >
                   {/* Corner glow */}
                   <div

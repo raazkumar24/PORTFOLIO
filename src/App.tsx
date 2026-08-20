@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { AnimatePresence, motion } from 'framer-motion'
 import Lenis from 'lenis'
 import { Navbar } from './components/Navbar'
+import { Footer } from './components/Footer'
 import { Home } from './pages/Home'
 import { About } from './pages/About'
 import { Projects } from './pages/Projects'
@@ -64,9 +65,12 @@ function App() {
 
   return (
     <Router>
-      <main className="w-full min-h-screen bg-bg-dark text-text-primary overflow-hidden">
+      <main className="w-full min-h-screen bg-bg-dark text-text-primary overflow-hidden flex flex-col">
         <Navbar />
-        <AnimatedRoutes />
+        <div className="flex-1 w-full">
+          <AnimatedRoutes />
+        </div>
+        <Footer />
         <PeekCreature />
       </main>
     </Router>

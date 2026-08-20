@@ -9,9 +9,12 @@ export const Projects = () => {
 
   return (
     <div
-      className="w-full min-h-screen pt-28 sm:pt-32 pb-24 md:pb-40"
+      className="w-full min-h-screen pt-28 sm:pt-32 pb-24 md:pb-40 relative overflow-hidden"
       style={{ background: 'var(--theme-bg)', color: 'var(--theme-text)' }}
     >
+      {/* Background patterns */}
+      <div className="absolute inset-0 bg-blueprint-tech pointer-events-none z-0 opacity-40" />
+      <div className="absolute inset-0 bg-vignette-radial pointer-events-none z-0" />
 
       <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-16 relative z-10">
 
@@ -23,7 +26,7 @@ export const Projects = () => {
           className="mb-20 md:mb-32"
         >
           <span className="text-xs font-bold tracking-[0.25em] uppercase text-accent-cyan mb-5 block">( Archive )</span>
-          <h1 className="text-[clamp(1.5rem,8vw,8rem)] font-black tracking-tighter uppercase mb-8 leading-[0.9] text-white break-words">
+          <h1 className="text-[clamp(1.5rem,8vw,8rem)] font-black tracking-tighter uppercase mb-8 leading-[0.9] text-white break-normal">
             Selected <span className="text-white/40">Works.</span>
           </h1>
           <p className="text-base sm:text-xl text-text-secondary max-w-xl font-sans leading-relaxed">
@@ -90,8 +93,8 @@ export const Projects = () => {
                     className="w-full h-full object-cover filter grayscale-[60%] group-hover/img:grayscale-0 transition-all duration-[1.2s] ease-out group-hover/img:scale-[1.04]"
                   />
 
-                  {/* Corner badge */}
-                  <div className="absolute top-5 right-5 z-20 opacity-0 group-hover/img:opacity-100 transition-opacity duration-500">
+                  {/* Corner badge — visible by default on touch screens, group-hover on desktops */}
+                  <div className="absolute top-5 right-5 z-20 opacity-100 lg:opacity-0 lg:group-hover/img:opacity-100 transition-opacity duration-500">
                     <div className="flex gap-2">
                       <GlassSurface
                         as="a"

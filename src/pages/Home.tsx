@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { useRef, useEffect, useState } from 'react'
-import { ArrowUpRight, FileText } from 'lucide-react'
+import { ArrowUpRight, FileText, Briefcase, Rocket, Zap, ShieldCheck } from 'lucide-react'
 import { personalInfo, stats, projects } from '../data/portfolio'
 import { MagneticButton } from '../components/MagneticButton'
 import { GlassSurface } from '../components/GlassSurface'
@@ -64,6 +64,74 @@ const getSocialIcon = (label: string, size = 12) => {
   }
 }
 
+const SOCIAL_CONFIG: Record<string, { tint: string; hoverTint: string; color: string; glow: string }> = {
+  github: {
+    tint: 'rgba(61,216,208,0.04)',
+    hoverTint: 'rgba(61,216,208,0.12)',
+    color: '#3dd8d0',
+    glow: '0 0 20px rgba(61,216,208,0.25), 0 0 0 1px rgba(61,216,208,0.4)',
+  },
+  linkedin: {
+    tint: 'rgba(139,92,246,0.04)',
+    hoverTint: 'rgba(139,92,246,0.12)',
+    color: '#8b5cf6',
+    glow: '0 0 20px rgba(139,92,246,0.25), 0 0 0 1px rgba(139,92,246,0.4)',
+  },
+  twitter: {
+    tint: 'rgba(255,255,255,0.04)',
+    hoverTint: 'rgba(255,255,255,0.12)',
+    color: '#ffffff',
+    glow: '0 0 20px rgba(255,255,255,0.2), 0 0 0 1px rgba(255,255,255,0.3)',
+  },
+  x: {
+    tint: 'rgba(255,255,255,0.04)',
+    hoverTint: 'rgba(255,255,255,0.12)',
+    color: '#ffffff',
+    glow: '0 0 20px rgba(255,255,255,0.2), 0 0 0 1px rgba(255,255,255,0.3)',
+  },
+  resume: {
+    tint: 'rgba(236,72,153,0.04)',
+    hoverTint: 'rgba(236,72,153,0.12)',
+    color: '#ec4899',
+    glow: '0 0 20px rgba(236,72,153,0.25), 0 0 0 1px rgba(236,72,153,0.4)',
+  },
+}
+
+const STATS_CONFIG = [
+  {
+    icon: Briefcase,
+    gradient: 'linear-gradient(135deg, #3dd8d0 0%, #8b5cf6 100%)',
+    desc: 'Continuous industry growth',
+    glow: 'rgba(61,216,208,0.15)',
+    tint: 'rgba(61,216,208,0.04)',
+    border: 'rgba(61,216,208,0.12)'
+  },
+  {
+    icon: Rocket,
+    gradient: 'linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%)',
+    desc: 'Delivered production-ready',
+    glow: 'rgba(139,92,246,0.15)',
+    tint: 'rgba(139,92,246,0.04)',
+    border: 'rgba(139,92,246,0.12)'
+  },
+  {
+    icon: Zap,
+    gradient: 'linear-gradient(135deg, #ec4899 0%, #f59e0b 100%)',
+    desc: 'Optimized runtime speed',
+    glow: 'rgba(236,72,153,0.15)',
+    tint: 'rgba(236,72,153,0.04)',
+    border: 'rgba(236,72,153,0.12)'
+  },
+  {
+    icon: ShieldCheck,
+    gradient: 'linear-gradient(135deg, #f59e0b 0%, #3dd8d0 100%)',
+    desc: 'Highly available systems',
+    glow: 'rgba(245,158,11,0.15)',
+    tint: 'rgba(245,158,11,0.04)',
+    border: 'rgba(245,158,11,0.12)'
+  },
+]
+
 
 /* ── Typewriter hook ── */
 const useTypewriter = (words: string[], speed = 80, pause = 1800) => {
@@ -123,6 +191,7 @@ const Counter = ({ target, suffix = '' }: { target: number; suffix?: string }) =
 }
 
 export const Home = () => {
+  const [hoveredSocial, setHoveredSocial] = useState<string | null>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start start', 'end end'] })
   const heroY = useTransform(scrollYProgress, [0, 0.3], [0, 120])
@@ -131,10 +200,13 @@ export const Home = () => {
 
   return (
     <div
-      className="w-full min-h-screen"
+      className="w-full min-h-screen relative overflow-hidden"
       style={{ background: 'var(--theme-bg)', color: 'var(--theme-text)' }}
       ref={containerRef}
     >
+      {/* Background patterns */}
+      <div className="absolute inset-0 bg-grid-cyber pointer-events-none z-0 opacity-45" />
+      <div className="absolute inset-0 bg-vignette-radial pointer-events-none z-0" />
 
       {/* ────────────── HERO ────────────── */}
       <section className="min-h-screen w-full relative flex flex-col justify-center px-5 sm:px-8 md:px-16 pt-28 pb-20 overflow-hidden">
@@ -175,7 +247,7 @@ export const Home = () => {
           {/* Big headline matched to the brutalist site style */}
           <div className="flex flex-col mb-8 relative">
             <motion.h1
-              className="text-[clamp(1.5rem,11vw,9rem)] font-black leading-[0.85] tracking-tighter text-white uppercase break-words mix-blend-difference z-10 relative"
+              className="text-[clamp(1.5rem,11vw,9rem)] font-black leading-[0.85] tracking-tighter text-white uppercase break-normal mix-blend-difference z-10 relative"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
@@ -188,7 +260,7 @@ export const Home = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             >
-              <h1 className="text-[clamp(1.5rem,11vw,9rem)] font-black leading-[0.85] tracking-tighter text-text-secondary uppercase break-words z-10 relative">
+              <h1 className="text-[clamp(1.5rem,11vw,9rem)] font-black leading-[0.85] tracking-tighter text-text-secondary uppercase break-normal z-10 relative">
                 Futures.
               </h1>
             </motion.div>
@@ -236,60 +308,100 @@ export const Home = () => {
               {[
                 ...personalInfo.socialLinks,
                 { label: 'Resume', href: personalInfo.resumeUrl },
-              ].map((item) => (
-                <MagneticButton key={item.label}>
-                  <GlassSurface
-                    as="a"
-                    href={item.href}
-                    target={item.href.startsWith('http') ? '_blank' : undefined}
-                    rel="noreferrer"
-                    radius={999}
-                    edgeWidth={12}
-                    strength={18}
-                    tint="rgba(255,255,255,0.06)"
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      padding: '7px 16px',
-                      fontSize: 11,
-                      fontWeight: 700,
-                      letterSpacing: '0.15em',
-                      textTransform: 'uppercase',
-                      color: 'var(--theme-text-muted)',
-                      textDecoration: 'none',
-                    }}
-                  >
-                    {getSocialIcon(item.label)}
-                    {item.label}
-                  </GlassSurface>
-                </MagneticButton>
-              ))}
+              ].map((item) => {
+                const labelKey = item.label.toLowerCase();
+                const config = SOCIAL_CONFIG[labelKey] || SOCIAL_CONFIG.github;
+                const isHovered = hoveredSocial === labelKey;
+                return (
+                  <MagneticButton key={item.label}>
+                    <div
+                      onMouseEnter={() => setHoveredSocial(labelKey)}
+                      onMouseLeave={() => setHoveredSocial(null)}
+                    >
+                      <GlassSurface
+                        as="a"
+                        href={item.href}
+                        target={item.href.startsWith('http') ? '_blank' : undefined}
+                        rel="noreferrer"
+                        radius={999}
+                        edgeWidth={12}
+                        strength={18}
+                        tint={isHovered ? config.hoverTint : 'rgba(255,255,255,0.04)'}
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          padding: '7px 16px',
+                          fontSize: 11,
+                          fontWeight: 700,
+                          letterSpacing: '0.15em',
+                          textTransform: 'uppercase',
+                          color: isHovered ? config.color : 'var(--theme-text-muted)',
+                          textDecoration: 'none',
+                          boxShadow: isHovered ? config.glow : undefined,
+                          borderColor: isHovered ? config.color : 'rgba(255,255,255,0.1)',
+                          transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
+                        }}
+                      >
+                        {getSocialIcon(item.label)}
+                        {item.label}
+                      </GlassSurface>
+                    </div>
+                  </MagneticButton>
+                );
+              })}
             </div>
           </motion.div>
         </motion.div>
       </section>
 
       {/* ────────────── STATS STRIP ────────────── */}
-      <section className="py-10 border-y border-white/[0.04] bg-surface relative z-10">
+      <section className="py-14 relative z-10 overflow-hidden">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-16">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
-            {stats.map((stat) => (
-              <GlassSurface
-                key={stat.label}
-                radius={20}
-                edgeWidth={18}
-                strength={28}
-                tilt={true}
-                tint="rgba(139,92,246,0.07)"
-                style={{ padding: '20px 12px', textAlign: 'center' }}
-              >
-                <p className="text-2xl xs:text-3xl sm:text-4xl font-black tracking-tighter" style={{ color: 'var(--theme-text)' }}>
-                  <Counter target={stat.value} suffix={stat.suffix} />
-                </p>
-                <p style={{ color: 'var(--theme-text-muted)' }} className="text-[10px] mt-1 font-bold uppercase tracking-widest">{stat.label}</p>
-              </GlassSurface>
-            ))}
-          </div>
+          <GlassSurface
+            radius={28}
+            edgeWidth={12}
+            strength={20}
+            tint="rgba(255,255,255,0.02)"
+            className="w-full py-10 px-6 sm:px-12 relative overflow-hidden"
+            style={{
+              borderColor: 'rgba(255, 255, 255, 0.08)',
+              boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.15), 0 8px 32px rgba(0,0,0,0.4)',
+            }}
+          >
+            {/* Subtle grid background overlay inside the glass surface */}
+            <div className="absolute inset-0 opacity-[0.02] bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
+
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 relative z-10">
+              {stats.map((stat, idx) => {
+                const config = STATS_CONFIG[idx] || STATS_CONFIG[0];
+                const Icon = config.icon;
+                return (
+                  <div
+                    key={stat.label}
+                    className="group relative flex flex-col items-center sm:items-start text-center sm:text-left transition-all duration-300"
+                  >
+                    {/* Icon with minimal styling */}
+                    <div className="p-2 rounded-xl border border-white/[0.04] bg-black/25 mb-4 group-hover:bg-black/55 group-hover:border-white/[0.1] transition-all duration-300">
+                      <Icon size={15} className="text-text-secondary group-hover:text-white transition-colors" />
+                    </div>
+
+                    {/* Counter with glassy drop-shadow glow (single brand color) */}
+                    <p 
+                      className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter leading-none mb-2 text-accent-cyan transition-all duration-300 group-hover:scale-105 origin-left"
+                      style={{ 
+                        textShadow: '0 2px 10px rgba(61,216,208,0.2)'
+                      }}
+                    >
+                      <Counter target={stat.value} suffix={stat.suffix} />
+                    </p>
+
+                    <p className="text-white text-xs font-bold uppercase tracking-wider mb-1 leading-tight">{stat.label}</p>
+                    <p className="text-text-secondary text-[10px] leading-tight font-medium opacity-80 group-hover:opacity-100 transition-opacity">{config.desc}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </GlassSurface>
         </div>
       </section>
 
@@ -304,7 +416,7 @@ export const Home = () => {
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             >
               <span className="text-xs font-bold tracking-[0.25em] uppercase text-accent-cyan mb-6 block">( Method )</span>
-              <h2 className="text-[clamp(1.5rem,8vw,4rem)] sm:text-5xl md:text-6xl font-black leading-[1] tracking-tighter text-white uppercase break-words">
+              <h2 className="text-[clamp(1.5rem,8vw,4rem)] sm:text-5xl md:text-6xl font-black leading-[1] tracking-tighter text-white uppercase break-normal">
                 Zero Compromise. <br />
                 <span className="text-text-secondary">Pure Performance.</span>
               </h2>
@@ -366,7 +478,7 @@ export const Home = () => {
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             >
               <span className="text-xs font-bold tracking-[0.25em] uppercase text-accent-cyan mb-4 block">( Selected Work )</span>
-              <h2 className="text-[clamp(1.5rem,11vw,6rem)] leading-[0.9] font-black tracking-tighter uppercase text-white break-words">Featured<br />Cases.</h2>
+              <h2 className="text-[clamp(1.5rem,11vw,6rem)] leading-[0.9] font-black tracking-tighter uppercase text-white break-normal">Featured<br />Cases.</h2>
             </motion.div>
             <MagneticButton className="hidden sm:block">
               <Link
@@ -448,8 +560,8 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* ────────────── FOOTER / CTA ────────────── */}
-      <footer className="py-24 md:py-36 px-5 sm:px-8 md:px-16 relative z-10 border-t border-white/[0.04]">
+      {/* ────────────── BOTTOM CTA ────────────── */}
+      <section className="py-24 md:py-36 px-5 sm:px-8 md:px-16 relative z-10 border-t border-white/[0.04]">
         <div className="max-w-7xl mx-auto w-full text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -461,26 +573,14 @@ export const Home = () => {
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="inline-block">
               <Link
                 to="/contact"
-                className="inline-block text-[clamp(1.5rem,10vw,7rem)] font-black tracking-tighter uppercase leading-[0.9] text-white hover:text-outline transition-all duration-300 break-words"
+                className="inline-block text-[clamp(1.5rem,10vw,7rem)] font-black tracking-tighter uppercase leading-[0.9] text-white hover:text-outline transition-all duration-300 break-normal"
               >
                 Start a <br />Project.
               </Link>
             </motion.div>
           </motion.div>
-
-          <div className="flex flex-col sm:flex-row justify-between items-center mt-24 pt-8 border-t border-white/[0.06] text-text-secondary text-xs font-bold uppercase tracking-widest gap-6">
-            <p>© {new Date().getFullYear()} {personalInfo.firstName} {personalInfo.lastName}.</p>
-            <div className="flex gap-6">
-              {personalInfo.socialLinks.map((s) => (
-                <a key={s.label} href={s.href} className="hover:text-white transition-colors flex items-center gap-1.5">
-                  {getSocialIcon(s.label, 14)}
-                  {s.label}
-                </a>
-              ))}
-            </div>
-          </div>
         </div>
-      </footer>
+      </section>
     </div>
   )
 }
