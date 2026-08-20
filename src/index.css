@@ -194,26 +194,28 @@
   .lg-surface:hover .lg-shimmer { transform: translateX(25%); }
 
   .service-card-wrap {
+    --service-icon-size: 72px;
     position: relative;
+    padding-top: calc(var(--service-icon-size) / 2);
   }
 
   .service-floating-icon {
     position: absolute;
-    top: 28px;
+    top: 0;
     left: 50%;
-    transform: translateX(50%);
-    width: 56px;
-    height: 56px;
+    transform: translateX(-50%);
+    width: var(--service-icon-size);
+    height: var(--service-icon-size);
     border-radius: 999px !important;
     z-index: 5;
     box-shadow:
-      0 0 0 8px var(--theme-bg),
-      0 12px 28px rgba(0, 0, 0, 0.5),
+      0 0 0 9px var(--theme-bg),
+      0 16px 34px rgba(0, 0, 0, 0.48),
       inset 0 1px 1px rgba(255,255,255,0.16) !important;
   }
 
   .service-floating-icon.lg-surface:hover {
-    transform: translateX(50%) !important;
+    transform: translateX(-50%) !important;
   }
 
   button.lg-surface:hover,

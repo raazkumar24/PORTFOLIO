@@ -33,7 +33,7 @@ export const Services = () => {
         </motion.div>
 
         {/* ── SERVICES GRID ── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-10 mb-24 md:mb-36">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10 md:gap-x-8 md:gap-y-12 mb-24 md:mb-36">
           {services.map((service, i) => {
             const Icon = service.icon
             return (
@@ -52,14 +52,14 @@ export const Services = () => {
                   tilt={false}
                   className="service-floating-icon flex items-center justify-center bg-black/70"
                 >
-                  <Icon size={22} style={{ color: service.accent }} className="opacity-80 group-hover:opacity-100 transition-opacity" />
+                  <Icon size={26} style={{ color: service.accent }} className="opacity-85 group-hover:opacity-100 transition-opacity" />
                 </GlassSurface>
                 <GlassSurface
                   radius={28}
                   edgeWidth={24}
                   strength={36}
-                  tilt={true}
-                  className="relative flex flex-col h-full px-6 pt-14 pb-8 sm:px-8 sm:pt-16 sm:pb-10"
+                  tilt={false}
+                  className="relative flex flex-col h-full min-h-[440px] px-6 pt-12 pb-8 sm:px-8 sm:pt-14 sm:pb-10"
                 >
                   {/* Corner glow */}
                   <div
@@ -67,17 +67,17 @@ export const Services = () => {
                     style={{ background: service.accent }}
                   />
 
-                  <div className="flex justify-end items-start mb-8 relative z-10">
+                  <div className="flex justify-end items-start mb-7 relative z-10">
                     <span className="text-sm font-mono font-bold text-white/20 group-hover:text-white/60 transition-colors duration-500">
                       /{service.id}
                     </span>
                   </div>
 
-                  <h3 className="text-2xl font-black text-white tracking-tight mb-2 relative z-10">{service.title}</h3>
+                  <h3 className="text-2xl font-black text-white tracking-tight mb-2 relative z-10 pr-3">{service.title}</h3>
                   <p className="text-sm font-semibold tracking-wide mb-6 relative z-10" style={{ color: service.accent }}>{service.short}</p>
-                  <p className="text-text-secondary text-sm leading-relaxed mb-8 flex-1 relative z-10">{service.description}</p>
+                  <p className="text-text-secondary text-sm leading-relaxed mb-8 relative z-10">{service.description}</p>
 
-                  <div className="space-y-3 mb-8 relative z-10">
+                  <div className="space-y-3 mb-8 relative z-10 flex-1">
                     {service.features.map((f, idx) => (
                       <div key={idx} className="flex items-center gap-3">
                         <div className="w-1 h-1 rounded-full bg-white/20 group-hover:bg-white/80 transition-colors duration-300" />
