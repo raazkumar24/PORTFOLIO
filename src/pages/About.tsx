@@ -59,7 +59,7 @@ const getSocialIcon = (label: string, size = 12) => {
       return null;
   }
 };
-import { personalInfo, skills } from '../data/portfolio';
+import { personalInfo } from '../data/portfolio';
 import { GlassSurface } from '../components/GlassSurface';
 
 
@@ -145,13 +145,78 @@ export const About = () => {
               </div>
             </GlassSurface>
 
-            <div className="mt-5 flex gap-3">
+            {/* Social pills row */}
+            <div className="mt-4 flex gap-2.5">
               {personalInfo.socialLinks.map((s) => (
-                <a key={s.label} href={s.href} className="flex-1 py-2.5 rounded-xl border border-white/[0.06] text-xs font-medium text-text-secondary text-center hover:text-white hover:border-white/20 hover:bg-white/[0.04] transition-all duration-300 flex items-center justify-center gap-1.5">
-                  {getSocialIcon(s.label)}
-                  {s.label}
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex-1 py-2.5 px-2 rounded-2xl border border-white/[0.08] bg-white/[0.02] text-xs font-bold text-text-secondary text-center hover:text-white hover:border-accent-cyan/40 hover:bg-white/[0.05] transition-all duration-300 flex items-center justify-center gap-1.5"
+                >
+                  {getSocialIcon(s.label, 13)}
+                  <span>{s.label}</span>
                 </a>
               ))}
+            </div>
+
+            {/* Architectural Profile Details Card */}
+            <div className="mt-4">
+              <GlassSurface
+                radius={24}
+                edgeWidth={14}
+                strength={24}
+                tint="rgba(255,255,255,0.02)"
+                className="p-5 sm:p-6 flex flex-col gap-4 border-white/[0.08]"
+              >
+                <div className="flex items-center justify-between border-b border-white/[0.06] pb-3">
+                  <span className="text-[10px] font-black tracking-[0.25em] uppercase text-accent-cyan flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-accent-cyan animate-pulse" />
+                    Specifications
+                  </span>
+                  <span className="text-[10px] font-mono text-white/30">/01</span>
+                </div>
+
+                <div className="space-y-3 text-xs">
+                  <div className="flex items-center justify-between">
+                    <span className="text-text-secondary uppercase tracking-wider font-bold text-[10px]">Location</span>
+                    <span className="text-white font-mono font-medium">India · Remote</span>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <span className="text-text-secondary uppercase tracking-wider font-bold text-[10px]">Core Stack</span>
+                    <span className="text-white font-mono font-medium">React · Next.js · TS</span>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <span className="text-text-secondary uppercase tracking-wider font-bold text-[10px]">Direct Email</span>
+                    <a
+                      href={`mailto:${personalInfo.email}`}
+                      className="text-accent-cyan font-mono hover:underline font-medium truncate max-w-[150px]"
+                    >
+                      {personalInfo.email}
+                    </a>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <span className="text-text-secondary uppercase tracking-wider font-bold text-[10px]">Status</span>
+                    <span className="text-accent-cyan font-mono font-bold">Open for Work</span>
+                  </div>
+                </div>
+
+                <div className="pt-3 border-t border-white/[0.06]">
+                  <a
+                    href={personalInfo.resumeUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-full py-2.5 px-4 rounded-xl bg-white/[0.04] hover:bg-white text-white hover:text-black border border-white/10 hover:border-transparent text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-all duration-300"
+                  >
+                    <span>Download CV / Resume</span>
+                    <ArrowUpRight size={13} />
+                  </a>
+                </div>
+              </GlassSurface>
             </div>
           </motion.div>
 
@@ -196,37 +261,114 @@ export const About = () => {
               ))}
             </div>
 
-            {/* Skills */}
-            <div className="mt-16">
-              <h3 className="text-sm font-bold tracking-widest uppercase text-accent-cyan mb-8">Technical Arsenal</h3>
-              <div className="flex flex-wrap gap-2.5">
-                {skills.map((skill, i) => (
-                  <motion.div
-                    key={skill.name}
-                    initial={{ opacity: 0, scale: 0.85 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.04, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                  >
+            {/* Skills Kinetic Marquee */}
+            <div className="mt-16 w-full">
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-xs font-bold tracking-[0.25em] uppercase text-accent-cyan flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent-cyan animate-pulse" />
+                  Technical Arsenal
+                </h3>
+                <span className="text-[10px] font-mono text-white/30 uppercase tracking-widest hidden sm:inline">
+                  ( Hover to pause )
+                </span>
+              </div>
+
+              {/* Row 1 - Scroll Left */}
+              <div className="w-full overflow-hidden py-1 mask-marquee-edges">
+                <div className="animate-marquee gap-2.5 flex">
+                  {[
+                    { name: 'React', accent: '#3dd8d0' },
+                    { name: 'Next.js 15', accent: '#ffffff' },
+                    { name: 'TypeScript', accent: '#38bdf8' },
+                    { name: 'TailwindCSS', accent: '#3dd8d0' },
+                    { name: 'WebGL & Three.js', accent: '#ec4899' },
+                    { name: 'Framer Motion', accent: '#8b5cf6' },
+                    { name: 'GSAP', accent: '#10b981' },
+                    { name: 'Node.js', accent: '#22c55e' },
+                    { name: 'React', accent: '#3dd8d0' },
+                    { name: 'Next.js 15', accent: '#ffffff' },
+                    { name: 'TypeScript', accent: '#38bdf8' },
+                    { name: 'TailwindCSS', accent: '#3dd8d0' },
+                    { name: 'WebGL & Three.js', accent: '#ec4899' },
+                    { name: 'Framer Motion', accent: '#8b5cf6' },
+                    { name: 'GSAP', accent: '#10b981' },
+                    { name: 'Node.js', accent: '#22c55e' },
+                  ].map((skill, i) => (
                     <GlassSurface
+                      key={`r1-${skill.name}-${i}`}
                       as="span"
-                      radius={12}
+                      radius={999}
                       edgeWidth={10}
                       strength={16}
-                      tint="rgba(61,216,208,0.07)"
+                      tint="rgba(255,255,255,0.03)"
+                      className="hover:border-accent-cyan/40 transition-all duration-300 shrink-0 cursor-default"
                       style={{
-                        display: 'inline-block',
-                        padding: '6px 14px',
-                        fontSize: 13,
-                        fontWeight: 500,
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: 8,
+                        padding: '7px 16px',
+                        fontSize: 12,
+                        fontWeight: 600,
                         color: 'var(--theme-text)',
-                        cursor: 'default',
                       }}
                     >
-                      {skill.name}
+                      <span
+                        className="w-1.5 h-1.5 rounded-full shrink-0"
+                        style={{ backgroundColor: skill.accent, boxShadow: `0 0 8px ${skill.accent}` }}
+                      />
+                      <span>{skill.name}</span>
                     </GlassSurface>
-                  </motion.div>
-                ))}
+                  ))}
+                </div>
+              </div>
+
+              {/* Row 2 - Scroll Right */}
+              <div className="w-full overflow-hidden py-1 mt-2.5 mask-marquee-edges">
+                <div className="animate-marquee-reverse gap-2.5 flex">
+                  {[
+                    { name: 'PostgreSQL', accent: '#38bdf8' },
+                    { name: 'GraphQL', accent: '#ec4899' },
+                    { name: 'Supabase', accent: '#3dd8d0' },
+                    { name: 'Docker', accent: '#0db7ed' },
+                    { name: 'AWS Cloud', accent: '#f59e0b' },
+                    { name: 'REST & WebSockets', accent: '#8b5cf6' },
+                    { name: 'Figma UI/UX', accent: '#ec4899' },
+                    { name: 'Core Web Vitals', accent: '#10b981' },
+                    { name: 'PostgreSQL', accent: '#38bdf8' },
+                    { name: 'GraphQL', accent: '#ec4899' },
+                    { name: 'Supabase', accent: '#3dd8d0' },
+                    { name: 'Docker', accent: '#0db7ed' },
+                    { name: 'AWS Cloud', accent: '#f59e0b' },
+                    { name: 'REST & WebSockets', accent: '#8b5cf6' },
+                    { name: 'Figma UI/UX', accent: '#ec4899' },
+                    { name: 'Core Web Vitals', accent: '#10b981' },
+                  ].map((skill, i) => (
+                    <GlassSurface
+                      key={`r2-${skill.name}-${i}`}
+                      as="span"
+                      radius={999}
+                      edgeWidth={10}
+                      strength={16}
+                      tint="rgba(255,255,255,0.03)"
+                      className="hover:border-purple-400/40 transition-all duration-300 shrink-0 cursor-default"
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: 8,
+                        padding: '7px 16px',
+                        fontSize: 12,
+                        fontWeight: 600,
+                        color: 'var(--theme-text)',
+                      }}
+                    >
+                      <span
+                        className="w-1.5 h-1.5 rounded-full shrink-0"
+                        style={{ backgroundColor: skill.accent, boxShadow: `0 0 8px ${skill.accent}` }}
+                      />
+                      <span>{skill.name}</span>
+                    </GlassSurface>
+                  ))}
+                </div>
               </div>
             </div>
 

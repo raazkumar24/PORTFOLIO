@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { ArrowUpRight, Mail, MapPin, Clock } from 'lucide-react'
 import { MagneticButton } from '../components/MagneticButton'
 import { GlassSurface } from '../components/GlassSurface'
+import { personalInfo } from '../data/portfolio'
 
 const getSocialIcon = (type: string, size = 15) => {
   switch (type) {
@@ -84,7 +85,7 @@ export const Contact = () => {
     'bg-transparent border-b border-white/[0.15] focus:border-accent-cyan focus:outline-none text-white placeholder:text-white/[0.2] transition-all duration-300 w-full py-1'
 
   const contactInfo = [
-    { icon: Mail, label: 'Email', value: 'hello@rajshekhar.dev', href: 'mailto:hello@rajshekhar.dev' },
+    { icon: Mail, label: 'Email', value: personalInfo.email, href: `mailto:${personalInfo.email}` },
     { icon: MapPin, label: 'Location', value: 'India · Remote', href: null },
     { icon: Clock, label: 'Timezone', value: 'IST (GMT+5:30)', href: null },
   ]

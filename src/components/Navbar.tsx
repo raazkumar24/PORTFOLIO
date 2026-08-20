@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import { MagneticButton } from './MagneticButton';
 import { GlassSurface } from './GlassSurface';
+import { personalInfo } from '../data/portfolio';
 
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -222,7 +223,7 @@ export const Navbar = () => {
               style={{ color: 'var(--theme-text-muted)' }}
             >
 
-              raazverma625@gmail.com
+              {personalInfo.email}
             </motion.div>
           </motion.div>
         )}

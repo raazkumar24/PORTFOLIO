@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowUpRight, ChevronDown } from 'lucide-react'
-import { experienceData } from '../data/portfolio'
+import { experienceData, personalInfo } from '../data/portfolio'
 import { GlassSurface } from '../components/GlassSurface'
 
 export const Experience = () => {
@@ -175,7 +175,7 @@ export const Experience = () => {
           </div>
           <GlassSurface
             as="a"
-            href="mailto:hello@rajshekhar.dev"
+            href={`mailto:${personalInfo.email}`}
             radius={999}
             edgeWidth={16}
             strength={24}

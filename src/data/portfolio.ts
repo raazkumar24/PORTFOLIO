@@ -10,6 +10,7 @@ export const personalInfo = {
     { label: 'LinkedIn', href: 'https://linkedin.com' },
     { label: 'Twitter', href: '#' },
   ],
+  email: 'raazverma625@gmail.com',
   resumeUrl: '#'
 };
 

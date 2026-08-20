@@ -11,7 +11,7 @@ export const Services = () => {
       style={{ background: 'var(--theme-bg)', color: 'var(--theme-text)' }}
     >
       {/* Background patterns */}
-      <div className="absolute inset-0 bg-diagonal-cyber pointer-events-none z-0 opacity-40" />
+      <div className="absolute inset-0 bg-blueprint-tech pointer-events-none z-0 opacity-40" />
       <div className="absolute inset-0 bg-vignette-radial pointer-events-none z-0" />
 
       <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-16 relative z-10">
@@ -27,13 +27,14 @@ export const Services = () => {
           <h1 className="text-[clamp(1.5rem,8vw,8rem)] font-black tracking-tighter uppercase mb-6 leading-[0.9] text-white break-normal">
             My <span className="text-white/40">Services.</span>
           </h1>
-          <p className="text-base sm:text-xl text-text-secondary max-w-2xl font-sans leading-relaxed">
+          <p className="text-base sm:text-xl text-text-secondary max-w-2xl font-sans leading-relaxed mb-8">
             As a freelance developer, I offer end-to-end web solutions — from design to deployment. Every project gets my full attention, clean code, and on-time delivery.
           </p>
+          <div className="h-px w-full bg-gradient-to-r from-white/[0.1] to-transparent" />
         </motion.div>
 
         {/* ── SERVICES GRID ── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10 md:gap-x-8 md:gap-y-12 mb-24 md:mb-36">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12 md:gap-x-8 md:gap-y-16 mb-24 md:mb-36">
           {services.map((service, i) => {
             const Icon = service.icon
             return (
@@ -45,15 +46,20 @@ export const Services = () => {
                 transition={{ duration: 0.7, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
                 className="service-card-wrap group h-full"
               >
+                {/* Floating Circle Icon */}
                 <GlassSurface
                   radius={999}
                   edgeWidth={14}
                   strength={22}
                   tilt={false}
-                  className="service-floating-icon flex items-center justify-center bg-black/70"
+                  className="service-floating-icon flex items-center justify-center bg-[#0b0d13]"
+                  style={{
+                    borderColor: `${service.accent}50`,
+                  }}
                 >
-                  <Icon size={26} style={{ color: service.accent }} className="opacity-85 group-hover:opacity-100 transition-opacity" />
+                  <Icon size={26} style={{ color: service.accent }} className="opacity-90 group-hover:opacity-100 transition-opacity" />
                 </GlassSurface>
+
                 <GlassSurface
                   radius={28}
                   edgeWidth={24}
@@ -67,21 +73,21 @@ export const Services = () => {
                     style={{ background: service.accent }}
                   />
 
-                  <div className="flex justify-end items-start mb-7 relative z-10">
-                    <span className="text-sm font-mono font-bold text-white/20 group-hover:text-white/60 transition-colors duration-500">
+                  <div className="flex justify-end items-start mb-6 relative z-10">
+                    <span className="text-sm font-mono font-bold text-white/25 group-hover:text-white/60 transition-colors duration-500">
                       /{service.id}
                     </span>
                   </div>
 
-                  <h3 className="text-2xl font-black text-white tracking-tight mb-2 relative z-10 pr-3">{service.title}</h3>
-                  <p className="text-sm font-semibold tracking-wide mb-6 relative z-10" style={{ color: service.accent }}>{service.short}</p>
-                  <p className="text-text-secondary text-sm leading-relaxed mb-8 relative z-10">{service.description}</p>
+                  <h3 className="text-2xl font-black text-white tracking-tight mb-2 relative z-10 pr-3 group-hover:text-accent-cyan transition-colors">{service.title}</h3>
+                  <p className="text-sm font-semibold tracking-wide mb-5 relative z-10" style={{ color: service.accent }}>{service.short}</p>
+                  <p className="text-text-secondary text-sm leading-relaxed mb-8 relative z-10 font-sans">{service.description}</p>
 
                   <div className="space-y-3 mb-8 relative z-10 flex-1">
                     {service.features.map((f, idx) => (
                       <div key={idx} className="flex items-center gap-3">
-                        <div className="w-1 h-1 rounded-full bg-white/20 group-hover:bg-white/80 transition-colors duration-300" />
-                        <span className="text-sm text-text-secondary/80 group-hover:text-white/90 transition-colors duration-300">{f}</span>
+                        <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: service.accent }} />
+                        <span className="text-sm text-text-secondary group-hover:text-white transition-colors duration-300 font-sans">{f}</span>
                       </div>
                     ))}
                   </div>
@@ -90,14 +96,14 @@ export const Services = () => {
 
                   <div className="flex justify-between items-center mt-auto relative z-10">
                     <div>
-                      <span className="block text-[10px] text-text-secondary/50 uppercase tracking-widest font-bold mb-1">Starting At</span>
-                      <span className="text-sm font-bold text-white">{service.price}</span>
+                      <span className="block text-[10px] text-text-secondary/60 uppercase tracking-widest font-bold mb-1">Starting At</span>
+                      <span className="text-sm font-bold text-white font-mono">{service.price}</span>
                     </div>
                     <Link
                       to="/contact"
-                      className="w-12 h-12 rounded-full bg-white/[0.03] group-hover:bg-white flex items-center justify-center transition-all duration-500 border border-white/[0.05]"
+                      className="w-12 h-12 rounded-full bg-white/[0.03] group-hover:bg-accent-cyan flex items-center justify-center transition-all duration-500 border border-white/[0.08] group/btn"
                     >
-                      <ArrowUpRight size={18} className="text-white/50 group-hover:text-black group-hover:rotate-45 transition-all duration-500" />
+                      <ArrowUpRight size={18} className="text-white/60 group-hover:text-bg-dark transition-colors duration-300" />
                     </Link>
                   </div>
                 </GlassSurface>
@@ -116,7 +122,7 @@ export const Services = () => {
             className="mb-12 md:mb-16"
           >
             <span className="text-xs font-bold tracking-[0.25em] uppercase text-accent-cyan mb-4 block">( Process )</span>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter">How I Work.</h2>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter text-white uppercase">How I Work.</h2>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -127,16 +133,18 @@ export const Services = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="relative"
+                className="relative h-full"
               >
                 {/* Connector line */}
                 {i < process.length - 1 && (
-                  <div className="hidden lg:block absolute top-5 left-[calc(100%+1px)] w-full h-px bg-gradient-to-r from-white/[0.08] to-transparent -translate-y-1/2" />
+                  <div className="hidden lg:block absolute top-1/2 left-[calc(100%+1px)] w-6 h-px bg-gradient-to-r from-white/[0.1] to-transparent -translate-y-1/2 z-20" />
                 )}
-                <GlassSurface radius={20} edgeWidth={16} strength={24} tilt={true} style={{ padding: 24, height: '100%' }}>
-                  <span className="text-3xl font-black text-accent-cyan/20 block mb-3">{step.num}</span>
-                  <h3 className="text-base font-black text-white mb-2">{step.title}</h3>
-                  <p className="text-sm text-text-secondary leading-relaxed">{step.desc}</p>
+                <GlassSurface radius={20} edgeWidth={16} strength={24} tilt={true} className="p-6 h-full flex flex-col justify-between hover:border-accent-cyan/30 transition-colors">
+                  <div>
+                    <span className="text-2xl sm:text-3xl font-black font-mono text-accent-cyan block mb-3">/{step.num}</span>
+                    <h3 className="text-base font-black text-white uppercase tracking-tight mb-2">{step.title}</h3>
+                    <p className="text-xs sm:text-sm text-text-secondary leading-relaxed font-sans">{step.desc}</p>
+                  </div>
                 </GlassSurface>
               </motion.div>
             ))}
@@ -161,17 +169,17 @@ export const Services = () => {
             <div className="absolute inset-0 bg-gradient-to-br from-accent-cyan/5 via-transparent to-accent-purple/5 pointer-events-none rounded-[32px]" />
 
             <span className="text-xs font-bold tracking-[0.25em] uppercase text-accent-cyan mb-5 block">( Let's Work Together )</span>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter mb-6">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter uppercase text-white mb-6">
               Got a project <br className="hidden sm:block" />
               <span className="gradient-text">in mind?</span>
             </h2>
-            <p className="text-text-secondary text-base sm:text-lg max-w-xl mx-auto mb-10 leading-relaxed">
+            <p className="text-text-secondary text-base sm:text-lg max-w-xl mx-auto mb-10 leading-relaxed font-sans">
               I'm currently available for new freelance projects. Drop me a message and let's discuss what we can build together.
             </p>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-accent-cyan text-[#060709] font-black text-sm tracking-widest uppercase hover:shadow-[0_0_50px_rgba(61,216,208,0.4)] transition-all duration-300"
+                className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-accent-cyan text-[#060709] font-black text-xs sm:text-sm tracking-widest uppercase hover:shadow-[0_0_50px_rgba(61,216,208,0.4)] transition-all duration-300"
               >
                 Start a Project <ArrowUpRight size={16} />
               </Link>

@@ -304,7 +304,7 @@ export const Home = () => {
               </p>
             </div>
 
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap items-center gap-3">
               {[
                 ...personalInfo.socialLinks,
                 { label: 'Resume', href: personalInfo.resumeUrl },
@@ -325,25 +325,33 @@ export const Home = () => {
                         rel="noreferrer"
                         radius={999}
                         edgeWidth={12}
-                        strength={18}
-                        tint={isHovered ? config.hoverTint : 'rgba(255,255,255,0.04)'}
+                        strength={20}
+                        tint={isHovered ? config.hoverTint : 'rgba(255,255,255,0.03)'}
                         style={{
                           display: 'inline-flex',
                           alignItems: 'center',
-                          padding: '7px 16px',
+                          gap: 6,
+                          padding: '8px 18px',
                           fontSize: 11,
-                          fontWeight: 700,
-                          letterSpacing: '0.15em',
+                          fontWeight: 800,
+                          letterSpacing: '0.16em',
                           textTransform: 'uppercase',
                           color: isHovered ? config.color : 'var(--theme-text-muted)',
                           textDecoration: 'none',
-                          boxShadow: isHovered ? config.glow : undefined,
-                          borderColor: isHovered ? config.color : 'rgba(255,255,255,0.1)',
+                          boxShadow: isHovered ? config.glow : '0 4px 16px rgba(0,0,0,0.2)',
+                          borderColor: isHovered ? config.color : 'rgba(255,255,255,0.08)',
                           transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
                         }}
                       >
-                        {getSocialIcon(item.label)}
-                        {item.label}
+                        <span
+                          className="w-1.5 h-1.5 rounded-full transition-all duration-300"
+                          style={{
+                            backgroundColor: isHovered ? config.color : 'rgba(255,255,255,0.3)',
+                            boxShadow: isHovered ? `0 0 10px ${config.color}` : 'none',
+                          }}
+                        />
+                        {getSocialIcon(item.label, 13)}
+                        <span>{item.label}</span>
                       </GlassSurface>
                     </div>
                   </MagneticButton>
@@ -392,34 +400,42 @@ export const Home = () => {
                   return (
                     <div
                       key={stat.label}
-                      className="group relative min-h-[190px] p-5 sm:p-7 md:p-8 border-white/[0.07] odd:border-r xl:border-r xl:last:border-r-0 border-b xl:border-b-0 last:border-b-0 [&:nth-last-child(2)]:border-b-0"
+                      className="group relative min-h-[200px] p-5 sm:p-7 md:p-8 border-white/[0.07] odd:border-r xl:border-r xl:last:border-r-0 border-b xl:border-b-0 last:border-b-0 [&:nth-last-child(2)]:border-b-0 transition-all duration-300 hover:bg-white/[0.02]"
                     >
+                      {/* Top gradient highlight on hover */}
                       <div
-                        className="absolute inset-x-6 top-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                        className="absolute inset-x-0 top-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                         style={{ background: config.gradient }}
                       />
-                      <div className="flex items-start justify-between gap-4 mb-8">
-                        <span className="text-[10px] font-black font-mono text-white/25">
+                      
+                      {/* Ambient hover glow */}
+                      <div
+                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full blur-[50px] opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none"
+                        style={{ background: config.glow }}
+                      />
+
+                      <div className="flex items-start justify-between gap-4 mb-7 relative z-10">
+                        <span className="text-[11px] font-black font-mono text-white/30 group-hover:text-accent-cyan transition-colors">
                           /0{idx + 1}
                         </span>
                         <span
-                          className="w-10 h-10 rounded-full border flex items-center justify-center bg-black/30 transition-all duration-300 group-hover:bg-black/60"
-                          style={{ borderColor: config.border, boxShadow: `0 0 28px ${config.glow}` }}
+                          className="w-10 h-10 rounded-full border flex items-center justify-center bg-black/40 transition-all duration-300 group-hover:scale-110 group-hover:bg-black/70"
+                          style={{ borderColor: config.border, boxShadow: `0 0 24px ${config.glow}` }}
                         >
                           <Icon size={16} style={{ color: idx === 0 ? '#3dd8d0' : idx === 1 ? '#8b5cf6' : idx === 2 ? '#ec4899' : '#f59e0b' }} />
                         </span>
                       </div>
 
                       <p
-                        className="text-4xl sm:text-5xl font-black leading-none text-white mb-4 transition-colors duration-300"
+                        className="text-4xl sm:text-5xl font-black leading-none text-white mb-3 transition-transform duration-300 group-hover:translate-x-1 relative z-10"
                         style={{ textShadow: `0 0 24px ${config.glow}` }}
                       >
                         <Counter target={stat.value} suffix={stat.suffix} />
                       </p>
-                      <p className="text-xs font-black uppercase tracking-[0.18em] text-white mb-2 leading-tight">
+                      <p className="text-xs font-black uppercase tracking-[0.18em] text-white mb-1.5 leading-tight relative z-10">
                         {stat.label}
                       </p>
-                      <p className="text-xs leading-relaxed text-text-secondary">
+                      <p className="text-xs leading-relaxed text-text-secondary font-sans relative z-10">
                         {config.desc}
                       </p>
                     </div>
