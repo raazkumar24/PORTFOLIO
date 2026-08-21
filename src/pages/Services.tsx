@@ -14,8 +14,11 @@ export const Services = () => {
       {/* Background patterns & ambient orbs */}
       <div className="absolute inset-0 bg-blueprint-tech pointer-events-none z-0 opacity-40" />
       <div className="absolute inset-0 bg-vignette-radial pointer-events-none z-0" />
-      <div className="absolute top-1/4 -right-40 w-[500px] h-[500px] rounded-full bg-accent-cyan/10 blur-[130px] pointer-events-none" />
-      <div className="absolute bottom-1/3 -left-40 w-[500px] h-[500px] rounded-full bg-accent-purple/10 blur-[130px] pointer-events-none" />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="aurora-blur aurora-drift" style={{ width: '50vw', height: '50vw', background: '#3dd8d0', top: '-10%', right: '-10%', opacity: 0.06 }} />
+        <div className="aurora-blur aurora-drift-reverse" style={{ width: '40vw', height: '40vw', background: '#8b5cf6', bottom: '10%', left: '-8%', opacity: 0.05 }} />
+      </div>
+
 
       <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-16 relative z-10">
 

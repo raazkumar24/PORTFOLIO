@@ -89,6 +89,13 @@ export const About = () => {
       <div className="absolute inset-0 bg-blueprint-tech pointer-events-none z-0 opacity-40" />
       <div className="absolute inset-0 bg-vignette-radial pointer-events-none z-0" />
 
+      {/* Aurora Orbs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="aurora-blur aurora-drift" style={{ width: '50vw', height: '50vw', background: '#3dd8d0', top: '-10%', left: '-10%', opacity: 0.06 }} />
+        <div className="aurora-blur aurora-drift-reverse" style={{ width: '40vw', height: '40vw', background: '#8b5cf6', bottom: '0%', right: '-8%', opacity: 0.05 }} />
+      </div>
+
+
       <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-16 relative z-10">
 
         {/* ── PAGE HEADER ── */}

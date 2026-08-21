@@ -82,7 +82,7 @@ export const Contact = () => {
   }
 
   const inputBase =
-    'bg-transparent border-b border-white/[0.15] focus:border-accent-cyan focus:outline-none text-white placeholder:text-white/[0.2] transition-all duration-300 w-full py-1'
+    'glass-input rounded-xl px-4 py-3 w-full font-black'
 
   const contactInfo = [
     { icon: Mail, label: 'Email', value: personalInfo.email, href: `mailto:${personalInfo.email}` },
@@ -98,6 +98,12 @@ export const Contact = () => {
       {/* Background patterns */}
       <div className="absolute inset-0 bg-dots-matrix pointer-events-none z-0 opacity-40" />
       <div className="absolute inset-0 bg-vignette-radial pointer-events-none z-0" />
+
+      {/* Aurora Orbs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="aurora-blur aurora-drift" style={{ width: '50vw', height: '50vw', background: '#8b5cf6', top: '-10%', right: '-10%', opacity: 0.06 }} />
+        <div className="aurora-blur aurora-drift-reverse" style={{ width: '35vw', height: '35vw', background: '#3dd8d0', bottom: '5%', left: '-5%', opacity: 0.05 }} />
+      </div>
 
       <div className="max-w-6xl w-full mx-auto px-5 sm:px-8 md:px-16 relative z-10">
 

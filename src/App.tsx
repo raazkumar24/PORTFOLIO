@@ -11,6 +11,7 @@ import { Experience } from './pages/Experience'
 import { Contact } from './pages/Contact'
 import { Services } from './pages/Services'
 import { PeekCreature } from './components/PeekCreature'
+import { CursorSpotlight } from './components/CursorSpotlight'
 
 /* ── Page wrapper with fade transition ── */
 const PageWrapper = ({ children }: { children: React.ReactNode }) => (
@@ -66,6 +67,7 @@ function App() {
   return (
     <Router>
       <main className="w-full min-h-screen bg-bg-dark text-text-primary overflow-hidden flex flex-col">
+        <CursorSpotlight />
         <Navbar />
         <div className="flex-1 w-full">
           <AnimatedRoutes />

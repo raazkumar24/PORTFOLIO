@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { useRef, useEffect, useState } from 'react'
 import { ArrowUpRight, FileText, Briefcase, Rocket, Zap, ShieldCheck } from 'lucide-react'
-import { personalInfo, stats, projects } from '../data/portfolio'
+import { personalInfo, stats, projects, techItems } from '../data/portfolio'
 import { MagneticButton } from '../components/MagneticButton'
 import { GlassSurface } from '../components/GlassSurface'
 
@@ -102,36 +102,65 @@ const STATS_CONFIG = [
     icon: Briefcase,
     gradient: 'linear-gradient(135deg, #3dd8d0 0%, #8b5cf6 100%)',
     desc: 'Continuous industry growth',
-    glow: 'rgba(61,216,208,0.15)',
-    tint: 'rgba(61,216,208,0.04)',
-    border: 'rgba(61,216,208,0.12)'
+    glow: 'rgba(61,216,208,0.2)',
+    tint: 'rgba(61,216,208,0.05)',
+    border: 'rgba(61,216,208,0.18)'
   },
   {
     icon: Rocket,
     gradient: 'linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%)',
     desc: 'Delivered production-ready',
-    glow: 'rgba(139,92,246,0.15)',
-    tint: 'rgba(139,92,246,0.04)',
-    border: 'rgba(139,92,246,0.12)'
+    glow: 'rgba(139,92,246,0.2)',
+    tint: 'rgba(139,92,246,0.05)',
+    border: 'rgba(139,92,246,0.18)'
   },
   {
     icon: Zap,
     gradient: 'linear-gradient(135deg, #ec4899 0%, #f59e0b 100%)',
     desc: 'Optimized runtime speed',
-    glow: 'rgba(236,72,153,0.15)',
-    tint: 'rgba(236,72,153,0.04)',
-    border: 'rgba(236,72,153,0.12)'
+    glow: 'rgba(236,72,153,0.2)',
+    tint: 'rgba(236,72,153,0.05)',
+    border: 'rgba(236,72,153,0.18)'
   },
   {
     icon: ShieldCheck,
     gradient: 'linear-gradient(135deg, #f59e0b 0%, #3dd8d0 100%)',
     desc: 'Highly available systems',
-    glow: 'rgba(245,158,11,0.15)',
-    tint: 'rgba(245,158,11,0.04)',
-    border: 'rgba(245,158,11,0.12)'
+    glow: 'rgba(245,158,11,0.2)',
+    tint: 'rgba(245,158,11,0.05)',
+    border: 'rgba(245,158,11,0.18)'
   },
 ]
 
+const APPROACH_CARDS = [
+  {
+    num: '01',
+    title: 'Rigorous Architecture',
+    desc: 'Building scalable, maintainable systems from day one. I don\'t just patch libraries — I engineer solutions built for the long haul.',
+    tint: 'rgba(61,216,208,0.05)',
+    border: 'rgba(61,216,208,0.18)',
+    glow: 'rgba(61,216,208,0.12)',
+    accent: '#3dd8d0',
+  },
+  {
+    num: '02',
+    title: 'Obsessive Detail',
+    desc: 'Micro-interactions, flawless responsive states, millisecond-level performance. The difference between good and great is in the details.',
+    tint: 'rgba(139,92,246,0.05)',
+    border: 'rgba(139,92,246,0.18)',
+    glow: 'rgba(139,92,246,0.12)',
+    accent: '#8b5cf6',
+  },
+  {
+    num: '03',
+    title: 'Pixel-Perfect UI',
+    desc: 'Design is not decoration — it\'s function. Every pixel is intentional, every animation purposeful, every layout considered.',
+    tint: 'rgba(236,72,153,0.05)',
+    border: 'rgba(236,72,153,0.18)',
+    glow: 'rgba(236,72,153,0.12)',
+    accent: '#ec4899',
+  },
+]
 
 /* ── Typewriter hook ── */
 const useTypewriter = (words: string[], speed = 80, pause = 1800) => {
@@ -190,6 +219,15 @@ const Counter = ({ target, suffix = '' }: { target: number; suffix?: string }) =
   return <span ref={ref}>{count}{suffix}</span>
 }
 
+/* ── Tech Marquee Items ── */
+const MARQUEE_ITEMS = [
+  ...(techItems || [
+    { label: 'React' }, { label: 'Next.js' }, { label: 'TypeScript' }, { label: 'Node.js' },
+    { label: 'WebGL' }, { label: 'Three.js' }, { label: 'Framer Motion' }, { label: 'TailwindCSS' },
+    { label: 'GraphQL' }, { label: 'PostgreSQL' }, { label: 'AWS' }, { label: 'Docker' },
+  ])
+]
+
 export const Home = () => {
   const [hoveredSocial, setHoveredSocial] = useState<string | null>(null)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -204,9 +242,40 @@ export const Home = () => {
       style={{ background: 'var(--theme-bg)', color: 'var(--theme-text)' }}
       ref={containerRef}
     >
-      {/* Background patterns */}
+      {/* ── Background: Grid + Vignette ── */}
       <div className="absolute inset-0 bg-grid-cyber pointer-events-none z-0 opacity-45" />
       <div className="absolute inset-0 bg-vignette-radial pointer-events-none z-0" />
+
+      {/* ── Drifting Aurora Orbs ── */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+        <div
+          className="aurora-blur aurora-drift"
+          style={{
+            width: '55vw', height: '55vw',
+            background: '#3dd8d0',
+            top: '-15%', left: '-10%',
+            opacity: 0.07,
+          }}
+        />
+        <div
+          className="aurora-blur aurora-drift-reverse"
+          style={{
+            width: '45vw', height: '45vw',
+            background: '#8b5cf6',
+            top: '10%', right: '-15%',
+            opacity: 0.06,
+          }}
+        />
+        <div
+          className="aurora-blur aurora-drift-slow"
+          style={{
+            width: '30vw', height: '30vw',
+            background: '#ec4899',
+            bottom: '10%', left: '30%',
+            opacity: 0.04,
+          }}
+        />
+      </div>
 
       {/* ────────────── HERO ────────────── */}
       <section className="min-h-screen w-full relative flex flex-col justify-center px-5 sm:px-8 md:px-16 pt-28 pb-20 overflow-hidden">
@@ -244,7 +313,7 @@ export const Home = () => {
             </GlassSurface>
           </motion.div>
 
-          {/* Big headline matched to the brutalist site style */}
+          {/* Big headline */}
           <div className="flex flex-col mb-8 relative">
             <motion.h1
               className="text-[clamp(1.5rem,11vw,9rem)] font-black leading-[0.85] tracking-tighter text-white uppercase break-normal mix-blend-difference z-10 relative"
@@ -263,16 +332,6 @@ export const Home = () => {
               <h1 className="text-[clamp(1.5rem,11vw,9rem)] font-black leading-[0.85] tracking-tighter text-text-secondary uppercase break-normal z-10 relative">
                 Futures.
               </h1>
-            </motion.div>
-
-            {/* Interactive 3D element replacing simple blur */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1.5, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute right-0 top-1/2 -translate-y-1/2 w-full h-full pointer-events-none z-0"
-            >
-              {/* <AbstractCubes /> */}
             </motion.div>
           </div>
 
@@ -298,7 +357,7 @@ export const Home = () => {
             className="w-full flex flex-col md:flex-row justify-between items-start md:items-end gap-10 border-t border-white/[0.08] pt-8"
           >
             <div className="max-w-md">
-              <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-white mb-4">Engineering & Design</p>
+              <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-white mb-4">Engineering &amp; Design</p>
               <p className="text-base sm:text-lg text-text-secondary font-sans leading-relaxed">
                 {personalInfo.introText} I engineer robust architectures while obsessed with pixel-perfect interfaces. No generic templates, just uncompromising quality.
               </p>
@@ -362,6 +421,36 @@ export const Home = () => {
         </motion.div>
       </section>
 
+      {/* ────────────── TECH MARQUEE TICKER ────────────── */}
+      <section className="py-6 relative z-10 overflow-hidden">
+        {/* Divider top */}
+        <div className="section-divider mb-6" />
+
+        <div className="overflow-hidden mask-marquee-edges">
+          <div className="animate-marquee gap-0" style={{ gap: 0 }}>
+            {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, i) => (
+              <span
+                key={i}
+                className="inline-flex items-center gap-3 px-6 text-[11px] font-black tracking-[0.22em] uppercase whitespace-nowrap"
+                style={{ color: 'rgba(255,255,255,0.25)' }}
+              >
+                <span
+                  className="w-1 h-1 rounded-full flex-shrink-0"
+                  style={{
+                    background: i % 4 === 0 ? '#3dd8d0' : i % 4 === 1 ? '#8b5cf6' : i % 4 === 2 ? '#ec4899' : '#f59e0b',
+                    boxShadow: i % 4 === 0 ? '0 0 6px #3dd8d0' : i % 4 === 1 ? '0 0 6px #8b5cf6' : i % 4 === 2 ? '0 0 6px #ec4899' : '0 0 6px #f59e0b',
+                  }}
+                />
+                {item.label}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Divider bottom */}
+        <div className="section-divider mt-6" />
+      </section>
+
       {/* ────────────── STATS STRIP ────────────── */}
       <section className="py-14 md:py-18 relative z-10 overflow-hidden">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-16">
@@ -369,8 +458,8 @@ export const Home = () => {
             radius={30}
             edgeWidth={18}
             strength={28}
-            tint="rgba(255,255,255,0.02)"
-            className="w-full relative overflow-hidden"
+            tint="rgba(255,255,255,0.025)"
+            className="w-full relative overflow-hidden shimmer-border"
             style={{
               borderColor: 'rgba(255, 255, 255, 0.1)',
               boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.16), 0 18px 60px rgba(0,0,0,0.38)',
@@ -400,17 +489,27 @@ export const Home = () => {
                   return (
                     <div
                       key={stat.label}
-                      className="group relative min-h-[200px] p-5 sm:p-7 md:p-8 border-white/[0.07] odd:border-r xl:border-r xl:last:border-r-0 border-b xl:border-b-0 last:border-b-0 [&:nth-last-child(2)]:border-b-0 transition-all duration-300 hover:bg-white/[0.02]"
+                      className="group relative min-h-[200px] p-5 sm:p-7 md:p-8 border-white/[0.07] odd:border-r xl:border-r xl:last:border-r-0 border-b xl:border-b-0 last:border-b-0 [&:nth-last-child(2)]:border-b-0 transition-all duration-300"
+                      style={{
+                        background: 'transparent',
+                        transition: 'background 0.4s ease',
+                      }}
+                      onMouseEnter={(e) => {
+                        (e.currentTarget as HTMLDivElement).style.background = config.tint
+                      }}
+                      onMouseLeave={(e) => {
+                        (e.currentTarget as HTMLDivElement).style.background = 'transparent'
+                      }}
                     >
                       {/* Top gradient highlight on hover */}
                       <div
                         className="absolute inset-x-0 top-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                         style={{ background: config.gradient }}
                       />
-                      
+
                       {/* Ambient hover glow */}
                       <div
-                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full blur-[50px] opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none"
+                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 rounded-full blur-[60px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                         style={{ background: config.glow }}
                       />
 
@@ -420,7 +519,10 @@ export const Home = () => {
                         </span>
                         <span
                           className="w-10 h-10 rounded-full border flex items-center justify-center bg-black/40 transition-all duration-300 group-hover:scale-110 group-hover:bg-black/70"
-                          style={{ borderColor: config.border, boxShadow: `0 0 24px ${config.glow}` }}
+                          style={{
+                            borderColor: config.border,
+                            boxShadow: `0 0 24px ${config.glow}, inset 0 1px 1px rgba(255,255,255,0.1)`,
+                          }}
                         >
                           <Icon size={16} style={{ color: idx === 0 ? '#3dd8d0' : idx === 1 ? '#8b5cf6' : idx === 2 ? '#ec4899' : '#f59e0b' }} />
                         </span>
@@ -428,7 +530,7 @@ export const Home = () => {
 
                       <p
                         className="text-4xl sm:text-5xl font-black leading-none text-white mb-3 transition-transform duration-300 group-hover:translate-x-1 relative z-10"
-                        style={{ textShadow: `0 0 24px ${config.glow}` }}
+                        style={{ textShadow: `0 0 30px ${config.glow}` }}
                       >
                         <Counter target={stat.value} suffix={stat.suffix} />
                       </p>
@@ -447,10 +549,12 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* ────────────── APPROACH (Replaced generic philosophy) ────────────── */}
+      {/* ────────────── APPROACH — Glass Cards Grid ────────────── */}
       <section className="py-24 md:py-36 px-5 sm:px-8 md:px-16 relative z-10">
         <div className="max-w-7xl mx-auto w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-12 md:gap-20 items-start">
+
+          {/* Section header */}
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-16 gap-6">
             <motion.div
               initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -458,7 +562,7 @@ export const Home = () => {
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             >
               <span className="text-xs font-bold tracking-[0.25em] uppercase text-accent-cyan mb-6 block">( Method )</span>
-              <h2 className="text-[clamp(1.5rem,8vw,4rem)] sm:text-5xl md:text-6xl font-black leading-[1] tracking-tighter text-white uppercase break-normal">
+              <h2 className="text-[clamp(1.5rem,8vw,4rem)] font-black leading-[1] tracking-tighter text-white uppercase break-normal">
                 Zero Compromise. <br />
                 <span className="text-text-secondary">Pure Performance.</span>
               </h2>
@@ -469,36 +573,11 @@ export const Home = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: '-80px' }}
               transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col justify-center space-y-6 lg:pt-2"
             >
-              <div className="flex gap-4 items-start">
-                <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center flex-shrink-0 mt-1">
-                  <span className="text-xs font-bold text-white">01</span>
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-white mb-2 uppercase tracking-tight">Rigorous Architecture</h3>
-                  <p className="text-text-secondary font-sans leading-relaxed">
-                    Building scalable, maintainable systems from day one. I don't just patch together libraries; I engineer solutions designed for the long haul.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex gap-4 items-start">
-                <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center flex-shrink-0 mt-1">
-                  <span className="text-xs font-bold text-white">02</span>
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-white mb-2 uppercase tracking-tight">Obsessive Detail</h3>
-                  <p className="text-text-secondary font-sans leading-relaxed">
-                    Micro-interactions, flawless responsive states, and millisecond-level performance optimizations. The difference between good and great is in the details.
-                  </p>
-                </div>
-              </div>
-
               <MagneticButton>
                 <Link
                   to="/about"
-                  className="group inline-flex items-center gap-2 text-white font-bold text-xs uppercase tracking-[0.15em] hover:text-accent-cyan transition-colors self-start mt-6"
+                  className="group inline-flex items-center gap-2 text-white font-bold text-xs uppercase tracking-[0.15em] hover:text-accent-cyan transition-colors"
                 >
                   <span className="border-b-2 border-white group-hover:border-accent-cyan pb-0.5 transition-colors duration-300">Discover my background</span>
                   <ArrowUpRight size={16} strokeWidth={2.5} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
@@ -506,11 +585,74 @@ export const Home = () => {
               </MagneticButton>
             </motion.div>
           </div>
+
+          {/* 3 Glass Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+            {APPROACH_CARDS.map((card, i) => (
+              <motion.div
+                key={card.num}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ duration: 0.8, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <GlassSurface
+                  radius={24}
+                  edgeWidth={16}
+                  strength={22}
+                  tilt={true}
+                  tint={card.tint}
+                  className="group h-full"
+                  style={{
+                    padding: '32px 28px',
+                    borderColor: card.border,
+                    boxShadow: `inset 0 1px 1px rgba(255,255,255,0.14), 0 12px 40px rgba(0,0,0,0.3), 0 0 0 1px ${card.border}`,
+                    cursor: 'default',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 20,
+                    minHeight: 260,
+                  }}
+                >
+                  {/* Glow on hover */}
+                  <div
+                    className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                    style={{ background: `radial-gradient(circle at 50% 0%, ${card.glow} 0%, transparent 70%)` }}
+                  />
+
+                  {/* Top bar accent */}
+                  <div
+                    className="absolute inset-x-0 top-0 h-[2px] rounded-t-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-500"
+                    style={{ background: `linear-gradient(90deg, transparent, ${card.accent}, transparent)` }}
+                  />
+
+                  <div className="flex items-center justify-between relative z-10">
+                    <span className="glass-number" style={{ borderColor: card.border, color: card.accent }}>
+                      {card.num}
+                    </span>
+                    <ArrowUpRight
+                      size={18}
+                      style={{ color: card.accent, opacity: 0.5 }}
+                      className="group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300"
+                    />
+                  </div>
+
+                  <div className="relative z-10 flex-1 flex flex-col justify-end gap-3">
+                    <h3 className="text-xl font-black text-white uppercase tracking-tight">{card.title}</h3>
+                    <p className="text-sm text-text-secondary font-sans leading-relaxed">{card.desc}</p>
+                  </div>
+                </GlassSurface>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ────────────── FEATURED WORK (Cleaner layout) ────────────── */}
-      <section className="py-24 md:py-36 px-5 sm:px-8 md:px-16 bg-surface relative z-10 rounded-t-[2.5rem] md:rounded-t-[4rem] border-t border-white/[0.04]">
+      {/* ── Divider ── */}
+      <div className="section-divider mx-5 sm:mx-8 md:mx-16 max-w-7xl xl:mx-auto" />
+
+      {/* ────────────── FEATURED WORK ────────────── */}
+      <section className="py-24 md:py-36 px-5 sm:px-8 md:px-16 relative z-10">
         <div className="max-w-7xl mx-auto w-full">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-14 md:mb-20 gap-6">
             <motion.div
@@ -548,7 +690,10 @@ export const Home = () => {
                   strength={24}
                   tilt={true}
                   className="w-full aspect-[4/3] relative overflow-hidden mb-6 group/img cursor-pointer"
-                  style={{ padding: 4 }}
+                  style={{
+                    padding: 4,
+                    boxShadow: `inset 0 1px 1px rgba(255,255,255,0.18), 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08)`,
+                  }}
                 >
                   <div className="w-full h-full rounded-2xl overflow-hidden relative">
                     <div className="absolute inset-0 bg-black/40 group-hover/img:bg-transparent transition-colors duration-500 z-10 pointer-events-none" />
@@ -559,6 +704,7 @@ export const Home = () => {
                       className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
                     />
 
+                    {/* Project number tag */}
                     <div className="absolute top-5 left-5 z-20 pointer-events-none">
                       <GlassSurface
                         as="div"
@@ -571,6 +717,23 @@ export const Home = () => {
                           {project.num}
                         </span>
                       </GlassSurface>
+                    </div>
+
+                    {/* Stack tags in bottom left */}
+                    <div className="absolute bottom-5 left-5 z-20 pointer-events-none flex flex-wrap gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      {project.stack.slice(0, 3).map(tech => (
+                        <GlassSurface
+                          key={tech}
+                          as="span"
+                          radius={6}
+                          edgeWidth={8}
+                          strength={14}
+                          tint="rgba(0,0,0,0.4)"
+                          style={{ display: 'inline-block', padding: '4px 10px', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.8)' }}
+                        >
+                          {tech}
+                        </GlassSurface>
+                      ))}
                     </div>
 
                     <Link
@@ -589,6 +752,7 @@ export const Home = () => {
                     <h3 className="text-2xl font-black text-white uppercase tracking-tight mb-2">{project.title}</h3>
                     <p className="text-sm font-bold text-text-secondary uppercase tracking-widest">{project.featuredCategory}</p>
                   </div>
+                  <span className="text-xs font-black font-mono text-white/20 mt-1">{project.year}</span>
                 </div>
               </motion.div>
             ))}
@@ -602,24 +766,110 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* ────────────── BOTTOM CTA ────────────── */}
-      <section className="py-24 md:py-36 px-5 sm:px-8 md:px-16 relative z-10 border-t border-white/[0.04]">
-        <div className="max-w-7xl mx-auto w-full text-center relative z-10">
+      {/* ────────────── BOTTOM CTA — Giant Glass Panel ────────────── */}
+      <section className="py-16 md:py-24 px-5 sm:px-8 md:px-16 relative z-10 pb-24">
+        <div className="max-w-7xl mx-auto w-full">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           >
-            <p className="text-xs font-bold tracking-[0.25em] uppercase text-text-secondary mb-6">( Next Steps )</p>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="inline-block">
-              <Link
-                to="/contact"
-                className="inline-block text-[clamp(1.5rem,10vw,7rem)] font-black tracking-tighter uppercase leading-[0.9] text-white hover:text-outline transition-all duration-300 break-normal"
-              >
-                Start a <br />Project.
-              </Link>
-            </motion.div>
+            <GlassSurface
+              radius={32}
+              edgeWidth={20}
+              strength={32}
+              tilt={true}
+              tint="rgba(61,216,208,0.03)"
+              className="w-full group shimmer-border"
+              style={{
+                padding: 'clamp(40px, 8vw, 80px)',
+                textAlign: 'center',
+                borderColor: 'rgba(255,255,255,0.1)',
+                boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.14), 0 30px 80px rgba(0,0,0,0.4)',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: 32,
+                overflow: 'visible',
+              }}
+            >
+              {/* Radial glow bg */}
+              <div className="absolute inset-0 rounded-3xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+                style={{ background: 'radial-gradient(ellipse at 50% 100%, rgba(61,216,208,0.06) 0%, transparent 70%)' }}
+              />
+
+              <div className="relative z-10">
+                <p className="text-xs font-bold tracking-[0.25em] uppercase text-text-secondary mb-4">( Next Steps )</p>
+                <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="inline-block">
+                  <Link
+                    to="/contact"
+                    className="inline-block text-[clamp(1.5rem,10vw,7rem)] font-black tracking-tighter uppercase leading-[0.9] text-white hover:text-outline transition-all duration-300 break-normal"
+                  >
+                    Start a <br />Project.
+                  </Link>
+                </motion.div>
+              </div>
+
+              <div className="relative z-10 flex flex-wrap justify-center gap-4">
+                <MagneticButton>
+                  <Link to="/contact">
+                    <GlassSurface
+                      as="span"
+                      radius={999}
+                      edgeWidth={14}
+                      strength={22}
+                      tint="rgba(61,216,208,0.1)"
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: 8,
+                        padding: '12px 28px',
+                        fontSize: 12,
+                        fontWeight: 800,
+                        letterSpacing: '0.14em',
+                        textTransform: 'uppercase',
+                        color: '#3dd8d0',
+                        borderColor: 'rgba(61,216,208,0.3)',
+                        cursor: 'pointer',
+                      }}
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-accent-cyan animate-pulse" />
+                      Get In Touch
+                      <ArrowUpRight size={14} />
+                    </GlassSurface>
+                  </Link>
+                </MagneticButton>
+
+                <MagneticButton>
+                  <Link to="/projects">
+                    <GlassSurface
+                      as="span"
+                      radius={999}
+                      edgeWidth={14}
+                      strength={22}
+                      tint="rgba(255,255,255,0.03)"
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: 8,
+                        padding: '12px 28px',
+                        fontSize: 12,
+                        fontWeight: 800,
+                        letterSpacing: '0.14em',
+                        textTransform: 'uppercase',
+                        color: 'rgba(255,255,255,0.6)',
+                        borderColor: 'rgba(255,255,255,0.08)',
+                        cursor: 'pointer',
+                      }}
+                    >
+                      View Work
+                      <ArrowUpRight size={14} />
+                    </GlassSurface>
+                  </Link>
+                </MagneticButton>
+              </div>
+            </GlassSurface>
           </motion.div>
         </div>
       </section>
